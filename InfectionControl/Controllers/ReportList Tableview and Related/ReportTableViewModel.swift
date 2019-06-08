@@ -26,9 +26,7 @@ class ReportTableViewModel: NSObject {
     }
     
     // Data Endpoint
-    //private let endpoint = URL(string: "https://safe-retreat-87739.herokuapp.com/api/reports")
-    private let mockReportEndpoint = URL(string: "http://127.0.0.1:3000/api/reports")
-    private let urlSession = URLSession(configuration: .default)
+    private let reportEndpoint = URL(string: "https://safe-retreat-87739.herokuapp.com/api/reports")
     
     override init() {
         self.reportCells = [ReportTableCellViewModel]()
@@ -44,7 +42,7 @@ class ReportTableViewModel: NSObject {
             guard let self = self else {
                 return
             }
-            let fetchJSONTask = DataHandler.fetchTaskCreater(self.mockReportEndpoint!, self.updateReports)
+            let fetchJSONTask = DataHandler.fetchTaskCreater(self.reportEndpoint!, self.updateReports)
             fetchJSONTask.resume()
         }
     }

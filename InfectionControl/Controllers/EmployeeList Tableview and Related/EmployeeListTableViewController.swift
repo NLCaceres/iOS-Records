@@ -32,8 +32,7 @@ class EmployeeListTableViewController: UITableViewController {
     var lastClickedCell: IndexPath?
     
     // Data Endpoint
-    //private let employeeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/employees")
-    private let mockEmployeeEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/employees")
+    private let employeeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/employees")
     private let urlSession = URLSession(configuration: .default)
     
     override func viewDidLoad() {
@@ -118,7 +117,7 @@ class EmployeeListTableViewController: UITableViewController {
             guard let self = self else {
                 return
             }
-            let fetchJSONTask = DataHandler.fetchTaskCreater(self.mockEmployeeEndpoint, self.decodeEmployeeList)
+            let fetchJSONTask = DataHandler.fetchTaskCreater(self.employeeEndpoint, self.decodeEmployeeList)
             fetchJSONTask.resume()
         }
     }

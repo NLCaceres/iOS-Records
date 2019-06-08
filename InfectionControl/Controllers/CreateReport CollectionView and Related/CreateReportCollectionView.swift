@@ -24,12 +24,8 @@ class CreateReportCollectionView: UICollectionViewController {
     var precautions: [Precaution] = []
     var healthPractices: [HealthPractice] = []
     
-    // I could create this URLSession
-    // But since I am using the default config anyway, better to use the singleton
-    // URLSession.shared.DATATASKOBJ
-    private let urlSession = URLSession(configuration: .default)
-    //private let precautionEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/precautions")
-    private let mockPrecautionEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/precautions")
+    // Could make a URLSession but singleton version with default config works just as well
+    private let precautionEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/precautions")
     
     var buttonImage: UIImage?
     @IBAction func unwindHereAndSwitchTabs(sender: UIStoryboardSegue) {
@@ -77,7 +73,7 @@ class CreateReportCollectionView: UICollectionViewController {
             guard let self = self else {
                 return
             }
-            let fetchJSONTask = DataHandler.fetchTaskCreater(self.mockPrecautionEndpoint, self.updatePrecautions)
+            let fetchJSONTask = DataHandler.fetchTaskCreater(self.precautionEndpoint, self.updatePrecautions)
             fetchJSONTask.resume()
             
         }

@@ -14,10 +14,8 @@ class CreateReportViewModel {
     var locations: [Location]
     
     // Data Endpoint
-    //let healthPracticeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/healthPractices")
-    //let locationEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/locations")
-    let mockHealthPracticeEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/healthpractices")
-    let mockLocationEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/locations")
+    let healthPracticeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/healthPractices")
+    let locationEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/locations")
     let urlSession = URLSession(configuration: .default)
     
     init() {

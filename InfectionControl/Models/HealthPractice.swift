@@ -14,15 +14,6 @@ struct HealthPractice: Codable {
     var name: String
     var precautionType: Precaution?
     
-//    init?(name: String, image:UIImage, precautionType:Precaution) {
-//        if (name.isEmpty) {
-//            return nil
-//        }
-//        self.name = name
-//        self.image = image
-//        self.precautionType = precautionType
-//    }
-    
     // Memberwise init provided by struct not enough (should in theory fill with nil though...)
     init(id: String? = nil, name: String, precautionType: Precaution? = nil) {
         self.id = id

@@ -16,10 +16,8 @@ class CreateReportViewController: UIViewController {
     // Properties
     let viewModel = CreateReportViewModel()
     let disposeBag = DisposeBag()
-    //let healthPracticeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/healthPractices")
-    //let locationEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/locations")
-    let mockHealthPracticeEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/healthpractices")
-    let mockLocationEndpoint: URL! = URL(string: "http://127.0.0.1:3000/api/locations")
+    let healthPracticeEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/healthpractices")
+    let locationEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/locations")
     var healthPractices: [HealthPractice] = [HealthPractice]()
     var locations: [Location] = [Location]()
     
@@ -78,8 +76,8 @@ class CreateReportViewController: UIViewController {
         datePicker.minimumDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
         datePicker.maximumDate = Date()
         
-        DataHandler.fetchJSONData(self.mockHealthPracticeEndpoint, decodeHealthPractices)
-        DataHandler.fetchJSONData(self.mockLocationEndpoint, decodeLocations)
+        DataHandler.fetchJSONData(self.healthPracticeEndpoint, decodeHealthPractices)
+        DataHandler.fetchJSONData(self.locationEndpoint, decodeLocations)
         //DataHandler.fetchJSONData(viewModel.healthPracticeEndpoint, viewModel.decodeHealthPractices)
         //healthPracticePicker.rx.
         //DataHandler.fetchJSONData(viewModel.locationEndpoint, viewModel.decodeLocations)

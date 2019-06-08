@@ -11,9 +11,7 @@ import UIKit
 class ReportTableViewController: UITableViewController {
     
     private var reports: [Report] = []
-    //private let endpoint = URL(string: "https://safe-retreat-87739.herokuapp.com/api/reports")
-    //private let urlSession = URLSession(configuration: .default)
-    
+    private let endpoint = URL(string: "https://safe-retreat-87739.herokuapp.com/api/reports")
     private let reuseIdentifier = "ReportTableViewCell"
     
     @objc dynamic private var viewModel: ReportTableViewModel!
