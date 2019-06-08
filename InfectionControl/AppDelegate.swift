@@ -13,10 +13,26 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var tabBar: UITabBarController?
+    
+//    // Prevents completion handler issue (they're not supported in background downloads)
+//    var backgroundSessionCompletionHandler: (() -> Void)?
+//    func application(_ application: UIApplication, handleEventsForBackgroundURLSession
+//        identifier: String, completionHandler: @escaping () -> Void) {
+//        backgroundSessionCompletionHandler = completionHandler
+//    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Tab bar customization
+        tabBar = self.window?.rootViewController as? UITabBarController
+        if let tabBar = tabBar {
+            tabBar.selectedIndex = 1
+            print("These are the tab bar view controllers: \(tabBar.viewControllers)")
+        }
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .selected)
+        
         return true
     }
 
