@@ -1,0 +1,6 @@
+framework module Pods_InfectionControlUITests {
+  umbrella header "Pods-InfectionControlUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

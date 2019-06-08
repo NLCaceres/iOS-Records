@@ -3,10 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C382FE025FBDCA11865ACCB /* Pods_InfectionControlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD474E36AC74C3B0CAE7220 /* Pods_InfectionControlTests.framework */; };
+		BF1A338F22582161009F48AA /* ReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A338E22582161009F48AA /* ReportCell.swift */; };
+		BF1A339122585982009F48AA /* ReportSectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A339022585982009F48AA /* ReportSectionReusableView.swift */; };
+		BF55668D22546169004A13C8 /* CreateReportCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */; };
+		BF55668F22546965004A13C8 /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55668E22546965004A13C8 /* Profession.swift */; };
+		BF55669222546E8C004A13C8 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55669122546E8C004A13C8 /* Employee.swift */; };
+		BF556694225470BD004A13C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF556693225470BD004A13C8 /* Location.swift */; };
+		BF55669622547242004A13C8 /* HealthPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55669522547242004A13C8 /* HealthPractice.swift */; };
+		BF5566982254724D004A13C8 /* Precaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566972254724D004A13C8 /* Precaution.swift */; };
+		BF55669A2254725F004A13C8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566992254725F004A13C8 /* Report.swift */; };
+		BF9D0E70228291F7003A8913 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */; };
+		BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */; };
+		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
+		BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E622965B290023CE7A /* ReportTableViewModel.swift */; };
+		BFC659E9229677F70023CE7A /* CreateReportCollectionVC+CVDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E8229677F70023CE7A /* CreateReportCollectionVC+CVDelegate.swift */; };
+		BFC659EB22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659EA22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift */; };
 		BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094E7224EBFC500953498 /* AppDelegate.swift */; };
 		BFD094EA224EBFC500953498 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094E9224EBFC500953498 /* ViewController.swift */; };
 		BFD094ED224EBFC600953498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD094EB224EBFC600953498 /* Main.storyboard */; };
@@ -15,6 +31,14 @@
 		BFD094F5224EBFC700953498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */; };
 		BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094FF224EBFC700953498 /* InfectionControlTests.swift */; };
 		BFD0950B224EBFC800953498 /* InfectionControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0950A224EBFC800953498 /* InfectionControlUITests.swift */; };
+		BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */; };
+		BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */; };
+		BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE7D72422A1D29800A07942 /* Default-568h@2x.png */; };
+		BFE7D72722A1DB2B00A07942 /* EmployeeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */; };
+		BFE7D72922A20A2F00A07942 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72822A20A2F00A07942 /* DataHandler.swift */; };
+		BFF15EDF229518D50078F59C /* CreateReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */; };
+		C97576B65811E91856138F7D /* Pods_InfectionControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9733E6C489CF28EE9EF5228C /* Pods_InfectionControl.framework */; };
+		F5691D083F7BE048A89B54C1 /* Pods_InfectionControlUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87EDF45C6CFC9C1AA2F20835 /* Pods_InfectionControlUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +59,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2590C9ACBD049FBE02BB4C70 /* Pods-InfectionControlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlTests.release.xcconfig"; path = "Target Support Files/Pods-InfectionControlTests/Pods-InfectionControlTests.release.xcconfig"; sourceTree = "<group>"; };
+		2A8483825F1F40EC54B20B5A /* Pods-InfectionControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControl.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControl/Pods-InfectionControl.debug.xcconfig"; sourceTree = "<group>"; };
+		2CD474E36AC74C3B0CAE7220 /* Pods_InfectionControlTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfectionControlTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		306FBE79199CDFA1CC96909D /* Pods-InfectionControlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlTests.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControlTests/Pods-InfectionControlTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3F5C51FBB0D5CAC70BA7AA6E /* Pods-InfectionControlUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlUITests.release.xcconfig"; path = "Target Support Files/Pods-InfectionControlUITests/Pods-InfectionControlUITests.release.xcconfig"; sourceTree = "<group>"; };
+		78E1268A6EEC2F8D1A758D2A /* Pods-InfectionControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControl.release.xcconfig"; path = "Target Support Files/Pods-InfectionControl/Pods-InfectionControl.release.xcconfig"; sourceTree = "<group>"; };
+		87EDF45C6CFC9C1AA2F20835 /* Pods_InfectionControlUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfectionControlUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9733E6C489CF28EE9EF5228C /* Pods_InfectionControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfectionControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlUITests.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControlUITests/Pods-InfectionControlUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF1A338E22582161009F48AA /* ReportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCell.swift; sourceTree = "<group>"; };
+		BF1A339022585982009F48AA /* ReportSectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSectionReusableView.swift; sourceTree = "<group>"; };
+		BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportCollectionView.swift; sourceTree = "<group>"; };
+		BF55668E22546965004A13C8 /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
+		BF55669122546E8C004A13C8 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		BF556693225470BD004A13C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BF55669522547242004A13C8 /* HealthPractice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPractice.swift; sourceTree = "<group>"; };
+		BF5566972254724D004A13C8 /* Precaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precaution.swift; sourceTree = "<group>"; };
+		BF5566992254725F004A13C8 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
+		BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
+		BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModel.swift; sourceTree = "<group>"; };
+		BFC659E622965B290023CE7A /* ReportTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModel.swift; sourceTree = "<group>"; };
+		BFC659E8229677F70023CE7A /* CreateReportCollectionVC+CVDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateReportCollectionVC+CVDelegate.swift"; sourceTree = "<group>"; };
+		BFC659EA22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateReportCollectionVC+CVDataSource.swift"; sourceTree = "<group>"; };
 		BFD094E4224EBFC500953498 /* InfectionControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfectionControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD094E7224EBFC500953498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD094E9224EBFC500953498 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +97,12 @@
 		BFD09506224EBFC800953498 /* InfectionControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfectionControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD0950A224EBFC800953498 /* InfectionControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfectionControlUITests.swift; sourceTree = "<group>"; };
 		BFD0950C224EBFC800953498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewController.swift; sourceTree = "<group>"; };
+		BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewController.swift; sourceTree = "<group>"; };
+		BFE7D72422A1D29800A07942 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewCell.swift; sourceTree = "<group>"; };
+		BFE7D72822A20A2F00A07942 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97576B65811E91856138F7D /* Pods_InfectionControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C382FE025FBDCA11865ACCB /* Pods_InfectionControlTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,19 +126,82 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5691D083F7BE048A89B54C1 /* Pods_InfectionControlUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF1A338C2258210E009F48AA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFE76540229FCECF0067A3C9 /* EmployeeList Tableview and Related */,
+				BFF15EDB229518330078F59C /* CreateReport VC and Related */,
+				BF9D0E6C228291C3003A8913 /* ReportList Tableview and Related */,
+				BF1A338D2258211F009F48AA /* CreateReport CollectionView and Related */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BF1A338D2258211F009F48AA /* CreateReport CollectionView and Related */ = {
+			isa = PBXGroup;
+			children = (
+				BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */,
+				BF1A338E22582161009F48AA /* ReportCell.swift */,
+				BF1A339022585982009F48AA /* ReportSectionReusableView.swift */,
+				BFC659E8229677F70023CE7A /* CreateReportCollectionVC+CVDelegate.swift */,
+				BFC659EA22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift */,
+			);
+			path = "CreateReport CollectionView and Related";
+			sourceTree = "<group>";
+		};
+		BF5566902254696E004A13C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BF55668E22546965004A13C8 /* Profession.swift */,
+				BF55669122546E8C004A13C8 /* Employee.swift */,
+				BF556693225470BD004A13C8 /* Location.swift */,
+				BF55669522547242004A13C8 /* HealthPractice.swift */,
+				BF5566972254724D004A13C8 /* Precaution.swift */,
+				BF5566992254725F004A13C8 /* Report.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF774C8422A059D300B592E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFD094F6224EBFC700953498 /* Info.plist */,
+				BFD094F1224EBFC700953498 /* Assets.xcassets */,
+				BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */,
+				BFD094EB224EBFC600953498 /* Main.storyboard */,
+				BFE7D72822A20A2F00A07942 /* DataHandler.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF9D0E6C228291C3003A8913 /* ReportList Tableview and Related */ = {
+			isa = PBXGroup;
+			children = (
+				BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */,
+				BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */,
+				BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */,
+				BFC659E622965B290023CE7A /* ReportTableViewModel.swift */,
+			);
+			path = "ReportList Tableview and Related";
+			sourceTree = "<group>";
+		};
 		BFD094DB224EBFC500953498 = {
 			isa = PBXGroup;
 			children = (
+				BFE7D72422A1D29800A07942 /* Default-568h@2x.png */,
 				BFD094E6224EBFC500953498 /* InfectionControl */,
 				BFD094FE224EBFC700953498 /* InfectionControlTests */,
 				BFD09509224EBFC800953498 /* InfectionControlUITests */,
 				BFD094E5224EBFC500953498 /* Products */,
+				DB1330933924369C7D253931 /* Pods */,
+				CF1BD1E5B95CE2ECCF91DFE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +218,12 @@
 		BFD094E6224EBFC500953498 /* InfectionControl */ = {
 			isa = PBXGroup;
 			children = (
-				BFD094E7224EBFC500953498 /* AppDelegate.swift */,
-				BFD094E9224EBFC500953498 /* ViewController.swift */,
-				BFD094EB224EBFC600953498 /* Main.storyboard */,
-				BFD094F1224EBFC700953498 /* Assets.xcassets */,
-				BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */,
-				BFD094F6224EBFC700953498 /* Info.plist */,
 				BFD094EE224EBFC600953498 /* InfectionControl.xcdatamodeld */,
+				BFD094E7224EBFC500953498 /* AppDelegate.swift */,
+				BF774C8422A059D300B592E3 /* Supporting Files */,
+				BF1A338C2258210E009F48AA /* Controllers */,
+				BF5566902254696E004A13C8 /* Models */,
+				BFD094E9224EBFC500953498 /* ViewController.swift */,
 			);
 			path = InfectionControl;
 			sourceTree = "<group>";
@@ -128,6 +246,47 @@
 			path = InfectionControlUITests;
 			sourceTree = "<group>";
 		};
+		BFE76540229FCECF0067A3C9 /* EmployeeList Tableview and Related */ = {
+			isa = PBXGroup;
+			children = (
+				BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */,
+				BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */,
+			);
+			path = "EmployeeList Tableview and Related";
+			sourceTree = "<group>";
+		};
+		BFF15EDB229518330078F59C /* CreateReport VC and Related */ = {
+			isa = PBXGroup;
+			children = (
+				BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */,
+				BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */,
+			);
+			path = "CreateReport VC and Related";
+			sourceTree = "<group>";
+		};
+		CF1BD1E5B95CE2ECCF91DFE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9733E6C489CF28EE9EF5228C /* Pods_InfectionControl.framework */,
+				2CD474E36AC74C3B0CAE7220 /* Pods_InfectionControlTests.framework */,
+				87EDF45C6CFC9C1AA2F20835 /* Pods_InfectionControlUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB1330933924369C7D253931 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A8483825F1F40EC54B20B5A /* Pods-InfectionControl.debug.xcconfig */,
+				78E1268A6EEC2F8D1A758D2A /* Pods-InfectionControl.release.xcconfig */,
+				306FBE79199CDFA1CC96909D /* Pods-InfectionControlTests.debug.xcconfig */,
+				2590C9ACBD049FBE02BB4C70 /* Pods-InfectionControlTests.release.xcconfig */,
+				A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */,
+				3F5C51FBB0D5CAC70BA7AA6E /* Pods-InfectionControlUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +294,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFD0950F224EBFC800953498 /* Build configuration list for PBXNativeTarget "InfectionControl" */;
 			buildPhases = (
+				2878A7A9993B3C8BC1289938 /* [CP] Check Pods Manifest.lock */,
 				BFD094E0224EBFC500953498 /* Sources */,
 				BFD094E1224EBFC500953498 /* Frameworks */,
 				BFD094E2224EBFC500953498 /* Resources */,
+				CE065E67142A638EF58A70A5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +313,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFD09512224EBFC800953498 /* Build configuration list for PBXNativeTarget "InfectionControlTests" */;
 			buildPhases = (
+				07A42C678150AF7D882E55D0 /* [CP] Check Pods Manifest.lock */,
 				BFD094F7224EBFC700953498 /* Sources */,
 				BFD094F8224EBFC700953498 /* Frameworks */,
 				BFD094F9224EBFC700953498 /* Resources */,
@@ -170,6 +332,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFD09515224EBFC800953498 /* Build configuration list for PBXNativeTarget "InfectionControlUITests" */;
 			buildPhases = (
+				CB162D1EFEE7A8ED328C8C10 /* [CP] Check Pods Manifest.lock */,
 				BFD09502224EBFC800953498 /* Sources */,
 				BFD09503224EBFC800953498 /* Frameworks */,
 				BFD09504224EBFC800953498 /* Resources */,
@@ -233,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD094F5224EBFC700953498 /* LaunchScreen.storyboard in Resources */,
+				BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */,
 				BFD094F2224EBFC700953498 /* Assets.xcassets in Resources */,
 				BFD094ED224EBFC600953498 /* Main.storyboard in Resources */,
 			);
@@ -254,14 +418,120 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07A42C678150AF7D882E55D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InfectionControlTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2878A7A9993B3C8BC1289938 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InfectionControl-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB162D1EFEE7A8ED328C8C10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InfectionControlUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE065E67142A638EF58A70A5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InfectionControl/Pods-InfectionControl-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InfectionControl/Pods-InfectionControl-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InfectionControl/Pods-InfectionControl-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BFD094E0224EBFC500953498 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */,
+				BF55669622547242004A13C8 /* HealthPractice.swift in Sources */,
+				BFC659E9229677F70023CE7A /* CreateReportCollectionVC+CVDelegate.swift in Sources */,
+				BF55669A2254725F004A13C8 /* Report.swift in Sources */,
+				BFF15EDF229518D50078F59C /* CreateReportViewModel.swift in Sources */,
+				BFE7D72922A20A2F00A07942 /* DataHandler.swift in Sources */,
+				BF55668F22546965004A13C8 /* Profession.swift in Sources */,
+				BF55669222546E8C004A13C8 /* Employee.swift in Sources */,
+				BF9D0E70228291F7003A8913 /* ReportTableViewCell.swift in Sources */,
 				BFD094EA224EBFC500953498 /* ViewController.swift in Sources */,
 				BFD094F0224EBFC600953498 /* InfectionControl.xcdatamodeld in Sources */,
+				BF5566982254724D004A13C8 /* Precaution.swift in Sources */,
+				BFE7D72722A1DB2B00A07942 /* EmployeeListTableViewCell.swift in Sources */,
+				BF1A338F22582161009F48AA /* ReportCell.swift in Sources */,
+				BF55668D22546169004A13C8 /* CreateReportCollectionView.swift in Sources */,
+				BF1A339122585982009F48AA /* ReportSectionReusableView.swift in Sources */,
+				BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */,
+				BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */,
 				BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */,
+				BF556694225470BD004A13C8 /* Location.swift in Sources */,
+				BFC659EB22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift in Sources */,
+				BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */,
+				BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +704,11 @@
 		};
 		BFD09510224EBFC800953498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A8483825F1F40EC54B20B5A /* Pods-InfectionControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = InfectionControl/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/InfectionControl/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,10 +722,11 @@
 		};
 		BFD09511224EBFC800953498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78E1268A6EEC2F8D1A758D2A /* Pods-InfectionControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = InfectionControl/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/InfectionControl/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,6 +740,7 @@
 		};
 		BFD09513224EBFC800953498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 306FBE79199CDFA1CC96909D /* Pods-InfectionControlTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -488,6 +761,7 @@
 		};
 		BFD09514224EBFC800953498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2590C9ACBD049FBE02BB4C70 /* Pods-InfectionControlTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +782,7 @@
 		};
 		BFD09516224EBFC800953498 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -527,6 +802,7 @@
 		};
 		BFD09517224EBFC800953498 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F5C51FBB0D5CAC70BA7AA6E /* Pods-InfectionControlUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
