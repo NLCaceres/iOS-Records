@@ -28,6 +28,7 @@ class CreateReportCollectionView: UICollectionViewController {
     private let precautionEndpoint: URL! = URL(string: "https://safe-retreat-87739.herokuapp.com/api/precautions")
     
     var buttonImage: UIImage?
+    
     @IBAction func unwindHereAndSwitchTabs(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? CreateReportViewController, let newReport = sourceViewController.fullReport {
             print("Got the full report: \(newReport)")
@@ -54,7 +55,7 @@ class CreateReportCollectionView: UICollectionViewController {
         } else {
             self.collectionView.addSubview(setUpRefreshControl())
         }
-        
+        self.collectionView.backgroundColor = UserDefaults.standard.color(forKey: "backgroundColor")
         fetchReportTypes()
         fetchButtonImage()
         
@@ -99,7 +100,7 @@ class CreateReportCollectionView: UICollectionViewController {
             print("Precautions update error: \(error)")
         }
         
-        // WITHOUT CODABLE IT WOULD LOOK A LOT WORSE and be more difficult of course
+        // WITHOUT CODABLE THIS is decoding
         //    let json = try JSONSerialization.jsonObject(with: data, options: [])
         //    guard let jsonArr = json as? [[String:Any]] else {
         //         return

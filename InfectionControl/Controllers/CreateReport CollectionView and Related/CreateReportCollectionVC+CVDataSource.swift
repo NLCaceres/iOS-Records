@@ -39,7 +39,7 @@ extension CreateReportCollectionView {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ReportCell
         
-        cell.reportCellImageView.image = self.buttonImage
+        cell.reportCellImageView.image = #imageLiteral(resourceName: "plus_icon")
         cell.reportCellImageView.layer.masksToBounds = true
         cell.reportCellImageView.layer.cornerRadius = cell.bounds.width / 2
         
@@ -69,8 +69,10 @@ extension CreateReportCollectionView {
             if (precautions.isEmpty) {
                 return headerView
             }
+            headerView.backgroundColor = UserDefaults.standard.color(forKey: "headerBackgroundColor")
             let sectionNum = indexPath.section
             headerView.headerLabel.text = "\(precautions[sectionNum].name) Precautions"
+            headerView.headerLabel.textColor = UserDefaults.standard.color(forKey: "headerTextColor")
             return headerView
             
             

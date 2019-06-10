@@ -10,6 +10,7 @@
 		1C382FE025FBDCA11865ACCB /* Pods_InfectionControlTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD474E36AC74C3B0CAE7220 /* Pods_InfectionControlTests.framework */; };
 		BF1A338F22582161009F48AA /* ReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A338E22582161009F48AA /* ReportCell.swift */; };
 		BF1A339122585982009F48AA /* ReportSectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A339022585982009F48AA /* ReportSectionReusableView.swift */; };
+		BF4C81C522AE148500341CD1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C81C422AE148500341CD1 /* SettingsTableViewController.swift */; };
 		BF55668D22546169004A13C8 /* CreateReportCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */; };
 		BF55668F22546965004A13C8 /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55668E22546965004A13C8 /* Profession.swift */; };
 		BF55669222546E8C004A13C8 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55669122546E8C004A13C8 /* Employee.swift */; };
@@ -17,6 +18,8 @@
 		BF55669622547242004A13C8 /* HealthPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF55669522547242004A13C8 /* HealthPractice.swift */; };
 		BF5566982254724D004A13C8 /* Precaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566972254724D004A13C8 /* Precaution.swift */; };
 		BF55669A2254725F004A13C8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566992254725F004A13C8 /* Report.swift */; };
+		BF9A4F0D22ADE9A200769C49 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4F0C22ADE9A200769C49 /* UserDefaultsExtension.swift */; };
+		BF9A4F0F22ADED1000769C49 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4F0E22ADED1000769C49 /* UIColorExtension.swift */; };
 		BF9D0E70228291F7003A8913 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */; };
 		BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */; };
 		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
@@ -70,6 +73,7 @@
 		A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlUITests.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControlUITests/Pods-InfectionControlUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF1A338E22582161009F48AA /* ReportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCell.swift; sourceTree = "<group>"; };
 		BF1A339022585982009F48AA /* ReportSectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSectionReusableView.swift; sourceTree = "<group>"; };
+		BF4C81C422AE148500341CD1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportCollectionView.swift; sourceTree = "<group>"; };
 		BF55668E22546965004A13C8 /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
 		BF55669122546E8C004A13C8 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 		BF55669522547242004A13C8 /* HealthPractice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPractice.swift; sourceTree = "<group>"; };
 		BF5566972254724D004A13C8 /* Precaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precaution.swift; sourceTree = "<group>"; };
 		BF5566992254725F004A13C8 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		BF9A4F0C22ADE9A200769C49 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		BF9A4F0E22ADED1000769C49 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
 		BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 		BF1A338C2258210E009F48AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BF4C81C322AE145600341CD1 /* SettingsTableView and Related */,
 				BFE76540229FCECF0067A3C9 /* EmployeeList Tableview and Related */,
 				BFF15EDB229518330078F59C /* CreateReport VC and Related */,
 				BF9D0E6C228291C3003A8913 /* ReportList Tableview and Related */,
@@ -154,6 +161,14 @@
 				BFC659EA22967CB10023CE7A /* CreateReportCollectionVC+CVDataSource.swift */,
 			);
 			path = "CreateReport CollectionView and Related";
+			sourceTree = "<group>";
+		};
+		BF4C81C322AE145600341CD1 /* SettingsTableView and Related */ = {
+			isa = PBXGroup;
+			children = (
+				BF4C81C422AE148500341CD1 /* SettingsTableViewController.swift */,
+			);
+			path = "SettingsTableView and Related";
 			sourceTree = "<group>";
 		};
 		BF5566902254696E004A13C8 /* Models */ = {
@@ -177,6 +192,8 @@
 				BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */,
 				BFD094EB224EBFC600953498 /* Main.storyboard */,
 				BFE7D72822A20A2F00A07942 /* DataHandler.swift */,
+				BF9A4F0C22ADE9A200769C49 /* UserDefaultsExtension.swift */,
+				BF9A4F0E22ADED1000769C49 /* UIColorExtension.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -522,9 +539,12 @@
 				BFD094F0224EBFC600953498 /* InfectionControl.xcdatamodeld in Sources */,
 				BF5566982254724D004A13C8 /* Precaution.swift in Sources */,
 				BFE7D72722A1DB2B00A07942 /* EmployeeListTableViewCell.swift in Sources */,
+				BF9A4F0D22ADE9A200769C49 /* UserDefaultsExtension.swift in Sources */,
+				BF4C81C522AE148500341CD1 /* SettingsTableViewController.swift in Sources */,
 				BF1A338F22582161009F48AA /* ReportCell.swift in Sources */,
 				BF55668D22546169004A13C8 /* CreateReportCollectionView.swift in Sources */,
 				BF1A339122585982009F48AA /* ReportSectionReusableView.swift in Sources */,
+				BF9A4F0F22ADED1000769C49 /* UIColorExtension.swift in Sources */,
 				BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */,
 				BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */,
 				BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */,

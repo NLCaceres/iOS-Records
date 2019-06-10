@@ -24,16 +24,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // Tab bar customization
+        UserDefaults.standard.set(UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0), forKey: "backgroundColor")  // USC Light Gray
+        UserDefaults.standard.set(UIColor(red:1.00, green: 0.80, blue: 0.00, alpha: 1.0), forKey: "headerBackgroundColor") // USC Gold
+        UserDefaults.standard.set(UIColor(red:0.60, green:0.00, blue:0.00, alpha:1.0), forKey: "headerTextColor") // USC Red
+        configureTabBar()
+        configureNavBar()
+        return true
+    }
+    
+    func configureTabBar() {
         tabBar = self.window?.rootViewController as? UITabBarController
         if let tabBar = tabBar {
             tabBar.selectedIndex = 1
-            print("These are the tab bar view controllers: \(tabBar.viewControllers)")
         }
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .selected)
-        
-        return true
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor(rgb: 0x990000)], for: .selected)
+    }
+    func configureNavBar() {
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.barTintColor =  UIColor(rgb: 0x990000)
+        navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgb: 0xFFCC00)]
+        // Can add a drop shadow here somehow but maybe it's an iOS12 thing to not have a divide anymore
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

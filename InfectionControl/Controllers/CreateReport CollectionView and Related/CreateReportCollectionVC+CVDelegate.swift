@@ -13,10 +13,7 @@ import UIKit
 extension CreateReportCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // let segueIdentifier = "CreateReportSegue"
         let clickedCell = collectionView.cellForItem(at: indexPath) as! ReportCell
-        print("This is the cell that got clicked \(clickedCell.reportCellLabel.text!)")
-        print("We clicked something at \(indexPath.item)")
         self.performSegue(withIdentifier: segueIdentifier, sender: clickedCell)
     }
 }

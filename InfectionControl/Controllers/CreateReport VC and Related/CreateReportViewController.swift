@@ -70,7 +70,7 @@ class CreateReportViewController: UIViewController {
         super.viewDidLoad()
         
         topNavBar.title = "New \(viewModel.reportPracticeType) Report"
-        // Hacky way to prevent keyboard
+        // Hacky way to prevent keyboard from appearing on textField
         findEmployeeTextField.inputView = UIView()
         
         datePicker.minimumDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
@@ -103,7 +103,6 @@ class CreateReportViewController: UIViewController {
         postRequest.setValue("Powered by Swift!", forHTTPHeaderField: "X-Powered-By")
         do {
             let jsonReport = try JSONEncoder().encode(fullReport)
-            print("This is the jsonReport: \(String(data: jsonReport, encoding: .utf8))")
             let putTask = URLSession.shared.uploadTask(with: postRequest, from: jsonReport, completionHandler: {data, response, error in
                 if let data = data, let dataString = String(data: data, encoding: .utf8) {
                     print("Data was returned")
@@ -143,6 +142,10 @@ class CreateReportViewController: UIViewController {
             DispatchQueue.main.async {
                 print("This is the number of rows in health practices that we should see: \(self.healthPractices.count)")
                 self.healthPracticePicker.reloadAllComponents()
+                if let healthPracticePickerRow = self.healthPractices.firstIndex(where: { $0.name == self.viewModel.reportPracticeType }) {
+                    print("This is the healthPractice row: \(healthPracticePickerRow)")
+                    self.healthPracticePicker.selectRow(healthPracticePickerRow+1, inComponent: 0, animated: true)
+                }
             }
             
         } catch {
@@ -214,6 +217,7 @@ extension CreateReportViewController: UIPickerViewDelegate {
                 reportHealthPractice = nil
             } else {
                 print("\(self.healthPractices[row - 1].name)")
+                self.topNavBar.title = "New \(self.healthPractices[row - 1].name) Report"
                 reportHealthPractice = self.healthPractices[row - 1]
             }
             //print("\(viewModel.healthPractices[row].name)")
