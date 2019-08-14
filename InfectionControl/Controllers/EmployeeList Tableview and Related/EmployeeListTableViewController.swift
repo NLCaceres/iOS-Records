@@ -39,12 +39,14 @@ class EmployeeListTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.clearsSelectionOnViewWillAppear = false
+        self.view.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         
         // Nil here means use the same view to display results
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchBar.placeholder = "Search by name or profession"
+        self.tableView.separatorColor = .red
         
         if #available(iOS 11.0, *) {
             // For iOS 11 and later, place the search bar in the navigation bar.
@@ -95,6 +97,7 @@ class EmployeeListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EmployeeListTableViewCell
+        cell.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         let employee:Employee
         if isFiltering() {
             employee = filteredEmployees[indexPath.row]

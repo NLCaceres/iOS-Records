@@ -124,11 +124,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="qm8-Jr-928">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4AY-dY-6z3">
+                            <color key="tintColor" red="1" green="0.97532327610000003" blue="0.1453303175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="cancelNewReport:" destination="BYZ-38-t0r" id="rFo-bh-OOJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="zzk-fr-ZpP">
+                            <color key="tintColor" red="1" green="0.97532327610000003" blue="0.1453303175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="Qjb-7u-1cP" kind="unwind" unwindAction="unwindHereAndSwitchTabsWithSender:" id="6t9-c4-EfJ"/>
                             </connections>
@@ -202,11 +204,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Employee List" id="ECH-f8-lqn">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="DWo-oT-stS">
+                            <color key="tintColor" red="1" green="0.97532327610000003" blue="0.1453303175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="cancelFindEmployee:" destination="qtj-ip-vTs" id="4C3-Fv-OiB"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Select" id="rvU-1O-Nv2">
+                            <color key="tintColor" red="1" green="0.97532327610000003" blue="0.1453303175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="Edt-Kr-8gK" kind="unwind" unwindAction="unwindToCreateReportVCWithSender:" id="wzm-zp-Uzz"/>
                             </connections>
@@ -437,7 +441,7 @@
         <!--Settings-->
         <scene sceneID="rJg-Nn-asK">
             <objects>
-                <tableViewController id="TWj-m5-kqu" sceneMemberID="viewController">
+                <tableViewController id="TWj-m5-kqu" customClass="SettingsTableViewController" customModule="InfectionControl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Kl-DL-Zkz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

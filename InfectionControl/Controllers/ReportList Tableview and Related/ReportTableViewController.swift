@@ -27,6 +27,8 @@ class ReportTableViewController: UITableViewController {
         } else {
             self.tableView.addSubview(setUpRefreshControl())
         }
+        self.tableView.separatorColor = .red
+        self.tableView.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         
         viewModel.fetchReports()
         addObserver(self, forKeyPath: #keyPath(viewModel.reportCells), options: [.old, .new], context: nil)
@@ -78,6 +80,7 @@ class ReportTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ReportTableViewCell
+        cell.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         let reportCellData = viewModel.reportCellViewModel(at: indexPath.row)
         
         cell.reportTableCellImageView.image = reportCellData.image

@@ -70,8 +70,8 @@ class CreateReportViewController: UIViewController {
         super.viewDidLoad()
         
         topNavBar.title = "New \(viewModel.reportPracticeType) Report"
-        // Hacky way to prevent keyboard from appearing on textField
-        findEmployeeTextField.inputView = UIView()
+        self.view.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+        findEmployeeTextField.inputView = UIView() // Hacky way to prevent keyboard from appearing and just segue
         
         datePicker.minimumDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
         datePicker.maximumDate = Date()

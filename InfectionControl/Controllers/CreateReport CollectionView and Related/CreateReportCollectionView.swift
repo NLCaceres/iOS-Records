@@ -208,7 +208,7 @@ class CreateReportCollectionView: UICollectionViewController {
 }
 
 // MARK: - Collection View Flow Layout Delegate
-// Proper way to use extensino
+// Proper way to use extension
 // Extends functions of our custom CollectionViewController
 // Specifically the ViewDelegateFlowLayout
 extension CreateReportCollectionView : UICollectionViewDelegateFlowLayout {

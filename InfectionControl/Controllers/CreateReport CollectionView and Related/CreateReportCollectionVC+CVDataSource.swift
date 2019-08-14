@@ -65,7 +65,6 @@ extension CreateReportCollectionView {
                 else {
                     fatalError("Invalid view type")
             }
-            
             if (precautions.isEmpty) {
                 return headerView
             }
@@ -74,7 +73,6 @@ extension CreateReportCollectionView {
             headerView.headerLabel.text = "\(precautions[sectionNum].name) Precautions"
             headerView.headerLabel.textColor = UserDefaults.standard.color(forKey: "headerTextColor")
             return headerView
-            
             
         default:
             // Checking that it's the right type (so in other words guard else condition)

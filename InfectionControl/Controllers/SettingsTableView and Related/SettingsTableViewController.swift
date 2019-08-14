@@ -10,8 +10,14 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    let reuseIdentifier = "SettingsCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+        self.tableView.separatorColor = .red
+        self.tableView.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -21,7 +27,6 @@ class SettingsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -30,15 +35,13 @@ class SettingsTableViewController: UITableViewController {
         return 3
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        cell.backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
         // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
