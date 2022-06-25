@@ -2,62 +2,55 @@
 //  Employee.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 4/2/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
-import UIKit
+import Foundation
 
-struct Employee: Codable {
-    // Properties
+struct Employee: Equatable {
+    // MARK: Properties
     var id: String?
     var firstName: String
     var surname: String
     var profession: Profession?
-    
-//    init?(firstName: String, surname:String, profession:Profession) {
-//        // Reasoning why I didn't check profession
-//        // In theory: SWIFT OPTIONALS PREVENT NIL VALS FROM GETTING THRU WHERE THEY SHOULDN'T!
-//        // In reality: That might not be true, but pretty sure it is
-//        if (firstName.isEmpty || surname.isEmpty) {
-//            return nil
-//        }
-//        self.firstName = firstName
-//        self.surname = surname
-//        self.profession = profession
-//    }
-    
-    init(id: String? = nil, firstName: String, surname: String, profession: Profession? = nil) {
-        self.id = id
-        self.firstName = firstName
-        self.surname = surname
-        self.profession = profession
+
+    static func ==(lhs: Employee, rhs: Employee) -> Bool {
+        return lhs.firstName == rhs.firstName && lhs.surname == rhs.surname && lhs.profession == rhs.profession
     }
-    
+}
+
+struct EmployeeDTO {
+    // Properties
+    var id: String?
+    var firstName: String
+    var surname: String
+    var profession: ProfessionDTO?
+}
+
+extension EmployeeDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case firstName = "first_name"
-        case surname = "surname"
-        case profession = "profession"
+        case id = "_id", firstName = "first_name", surname, profession
     }
-    
+    // Profession key gets sent a string or [string] so need to override unfortunately
     init(from decoder: Decoder) throws {
         let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         let id = try? jsonKeys.decode(String.self, forKey: .id)
         let firstName = try jsonKeys.decode(String.self, forKey: .firstName)
         let surname = try jsonKeys.decode(String.self, forKey: .surname)
-        let profession = try? jsonKeys.decode(Profession.self, forKey: .profession)
-        
+        let profession = try? jsonKeys.decode(ProfessionDTO.self, forKey: .profession)
+
         self.init(id: id, firstName: firstName, surname: surname, profession: profession)
     }
     
-    func encode(to encoder: Encoder) throws {
-        var jsonObj = encoder.container(keyedBy: CodingKeys.self)
-        
-        try? jsonObj.encode(id, forKey: .id)
-        try jsonObj.encode(firstName, forKey: .firstName)
-        try jsonObj.encode(surname, forKey: .surname)
-        try? jsonObj.encode(profession, forKey: .profession)
+    init(from base: Employee) {
+        let professionDTO = base.profession != nil ? ProfessionDTO(from: base.profession!) : nil
+        self.init(id: base.id, firstName: base.firstName, surname: base.surname, profession: professionDTO)
+    }
+}
+
+extension EmployeeDTO: ToBase {
+    func toBase() -> Employee {
+        let profession = self.profession?.toBase() // Profession is often a stringID in reportsList so nil is OK
+        return Employee(id: self.id, firstName: self.firstName, surname: self.surname, profession: profession)
     }
 }

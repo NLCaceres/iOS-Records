@@ -2,44 +2,52 @@
 //  HealthPractice.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 4/2/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
-import UIKit
+import Foundation
 
-struct HealthPractice: Codable {
+struct HealthPractice: Equatable {
     // Properties
     var id: String?
     var name: String
     var precautionType: Precaution?
     
-    // Memberwise init provided by struct not enough (should in theory fill with nil though...)
-    init(id: String? = nil, name: String, precautionType: Precaution? = nil) {
-        self.id = id
-        self.name = name
-        self.precautionType = precautionType
+    static func == (lhs: HealthPractice, rhs: HealthPractice) -> Bool {
+        return lhs.name == rhs.name && lhs.precautionType == rhs.precautionType
     }
-    
+}
+
+struct HealthPracticeDTO {
+    // Properties
+    var id: String?
+    var name: String
+    var precautionType: PrecautionDTO?
+}
+
+extension HealthPracticeDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case name = "name"
-        case precautionType = "precautionType"
+        case id = "_id", name, precautionType
     }
     
+    // Need overriden init since precautionType sometimes get sent as a array of id strings
     init(from decoder: Decoder) throws {
         let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
         let id = try? jsonKeys.decode(String.self, forKey: .id)
         let name = try jsonKeys.decode(String.self, forKey: .name)
-        let precautionType = try? jsonKeys.decode(Precaution.self, forKey: .precautionType)
+        let precautionType = try? jsonKeys.decode(PrecautionDTO.self, forKey: .precautionType)
         
         self.init(id: id, name: name, precautionType: precautionType)
     }
-    func encode(to encoder: Encoder) throws {
-        var jsonObj = encoder.container(keyedBy: CodingKeys.self)
-        
-        try? jsonObj.encode(id, forKey: .id)
-        try jsonObj.encode(name, forKey: .name)
-        try? jsonObj.encode(precautionType, forKey: .precautionType)
+    
+    init(from base: HealthPractice) {
+        let precautionDTO = base.precautionType != nil ? PrecautionDTO(from: base.precautionType!) : nil
+        self.init(id: base.id, name: base.name, precautionType: precautionDTO)
+    }
+}
+
+extension HealthPracticeDTO: ToBase {
+    func toBase() -> HealthPractice { // OK for precaution to be nil since API often returns stringID or [ID]
+        let precautionType = self.precautionType?.toBase()
+        return HealthPractice(id: self.id, name: self.name, precautionType: precautionType)
     }
 }

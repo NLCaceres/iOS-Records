@@ -2,50 +2,42 @@
 //  Location.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 4/2/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
-import UIKit
+import Foundation
 
-struct Location: Codable {
+struct Location: Equatable {
     // Properties
     var id: String?
     var facilityName: String
     var unitNum: String
     var roomNum: String
     
-    init(id:String? = nil, facilityName:String, unitNum:String, roomNum:String) {
-        self.id = id
-        self.facilityName = facilityName
-        self.unitNum = unitNum
-        self.roomNum = roomNum
+    static func ==(lhs: Location, rhs: Location) -> Bool {
+        return lhs.facilityName == lhs.facilityName && lhs.unitNum == rhs.unitNum && lhs.roomNum == rhs.roomNum
     }
-    
+}
+
+// Data Transfer Objects rarely inherit from the basic version of the model
+struct LocationDTO {
+    var id: String?
+    var facilityName: String
+    var unitNum: String
+    var roomNum: String
+}
+
+extension LocationDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case facilityName = "facilityName"
-        case unitNum = "unitNum"
-        case roomNum = "roomNum"
-    }
+        case id = "_id", facilityName, unitNum, roomNum
+    } // Only need a raw value string for id, rest get coded just fine
     
-    init(from decoder: Decoder) throws {
-        let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let id = try? jsonKeys.decode(String.self, forKey: .id)
-        let facilityName = try jsonKeys.decode(String.self, forKey: .facilityName)
-        let unitNum = try jsonKeys.decode(String.self, forKey: .unitNum)
-        let roomNum = try jsonKeys.decode(String.self, forKey: .roomNum)
-        
-        self.init(id: id, facilityName: facilityName, unitNum: unitNum, roomNum: roomNum)
+    init(from base: Location) {
+        self.init(id: base.id, facilityName: base.facilityName, unitNum: base.unitNum, roomNum: base.roomNum)
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var jsonObj = encoder.container(keyedBy: CodingKeys.self)
-        
-        try? jsonObj.encode(id, forKey: .id)
-        try jsonObj.encode(facilityName, forKey: .facilityName)
-        try jsonObj.encode(unitNum, forKey: .unitNum)
-        try jsonObj.encode(roomNum, forKey: .roomNum)
+}
+
+extension LocationDTO: ToBase {
+    func toBase() -> Location {
+        Location(id: self.id, facilityName: self.facilityName, unitNum: self.unitNum, roomNum: self.roomNum)
     }
 }

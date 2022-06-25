@@ -2,69 +2,73 @@
 //  Report.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 4/2/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
-import UIKit
+import Foundation
 
-struct Report: Codable {
+struct Report: Equatable {
     var id: String?
-    var employee: Employee?
-    var healthPractice: HealthPractice?
-    var location: Location?
+    var employee: Employee
+    var healthPractice: HealthPractice
+    var location: Location
     var date: Date
     
-    init(id: String? = nil, employee: Employee? = nil, healthPractice: HealthPractice? = nil, location: Location? = nil, date: Date) {
-        self.id = id
-        self.employee = employee
-        self.healthPractice = healthPractice
-        self.location = location
-        self.date = date
+    static func ==(lhs: Report, rhs: Report) -> Bool {
+        return lhs.id == rhs.id && lhs.employee == rhs.employee && lhs.healthPractice == rhs.healthPractice &&
+            lhs.location == rhs.location && lhs.date == rhs.date
     }
     
-    enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case employee = "employee"
-        case healthPractice = "healthPractice"
-        case location = "location"
-        case date = "date_reported"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
-        let id = try? jsonKeys.decode(String.self, forKey: .id)
-        let employee = try? jsonKeys.decode(Employee.self, forKey: .employee)
-        let healthPractice = try? jsonKeys.decode(HealthPractice.self, forKey: .healthPractice)
-        let location = try? jsonKeys.decode(Location.self, forKey: .location)
-        let date = try jsonKeys.decode(String.self, forKey: .date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let formattedDate = dateFormatter.date(from: date)
-        self.init(id: id, employee: employee, healthPractice: healthPractice, location: location, date: formattedDate!)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var jsonObj = encoder.container(keyedBy: CodingKeys.self)
-        
-        try? jsonObj.encode(id, forKey: .id)
-        try? jsonObj.encode(employee, forKey: .employee)
-        try? jsonObj.encode(healthPractice, forKey: .healthPractice)
-        try? jsonObj.encode(location, forKey: .location)
-        try jsonObj.encode(date, forKey: .date)
-    }
-    
-    static func dateHelper(_ date: Date) {
+    // LangCodes to consider "en" == "Month/Day/Year"
+    // "es" + "fr" + "de" + "it" == "Day/Month/Year"
+    // "ko" + "ja" + "zh" == "Year/Month/Day"
+    static func dateHelper(_ date: Date, long: Bool = false, langCode: String? = nil) -> String {
         let dateFormatter = DateFormatter()
         
-        dateFormatter.locale = Locale(identifier: Locale.current.languageCode!)
+        dateFormatter.locale = Locale(identifier: langCode ?? Locale.current.languageCode!) // Easier to test thanks to default param
         print("This is the language code: \(dateFormatter.locale.languageCode!)")
-        if dateFormatter.locale.languageCode == "en" {
+        
+        if long && dateFormatter.locale.languageCode == "en" {
             dateFormatter.dateFormat = "MMM d, yyyy. h:mm a."
-        } else {
+        }
+        else if long { // Long format, NON english
             dateFormatter.dateFormat = "d MMM yyyy H:mm"
         }
-        print("This is what we have from dateHelper: \(dateFormatter.string(from: date))")
+        else if dateFormatter.locale.languageCode == "en" { // Short format, english
+            dateFormatter.dateFormat = "M/d/yy"
+        }
+        else { // Short format, NON english
+            dateFormatter.dateFormat = "d/M/yy"
+        }
+
+        return dateFormatter.string(from: date)
+    }
+    
+    
+}
+
+struct ReportDTO {
+    var id: String?
+    var employee: EmployeeDTO?
+    var healthPractice: HealthPracticeDTO?
+    var location: LocationDTO?
+    var date: Date
+}
+
+extension ReportDTO: Codable {
+    enum CodingKeys: String, CodingKey {
+        case date = "date_reported", employee, id = "_id", healthPractice, location
+    }
+    
+    init(from base: Report) {
+        self.init(id: base.id, employee: EmployeeDTO(from: base.employee), healthPractice:
+                    HealthPracticeDTO(from: base.healthPractice), location: LocationDTO(from: base.location), date: base.date)
+    }
+}
+
+extension ReportDTO: ToBase {
+    func toBase() -> Report? {
+        guard let employee = self.employee?.toBase(), let healthPractice = self.healthPractice?.toBase(),
+                let location = self.location?.toBase() else { return nil }
+        return Report(id: self.id, employee: employee, healthPractice: healthPractice, location: location, date: self.date)
     }
 }

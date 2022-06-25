@@ -2,44 +2,44 @@
 //  Precaution.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 4/2/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
-import UIKit
+import Foundation
 
-struct Precaution: Codable {
+struct Precaution: Equatable {
     var id: String?
-    var name:String
-    var practices: [HealthPractice]?
+    var name: String
+    var practices: [HealthPractice]? // Might not receive the HealthPractices
     
-    init(id: String? = nil, name: String, practices: [HealthPractice]? = nil) {
-        self.id = id
-        self.name = name
-        self.practices = practices
+    static func == (lhs: Precaution, rhs: Precaution) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.practices == rhs.practices
     }
-    
+}
+
+struct PrecautionDTO {
+    var id: String?
+    var name: String
+    var practices: [HealthPracticeDTO]?
+}
+
+extension PrecautionDTO: Codable {
+    // Unlike HealthPracticeDTO, no expected 'string got array' issue decoding since practices ends up as [stringID]
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case name = "name"
-        case practices = "practices"
+        case id = "_id", name, practices
     }
     
-    init(from decoder: Decoder) throws {
-        let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
-        let id = try? jsonKeys.decode(String.self, forKey: .id)
-        let name = try jsonKeys.decode(String.self, forKey: .name)
-        let practices = try? jsonKeys.decode([HealthPractice].self, forKey: .practices)
-        
-        // Following is just regular method with included method labels
-        self.init(id: id, name: name, practices: practices)
+    init(from base: Precaution) {
+        if let practices = base.practices, practices.count > 0 {
+            let practicesDTO = practices.map { HealthPracticeDTO(from: $0) }
+            self.init(id: base.id, name: base.name, practices: practicesDTO)
+        }
+        else { self.init(id: base.id, name: base.name) }
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var jsonObj = encoder.container(keyedBy: CodingKeys.self)
-        
-        try? jsonObj.encode(id, forKey: .id)
-        try jsonObj.encode(name, forKey: .name)
-        try? jsonObj.encode(practices, forKey: .practices)
+}
+
+extension PrecautionDTO: ToBase {
+    func toBase() -> Precaution {
+        let practices = self.practices?.map { $0.toBase() }
+        return Precaution(id: self.id, name: self.name, practices: practices)
     }
 }
