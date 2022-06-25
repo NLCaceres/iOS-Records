@@ -1,4 +1,4 @@
-framework module Pods_InfectionControlTests {
+module Pods_InfectionControlTests {
   umbrella header "Pods-InfectionControlTests-umbrella.h"
 
   export *

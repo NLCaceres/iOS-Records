@@ -2,9 +2,7 @@
 //  AppDelegate.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 3/29/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import UIKit
 import CoreData
@@ -13,38 +11,37 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var tabBar: UITabBarController?
-    
-//    // Prevents completion handler issue (they're not supported in background downloads)
-//    var backgroundSessionCompletionHandler: (() -> Void)?
-//    func application(_ application: UIApplication, handleEventsForBackgroundURLSession
-//        identifier: String, completionHandler: @escaping () -> Void) {
-//        backgroundSessionCompletionHandler = completionHandler
-//    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        UserDefaults.standard.set(UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0), forKey: "backgroundColor")  // USC Light Gray
-        UserDefaults.standard.set(UIColor(red:1.00, green: 0.80, blue: 0.00, alpha: 1.0), forKey: "headerBackgroundColor") // USC Gold
-        UserDefaults.standard.set(UIColor(red:0.60, green:0.00, blue:0.00, alpha:1.0), forKey: "headerTextColor") // USC Red
-        configureTabBar()
-        configureNavBar()
+        // MARK: UI Test Overrides
+        debugUITests(application)
+        
+        let backgroundColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0) // USC Light Gray (204,204,204) - #cccccc
+        // USC Dark Gray (119,119,119) - #777777
+        let themeColor = UIColor(red:0.60, green:0.00, blue:0.00, alpha:1.0) // USC Red (153,0,0) - #990000
+        let themeSecondaryColor = UIColor(red:1.00, green: 0.80, blue: 0.00, alpha: 1.0) // USC Gold (255,204,0) - #ffcc00
+        
+        // MARK: Configure App-Wide Defaults
+        UserDefaults.standard.set(backgroundColor, forKey: "backgroundColor")
+        UserDefaults.standard.set(themeColor, forKey: "themeColor")
+        UserDefaults.standard.set(themeSecondaryColor, forKey: "themeSecondaryColor")
+        
+        if let tabBarController = self.window?.rootViewController as? UITabBarController {
+            configureTabBar(tabBarController)
+        }
+        configureNavBar(themeColor: themeColor, themeSecondaryColor: themeSecondaryColor)
+        configureSegmentedControl(themeColor: themeColor, themeSecondaryColor: themeSecondaryColor)
+        
         return true
     }
     
-    func configureTabBar() {
-        tabBar = self.window?.rootViewController as? UITabBarController
-        if let tabBar = tabBar {
-            tabBar.selectedIndex = 1
+    func debugUITests(_ application: UIApplication) {
+        #if DEBUG
+        if CommandLine.arguments.contains("-disableAnimations") {
+            UIView.setAnimationsEnabled(false)
+//            self.window?.layer.speed = 2.0 // An option if animations are required
         }
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor(rgb: 0x990000)], for: .selected)
-    }
-    func configureNavBar() {
-        let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.barTintColor =  UIColor(rgb: 0x990000)
-        navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgb: 0xFFCC00)]
-        // Can add a drop shadow here somehow but maybe it's an iOS12 thing to not have a divide anymore
+        #endif
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

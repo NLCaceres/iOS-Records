@@ -1,15 +1,14 @@
 //
-//  File.swift
+//  UserDefaults.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 6/9/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import Foundation
 import UIKit.UIColor
 
-extension UserDefaults {
+//TODO: Simplify access to UserDefaults further?
+extension UserDefaults { // For saving colors to UserDefaults and then grabbing/setting them
     
     func color(forKey key: String) -> UIColor? {
         
