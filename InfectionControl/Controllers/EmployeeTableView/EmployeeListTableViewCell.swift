@@ -2,9 +2,7 @@
 //  EmployeeListTableViewCell.swift
 //  InfectionControl
 //
-//  Created by Nick Caceres on 5/31/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import UIKit
 
