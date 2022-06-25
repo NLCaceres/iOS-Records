@@ -2,9 +2,7 @@
 //  InfectionControlTests.swift
 //  InfectionControlTests
 //
-//  Created by Nick Caceres on 3/29/19.
-//  Copyright © 2019 Nick Caceres. All rights reserved.
-//
+//  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import XCTest
 @testable import InfectionControl
