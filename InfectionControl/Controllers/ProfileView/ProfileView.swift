@@ -15,18 +15,12 @@ struct ProfileView: View, BaseStyling {
     @StateObject var viewModel: ProfileViewModel
     
     var employeeString: String {
-        guard let employee = self.viewModel.employee else {
-            return "Missing employee name"
-        }
-        print("Employee not nil, making string")
-        return "\(employee.firstName) \(employee.surname)"
+        if let employee = self.viewModel.employee { return employee.fullName }
+        else { return "Missing employee info" }
     }
     var employeeProfessionString: String {
-        guard let profession = self.viewModel.employee?.profession else {
-            return "Profession info missing"
-        }
-        print("Profession not nil, making string")
-        return "\(profession.observedOccupation) \(profession.serviceDiscipline)"
+        if let profession = self.viewModel.employee?.profession { return profession.description }
+        else { return "Profession info missing!" }
     }
     
     var body: some View {
@@ -58,12 +52,25 @@ struct ProfileView: View, BaseStyling {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         let profileViewModel = ProfileViewModel()
-        profileViewModel.employee = Employee(firstName: "John", surname: "Smith")
+        let employee = Employee(firstName: "John", surname: "Smith")
+        profileViewModel.employee = employee
         profileViewModel.employee!.profession = Profession(observedOccupation: "Clinic", serviceDiscipline: "Nurse")
         profileViewModel.reportList = [ReportRow_Previews.makeReport(), ReportRow_Previews.makeReport()]
-//        let otherEmployee = Employee(firstName: "Maria", surname: "Garcia", profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Nurse"))
-//        profileViewModel.teamList = [otherEmployee, otherEmployee, otherEmployee]
         
-        return ProfileView(viewModel: profileViewModel).previewInterfaceOrientation(.portrait)
+        let secondProfileViewModel = ProfileViewModel()
+        secondProfileViewModel.reportList = []
+        
+        let otherProfileViewModel = ProfileViewModel()
+        let otherEmployee = Employee(firstName: "Maria", surname: "Garcia",
+                                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Supervisor"))
+        otherProfileViewModel.employee = otherEmployee
+        otherProfileViewModel.reportList = [ReportRow_Previews.makeReport(), ReportRow_Previews.makeReport()]
+        otherProfileViewModel.teamList = [employee, employee, employee]
+        
+        return Group {
+            ProfileView(viewModel: profileViewModel) // Typical employee view
+            ProfileView(viewModel: secondProfileViewModel) // Loading info example
+            ProfileView(viewModel: otherProfileViewModel) // Supervisor view with segmented control lists
+        }.previewInterfaceOrientation(.portrait)
     }
 }

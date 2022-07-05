@@ -18,8 +18,9 @@ struct ProfileListSection: View, BaseStyling {
         if (isTeamLeader(viewModel.employee?.profession)) { SegmentedLists(viewModel: viewModel) }
         else {
             ReportListView(reportList: viewModel.reportList, refreshTask: { await viewModel.fetchReports() })
-                .padding(.top, 5).addNetworkIndicator(isRefreshing: viewModel.isLoadingReportList,
-                                                      title: "Loading Reports Data", color: themeColor.color)
+                .padding(.top, 5)
+                .addNetworkIndicator(isRefreshing: viewModel.isLoadingReportList,
+                                     title: "Loading Reports Data", color: themeColor.color)
                 .task { if viewModel.reportList.isEmpty {
                     print("Empty reportLists, let's init them")
                     await viewModel.fetchReports()

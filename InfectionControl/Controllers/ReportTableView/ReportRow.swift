@@ -8,31 +8,15 @@ import SwiftUI
 
 struct ReportRow: View {
     var report: Report
-    var violationString: String {
-        return "\(self.report.healthPractice.name) Violation"
-    }
-    var employeeString: String {
-        return "Committed by \(self.report.employee.firstName) \(self.report.employee.surname)"
-    }
-    var employeeProfessionString: String {
-        let facility = self.report.location.facilityName
-        let unit = self.report.location.unitNum
-        let room = self.report.location.roomNum
-        
-        return "Location: \(facility) Unit \(unit) Room \(room)"
-    }
+    var violationString: String { "\(self.report.healthPractice.name) Violation" }
+    var employeeString: String { "Committed by \(self.report.employee.fullName)" }
+    var employeeProfessionString: String { self.report.location.description }
+
     var body: some View {
-        HStack(alignment: .center) {
-            Image("report_placeholder_icon")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(violationString).font(.headline)
-                Text(employeeString).font(.body).padding(.leading, 7)
-                Text(employeeProfessionString).font(.body).padding(.leading, 7)
-            }
-            Spacer()
+        CommonRowSubtitled(imageName: "report_placeholder_icon") {
+            Text(violationString).font(.headline)
+            Text(employeeString).font(.body).padding(.leading, 7)
+            Text(employeeProfessionString).font(.body).padding(.leading, 7)
         }
     }
 }

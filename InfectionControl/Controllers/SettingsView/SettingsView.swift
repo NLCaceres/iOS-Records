@@ -19,7 +19,7 @@ struct SettingsView: View {
     @State private var concerningNumReports = 3
     @State private var poorNumReports = 6
     
-    var body: some View { // Body only returns one view! so probably a H,V, or Z stack
+    var body: some View { // Body only can returns one view! so usually a H,V, or Z stack
         List {
             Section("Colors") {
                 Toggle("Prefer to Use System Light and Dark Mode?", isOn: $preferSystemAppearance)
@@ -46,9 +46,8 @@ struct SettingsView: View {
             }.listRowBackground(Color.white)
             
             Section("Performance Indicators") {
-                // TODO: Update labels. For custom steppers would need to make a full custom view.
-                Stepper("Number of Reports to Cause Concern: \(concerningNumReports)", value: $concerningNumReports)
-                Stepper("Number of Reports to Force Action: \(poorNumReports)", value: $poorNumReports)
+                Stepper("Number of Reports until Concerning: \(concerningNumReports)", value: $concerningNumReports)
+                Stepper("Number of Reports until Actionable: \(poorNumReports)", value: $poorNumReports)
             }.listRowBackground(Color.white)
             
         }.listStyle(.insetGrouped)

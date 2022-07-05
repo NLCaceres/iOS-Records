@@ -14,25 +14,11 @@ struct ReportListView: View, BaseStyling {
     var body: some View {
         List {
             Section {
-                ForEach(self.reportList, id: \.id) { report in
-                    ZStack { // Keeps Row from shrinking but still allows navLinking
-                        NavigationLink(destination: ReportDetailView()) {
-                            Rectangle().opacity(0.0)
-                            Spacer()
-                        }
-                        ReportRow(report: report)
-                    }
-                    .listRowInsets(.init(top: 3, leading: 0, bottom: 3, trailing: 10))
+                ForEach(self.reportList) { report in
+                    NavigableRow(content: ReportRow(report: report), destination: ReportDetailView())
                 }.listRowSeparatorTint(.red)
             }
-            header: {
-                HStack {
-                    Text(headerText).font(.title2)
-                        .fontWeight(.bold).foregroundColor(self.themeColor.color)
-                        .padding(.init(top: 8, leading: 20, bottom: 5, trailing: 0))
-                    Spacer()
-                }.background(self.themeSecondaryColor.color)
-            }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            header: { CommonHeader(title: headerText) }.flushListRow()
             
             .listRowBackground(self.backgroundColor.withAlphaComponent(0.5).color)
         }.listStyle(.grouped).onAppear {

@@ -13,19 +13,11 @@ struct EmployeeListView: View, BaseStyling {
     var body: some View {
         List {
             Section {
-                ForEach(self.employeeList, id: \.id) { employee in
-                    EmployeeRow(employee: employee)
-                        .listRowInsets(.init(top: 15, leading: 10, bottom: 5, trailing: 10))
+                ForEach(self.employeeList) { employee in
+                    EmployeeRow(employee: employee).listRowInsets(15, 10, 5, 10)
                 }.listRowSeparatorTint(.red)
-            }
-            header: { // Override default styling of header's simple Text()
-                HStack {
-                    Text("Team List").font(.title2).fontWeight(.bold)
-                        .foregroundColor(self.themeColor.color)
-                        .padding(.init(top: 8, leading: 20, bottom: 5, trailing: 0))
-                    Spacer()
-                }.background(self.themeSecondaryColor.color)
-            }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            } // Rather than a simple header, a nice reusable custom one!
+            header: { CommonHeader(title: "Team List") }.flushListRow()
             
             .listRowBackground(self.backgroundColor.withAlphaComponent(0.5).color)
         }.listStyle(.grouped).refreshable {
