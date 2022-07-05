@@ -6,11 +6,12 @@
 
 import Foundation
 
-struct Profession: Equatable {
+struct Profession: Equatable, Identifiable {
     // MARK: Properties
     var id: String?
     var observedOccupation: String
     var serviceDiscipline: String
+    var description: String { "\(observedOccupation) \(serviceDiscipline)" }
 
     static func ==(lhs: Profession, rhs: Profession) -> Bool {
         return lhs.observedOccupation == rhs.observedOccupation && lhs.serviceDiscipline == rhs.serviceDiscipline

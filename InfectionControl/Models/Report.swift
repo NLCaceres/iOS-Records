@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct Report: Equatable {
+struct Report: Equatable, Identifiable {
     var id: String?
     var employee: Employee
     var healthPractice: HealthPractice

@@ -54,21 +54,21 @@ class EmployeeDTOTests: XCTestCase {
     func testCreateEmployee() throws {
         // When EmployeeDTO used to Make Employee
         let employeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: nil)
-        let employee = Employee(from: employeeDTO)
+        let employee = employeeDTO.toBase()
         //Then Matching firstName and surname
         XCTAssertEqual(employee.firstName, employeeDTO.firstName)
         XCTAssertEqual(employee.surname, employeeDTO.surname)
         
         // When EmployeeDTO with ID used to make Employee
         let nextEmployeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: nil)
-        let nextEmployee = Employee(from: nextEmployeeDTO)
+        let nextEmployee = nextEmployeeDTO.toBase()
         // Then Matching IDs
         XCTAssertEqual(nextEmployee.id, nextEmployeeDTO.id)
         
         // When EmployeeDTO with Profession used to make Employee
         let profession = ProfessionDTO(id: "profesionId0", observedOccupation: "occupation0", serviceDiscipline: "discipline0")
         let finalEmployeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: profession)
-        let finalEmployee = Employee(from: finalEmployeeDTO)
+        let finalEmployee = finalEmployeeDTO.toBase()
         // Then Matching IDs, occupation, and discipline from ProfessionDTO for Profession
         XCTAssertEqual(finalEmployee.id, finalEmployeeDTO.id)
         XCTAssertEqual(finalEmployee.profession?.id, finalEmployeeDTO.profession?.id)

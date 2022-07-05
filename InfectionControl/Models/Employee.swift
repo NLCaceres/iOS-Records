@@ -6,12 +6,14 @@
 
 import Foundation
 
-struct Employee: Equatable {
+// Identifiable just requires an id prop which works fine thanks to mongoDB UUIDs '_id'
+struct Employee: Equatable, Identifiable {
     // MARK: Properties
     var id: String?
     var firstName: String
     var surname: String
     var profession: Profession?
+    var fullName: String { "\(firstName) \(surname)" }
 
     static func ==(lhs: Employee, rhs: Employee) -> Bool {
         return lhs.firstName == rhs.firstName && lhs.surname == rhs.surname && lhs.profession == rhs.profession

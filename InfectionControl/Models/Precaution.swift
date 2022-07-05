@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct Precaution: Equatable {
+struct Precaution: Equatable, Identifiable {
     var id: String?
     var name: String
     var practices: [HealthPractice]? // Might not receive the HealthPractices

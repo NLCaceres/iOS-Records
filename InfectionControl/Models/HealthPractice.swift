@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct HealthPractice: Equatable {
+struct HealthPractice: Equatable, Identifiable {
     // Properties
     var id: String?
     var name: String

@@ -6,15 +6,16 @@
 
 import Foundation
 
-struct Location: Equatable {
+struct Location: Equatable, Identifiable {
     // Properties
     var id: String?
     var facilityName: String
     var unitNum: String
     var roomNum: String
+    var description: String { "Location: \(facilityName) Unit \(unitNum) Room \(roomNum)" }
     
     static func ==(lhs: Location, rhs: Location) -> Bool {
-        return lhs.facilityName == lhs.facilityName && lhs.unitNum == rhs.unitNum && lhs.roomNum == rhs.roomNum
+        return lhs.facilityName == rhs.facilityName && lhs.unitNum == rhs.unitNum && lhs.roomNum == rhs.roomNum
     }
 }
 

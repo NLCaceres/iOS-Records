@@ -145,7 +145,7 @@ struct ModelsFactory {
         createdReports += 1
         return reportJSON
     }
-    // Should be "Jan 01, 2020, 03:12PM" (Specific Timezone [PST] required or will default to machine's local tz)
+    // Should be "Oct 01, 2020, 03:12PM" (Specific Timezone [PST] required or will default to machine's local tz)
     static func createMockDate() -> Date {
         return DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(abbreviation: "PST"),
                               year: 2020, month: 10, day: 1, hour: 15, minute: 12).date!

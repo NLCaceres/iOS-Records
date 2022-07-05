@@ -50,7 +50,7 @@ class ReportTableCellViewModelTests: XCTestCase {
     
     func testCreateTitleText() {
         let healthPracticeName = "\(self.report.healthPractice.name)"
-        let dateStr = "Oct 01, 2020, 03:12PM" // ALWAYS the Mock date used in mockReport
+        let dateStr = "10/1/20" // MockDate ALWAYS this date. CellViewModel uses Report's default short date format
         let fullStr = "\(healthPracticeName) Violation \(dateStr)"
         let mainText = cellViewModel.titleText
         XCTAssertTrue(mainText.mutableString.hasPrefix(healthPracticeName))

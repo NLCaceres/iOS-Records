@@ -39,7 +39,7 @@ class ProfessionDTOTests: XCTestCase {
     
     func testCreateProfession() {
         let professionDTO = ProfessionDTO(id: "professionId0", observedOccupation: "occupation0", serviceDiscipline: "discipline0")
-        let profession = Profession(from: professionDTO)
+        let profession = professionDTO.toBase()
         XCTAssertEqual(profession.id, professionDTO.id)
         XCTAssertEqual(profession.observedOccupation, professionDTO.observedOccupation)
         XCTAssertEqual(profession.serviceDiscipline, professionDTO.serviceDiscipline)

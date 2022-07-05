@@ -80,20 +80,20 @@ class HealthPracticeDTOTests: XCTestCase {
     func testCreateHealthPractice() {
         // When HealthPracticeDTO has ID makes HealthPractice
         let healthPracticeDTO = HealthPracticeDTO(id: nil, name: "name0", precautionType: nil)
-        let healthPractice = HealthPractice(from: healthPracticeDTO)
+        let healthPractice = healthPracticeDTO.toBase()
         // Then Matching names
         XCTAssertEqual(healthPractice.name, healthPracticeDTO.name)
         
         // When HealthPracticeDTO with ID makes HealthPractice
         let nextHealthPracticeDTO = HealthPracticeDTO(id: "healthPracticeId0", name: "name0", precautionType: nil)
-        let nextHealthPractice = HealthPractice(from: nextHealthPracticeDTO)
+        let nextHealthPractice = nextHealthPracticeDTO.toBase()
         // Then Matching IDs
         XCTAssertEqual(nextHealthPractice.id, nextHealthPracticeDTO.id)
         
         // When HealthPracticeDTO with Precaution makes HealthPractice
         let newPrecaution = PrecautionDTO(name: "name0")
         let finalHealthPracticeDTO = HealthPracticeDTO(id: "healthPracticeId0", name: "name0", precautionType: newPrecaution)
-        let finalHealthPractice = HealthPractice(from: finalHealthPracticeDTO)
+        let finalHealthPractice = finalHealthPracticeDTO.toBase()
         // Then Precaution has matching ID and name
         XCTAssertEqual(finalHealthPractice.id, finalHealthPracticeDTO.id)
         XCTAssertEqual(finalHealthPractice.precautionType?.id, finalHealthPracticeDTO.precautionType?.id)
