@@ -33,7 +33,12 @@ class ProfileViewModel: ObservableObject {
     }
     @MainActor
     func fetchEmployeeImage(urlPath: String, networkManager: FetchingNetworkManager) async {
-        let employeeImgData = await networkManager.fetchTask(endpointPath: urlPath)
+        let employeeImgResult = await networkManager.fetchTask(endpointPath: urlPath)
+        if case let .failure(error) = employeeImgResult { // Early return if condition
+            print("Got the following error \(error)")
+            return
+        }
+        let employeeImgData = try! employeeImgResult.get() // Should not be able to throw anymore!
         if let data = employeeImgData { employeeImg = UIImage(data: data) }
     }
     

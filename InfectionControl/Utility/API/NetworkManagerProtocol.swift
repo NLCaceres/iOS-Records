@@ -6,25 +6,25 @@
 
 import Foundation
 
-typealias DataUpdater = (Data?, Error?) -> Void // Technically = (Data) -> () since Void is actually an empty Tuple under the hood
+typealias DataUpdater = (Data?, Error?) -> Void // Technically = "(Data, Error) -> ()" since Void is actually an empty Tuple under the hood
 
 protocol FetchingNetworkManager {
-    var baseURL: URL { get }
-    func fetchTask(endpointPath: String) async -> Data?
-    func createFetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask
-    func onFetchComplete(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater)
+    var apiURL: URL { get }
+    func fetchTask(endpointPath: String) async -> Result<Data?, Error>
+    func fetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask
+    func onHttpResponse(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater?) -> Result<Data?, Error>
 }
 protocol PostingNetworkManager {
-    var baseURL: URL { get }
+    var apiURL: URL { get }
     func postRequest(endpointPath: String) -> URLRequest
 }
 
 protocol CompleteNetworkManager: FetchingNetworkManager, PostingNetworkManager {
-    var baseURL: URL { get }
+    var apiURL: URL { get }
     
-    func fetchTask(endpointPath: String) async -> Data?
-    func createFetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask
-    func onFetchComplete(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater)
+    func fetchTask(endpointPath: String) async -> Result<Data?, Error>
+    func fetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask
+    func onHttpResponse(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater?) -> Result<Data?, Error>
     
     func postRequest(endpointPath: String) -> URLRequest
 }

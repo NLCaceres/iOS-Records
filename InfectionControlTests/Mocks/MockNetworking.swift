@@ -12,7 +12,7 @@ import Foundation
  The mockSession has mutable data and err vars as well as an overriden dataTask() that returns our mockDataTask
  The mockDataTask can be used individually (with its simple init)or from inside the mockSession.
  Inside the mockSession, mockDataTask receives a closure that just calls our completionHandler when mockDataTask resume() is called
- Finally mockNetworkManager works mostly normally. When calling createFetchTask, the func we pass in is called by mockDataTask
+ Finally mockNetworkManager works mostly normally. When calling fetchTask, the func we pass in is called by mockDataTask
  Basically mockDataTask resume() calls mockSession's completionHandler which calls our updateClosure
  */
 typealias AnyClosure = () -> Void
@@ -44,9 +44,9 @@ class MockURLSession: URLSession {
 }
 
 class MockNetworkManager: CompleteNetworkManager {
-    var baseURL: URL { return URL(string: "https://www.foobar.com")! }
+    var apiURL: URL { return URL(string: "https://www.foobar.com")! }
     var urlSession: URLSession
-    // Called in dataTask's completionHandler in place of closure passed into createFetchTask()
+    // Called in dataTask's completionHandler in place of closure passed into fetchTask()
     var replacementClosure: AnyClosure?
     var replacementData: Data?
     
@@ -59,22 +59,23 @@ class MockNetworkManager: CompleteNetworkManager {
         self.replacementClosure = replacementClosure
     }
     
-    func fetchTask(endpointPath: String) async -> Data? {
-        return self.replacementData
+    func fetchTask(endpointPath: String) async -> Result<Data?, Error> {
+        return .success(self.replacementData)
     }
     
-    func createFetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask {
-        return self.urlSession.dataTask(with: self.baseURL) { data, _, err in
-            print("Running createFetchTask dataTask handler")
+    func fetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask {
+        return self.urlSession.dataTask(with: self.apiURL) { data, _, err in
+            print("Running fetchTask with a dataTask handler")
             self.replacementClosure != nil ? self.replacementClosure!() : updateClosure(data, err)
         }
     }
     
-    func onFetchComplete(data: Data?, response: URLResponse?, error: Error?, dataHandler: (Data?, Error?) -> Void) {
+    func onHttpResponse(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater?) -> Result<Data?, Error> {
         print("On Fetch Completed!")
+        return .success(nil)
     }
     
     func postRequest(endpointPath: String) -> URLRequest {
-        return URLRequest(url: self.baseURL)
+        return URLRequest(url: self.apiURL)
     }
 }

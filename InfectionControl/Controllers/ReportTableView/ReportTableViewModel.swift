@@ -34,7 +34,7 @@ class ReportTableViewModel {
         self.isLoading.accept(true)
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let myVM = self else { return }
-            myVM.networkManager.createFetchTask(endpointPath: "reports", updateClosure: myVM.setupReportViewCell).resume()
+            myVM.networkManager.fetchTask(endpointPath: "reports", updateClosure: myVM.setupReportViewCell).resume()
         }
     }
     

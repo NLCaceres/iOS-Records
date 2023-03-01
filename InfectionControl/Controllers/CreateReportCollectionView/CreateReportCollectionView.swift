@@ -32,7 +32,7 @@ class CreateReportCollectionView: UICollectionViewController {
         self.collectionView.refreshControl?.beginRefreshing()
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let myVC = self else { return }
-            myVC.networkManager.createFetchTask(endpointPath: "precautions", updateClosure: myVC.updatePrecautions).resume()
+            myVC.networkManager.fetchTask(endpointPath: "precautions", updateClosure: myVC.updatePrecautions).resume()
         }
     }
     
