@@ -92,6 +92,7 @@
 		BFD094F5224EBFC700953498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */; };
 		BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094FF224EBFC700953498 /* InfectionControlTests.swift */; };
 		BFD0950B224EBFC800953498 /* BaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0950A224EBFC800953498 /* BaseUITests.swift */; };
+		BFD9418E29AF4D3F00F8A78D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFD9418D29AF4D3F00F8A78D /* README.md */; };
 		BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */; };
 		BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */; };
 		BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE7D72422A1D29800A07942 /* Default-568h@2x.png */; };
@@ -217,6 +218,7 @@
 		BFD09506224EBFC800953498 /* InfectionControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfectionControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD0950A224EBFC800953498 /* BaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITests.swift; sourceTree = "<group>"; };
 		BFD0950C224EBFC800953498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD9418D29AF4D3F00F8A78D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewController.swift; sourceTree = "<group>"; };
 		BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewController.swift; sourceTree = "<group>"; };
 		BFE7D72422A1D29800A07942 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 		BFD094DB224EBFC500953498 = {
 			isa = PBXGroup;
 			children = (
+				BFD9418D29AF4D3F00F8A78D /* README.md */,
 				BFE7D72422A1D29800A07942 /* Default-568h@2x.png */,
 				BFD094E6224EBFC500953498 /* InfectionControl */,
 				BFD094FE224EBFC700953498 /* InfectionControlTests */,
@@ -688,6 +691,7 @@
 			files = (
 				BFD094F5224EBFC700953498 /* LaunchScreen.storyboard in Resources */,
 				BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */,
+				BFD9418E29AF4D3F00F8A78D /* README.md in Resources */,
 				BFD094F2224EBFC700953498 /* Assets.xcassets in Resources */,
 				BFD094ED224EBFC600953498 /* Main.storyboard in Resources */,
 			);
