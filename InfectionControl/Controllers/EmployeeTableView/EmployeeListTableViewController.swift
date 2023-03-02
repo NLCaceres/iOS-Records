@@ -5,8 +5,7 @@
 //  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import UIKit
-import RxSwift
-import RxCocoa
+import Combine
 
 class EmployeeListTableViewController: UITableViewController, BaseStyling {
 
@@ -17,15 +16,12 @@ class EmployeeListTableViewController: UITableViewController, BaseStyling {
     @IBAction func cancelFindEmployee(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+    // IF I wanted to directly unit test the controller, then using "init()" would make dependency injection easier
+    // BUT more likely to simply observe results while XCUITesting
     // MARK: Properties
-    var networkManager: CompleteNetworkManager = NetworkManager()
-    var employees = [Employee]()
-    var filteredEmployees = [Employee]()
-    var selectedEmployee: Employee?
-    var filteredEmployeesRx: PublishSubject<[Employee]> = PublishSubject()
-    private let disposeBag = DisposeBag()
-    let reuseIdentifier = "EmployeeListTableViewCell"
+    let viewModel = EmployeeListViewModel()
+    var cancellables = [AnyCancellable]() // Can't make private or else SearchController extensions can't reach it
+    
     // Hacky double tap helpers
     var lastClick: TimeInterval?
     var lastClickedCell: IndexPath?
@@ -37,76 +33,50 @@ class EmployeeListTableViewController: UITableViewController, BaseStyling {
         self.view.backgroundColor = self.backgroundColor
         self.tableView.separatorColor = self.themeColor
         
+        viewModel.doneButtonEnabled.sink { isEnabled in self.selectButton.isEnabled = isEnabled }.store(in: &cancellables)
+        
+        viewModel.$isLoading
+            .sink { $0 ? self.tableView.refreshControl?.beginRefreshing() : self.tableView.refreshControl?.endRefreshing() }
+            .store(in: &cancellables)
         self.tableView.refreshControl = setUpRefreshControl(title: "Fetching Employee List", view: self, action: #selector(fetchEmployees))
-        setUpSearchController()
+        
+        setUpSearchController() /// Call extension: ``EmployeeListTableViewController/setUpSearchController()``
+        
+        viewModel.$employeeList.sink { newEmployeeList in self.tableView.reloadData() }.store(in: &cancellables)
         
         fetchEmployees()
     }
     
-    func isFiltering() -> Bool { // SearchController must be Active and NOT Empty
-        // If optionalChain fails, text is nil, so coalesce, return true as if the text is empty.
-        return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
-    }
-    
     // MARK: HTTP Methods
     @objc func fetchEmployees() {
-        self.tableView.refreshControl?.beginRefreshing()
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let myVC = self else { return } // Need self or following weak ref calls won't work of course!
-            myVC.networkManager.createFetchTask(endpointPath: "employees", updateClosure: myVC.decodeEmployeeList).resume()
-        }
-    }
-    func decodeEmployeeList(data: Data?, err: Error?) {
-        guard let employeeData = data else { return }
-        
-        if let decodedEmployees = employeeData.toArray(containing: EmployeeDTO.self) {
-            for decodedEmployee in decodedEmployees {
-//                print("This is the decoded report \(decodedEmployee)")
-                guard decodedEmployee.profession != nil else {
-                    print("Missing profession for some reason")
-                    return
-                }
-                employees.append(decodedEmployee.toBase())
-            }
-        }
-        else {
-            // TODO: Render err
-        }
-        
-        DispatchQueue.main.async { // No func here expected to be long running so no capture list
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
-        }
+        Task { await viewModel.getEmployeeList() } // Use a task to fire off async func, replacing DispatchQueue.global().async { }
     }
     
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
         guard let button = sender as? UIBarButtonItem, button === selectButton
         else { print("The select button not pressed, cancelling"); return }
     }
 }
 
+// MARK: TableView Protocols that setup its functionality and data source
 extension EmployeeListTableViewController {
     // MARK: TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentClick: TimeInterval = Date().timeIntervalSince1970
+        let currentClick = Date().timeIntervalSince1970
         if let lastClick = lastClick, let lastClickedCell = lastClickedCell {
             if (currentClick - lastClick < 0.5) && (indexPath == lastClickedCell) {
                 print("Double clicked!")
             }
         }
-        selectButton.isEnabled = true
-        if isFiltering() {
-            selectedEmployee = filteredEmployees[indexPath.row]
-            searchController.dismiss(animated: true, completion: nil)
-            let rowIndex = employees.firstIndex { $0.id == selectedEmployee!.id }
-            let indexPath = IndexPath(row: rowIndex!, section: 0)
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+                
+        let (rowIndex, _) = viewModel.selectEmployee(index: indexPath.row) // Find the employee in main list
+        
+        if viewModel.filteringBegan() { // If search controller being used, then user is done searching
+            searchController.dismiss(animated: true, completion: nil) // Close it, technically reopening main controller
+            let indexPath = IndexPath(row: rowIndex, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle) // And select that row in main controller
         }
-        else { selectedEmployee = employees[indexPath.row] }
         
         lastClick = currentClick
         lastClickedCell = indexPath
@@ -116,28 +86,13 @@ extension EmployeeListTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering() ? filteredEmployees.count : employees.count
+        return viewModel.filteringBegan() ? viewModel.filteredEmployeeList.count : viewModel.employeeList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Normal Styling
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EmployeeListTableViewCell
-        cell.backgroundColor = self.backgroundColor
-        
-        // On Selection Styling
-        let selectedBackground = UIView()
-        selectedBackground.backgroundColor = self.themeColor.withAlphaComponent(0.7)
-        cell.selectedBackgroundView = selectedBackground
-
-        let employee = isFiltering() ? filteredEmployees[indexPath.row] : employees[indexPath.row]
-        
-        cell.employeeNameLabel.text = "\(employee.firstName) \(employee.surname)"
-        cell.employeeNameLabel.highlightedTextColor = self.themeSecondaryColor // On Selection Styling
-        if let profession = employee.profession {
-            cell.employeeProfessionLabel.text = "\(profession.observedOccupation) \(profession.serviceDiscipline)"
-            cell.employeeProfessionLabel.highlightedTextColor = self.themeSecondaryColor.withAlphaComponent(0.9) // On Selection Styling
-        }
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeListTableViewCell.identifier, for: indexPath) as! EmployeeListTableViewCell
+        cell.viewModel = EmployeeListTableCellViewModel(employee: viewModel.getEmployee(index: indexPath.row))
         return cell
     }
 }

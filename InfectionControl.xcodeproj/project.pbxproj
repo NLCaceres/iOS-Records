@@ -46,6 +46,19 @@
 		BF5566982254724D004A13C8 /* Precaution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566972254724D004A13C8 /* Precaution.swift */; };
 		BF55669A2254725F004A13C8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5566992254725F004A13C8 /* Report.swift */; };
 		BF557CB7280F7171006600FB /* AssertableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF557CB6280F7171006600FB /* AssertableData.swift */; };
+		BF82706729B02A95004542C8 /* CommonViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82706629B02A95004542C8 /* CommonViewModifiers.swift */; };
+		BF82706A29B02CE9004542C8 /* DataSourceGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82706929B02CE9004542C8 /* DataSourceGenerics.swift */; };
+		BF82706C29B02D50004542C8 /* EmployeeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82706B29B02D50004542C8 /* EmployeeDataSource.swift */; };
+		BF82706E29B02DAE004542C8 /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */; };
+		BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707629B030E5004542C8 /* MockNetworking.swift */; };
+		BF82707929B0320A004542C8 /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707829B0320A004542C8 /* MockDataSource.swift */; };
+		BF82707B29B0328D004542C8 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707A29B0328D004542C8 /* MockRepository.swift */; };
+		BF82707D29B03359004542C8 /* DataSourceGenericsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */; };
+		BF82707F29B0338E004542C8 /* EmployeeDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */; };
+		BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */; };
+		BF82708329B03750004542C8 /* EmployeeListTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708229B03750004542C8 /* EmployeeListTableCellViewModel.swift */; };
+		BF82708529B0380D004542C8 /* EmployeeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708429B0380D004542C8 /* EmployeeListViewModel.swift */; };
+		BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708629B0467F004542C8 /* EmployeeListViewModelTests.swift */; };
 		BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85CFBE281C889B0022F18E /* ProfessionDTOTests.swift */; };
 		BF85CFC1281E6C850022F18E /* EmployeeDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85CFC0281E6C850022F18E /* EmployeeDTOTests.swift */; };
 		BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */; };
@@ -69,7 +82,6 @@
 		BF9A4F0F22ADED1000769C49 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4F0E22ADED1000769C49 /* UIColorExtension.swift */; };
 		BF9D0E70228291F7003A8913 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */; };
 		BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */; };
-		BFA3D091286D803E00C6112E /* CommonViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D090286D803E00C6112E /* CommonViewModifiers.swift */; };
 		BFA3D093286EDE0500C6112E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D092286EDE0500C6112E /* ViewExtensions.swift */; };
 		BFA3D096287161D100C6112E /* NavigableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D095287161D100C6112E /* NavigableRow.swift */; };
 		BFA3D0982871621300C6112E /* CommonRowRightSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0972871621300C6112E /* CommonRowRightSubtitle.swift */; };
@@ -80,7 +92,6 @@
 		BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A52873E44D00C6112E /* EmployeeTests.swift */; };
 		BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */; };
 		BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */; };
-		BFBC94B22830677300B7776E /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBC94B12830677300B7776E /* MockNetworking.swift */; };
 		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
 		BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E622965B290023CE7A /* ReportTableViewModel.swift */; };
 		BFC659E9229677F70023CE7A /* CreateReportVcDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E8229677F70023CE7A /* CreateReportVcDelegate.swift */; };
@@ -166,6 +177,19 @@
 		BF5566972254724D004A13C8 /* Precaution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precaution.swift; sourceTree = "<group>"; };
 		BF5566992254725F004A13C8 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		BF557CB6280F7171006600FB /* AssertableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertableData.swift; sourceTree = "<group>"; };
+		BF82706629B02A95004542C8 /* CommonViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModifiers.swift; sourceTree = "<group>"; };
+		BF82706929B02CE9004542C8 /* DataSourceGenerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceGenerics.swift; sourceTree = "<group>"; };
+		BF82706B29B02D50004542C8 /* EmployeeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDataSource.swift; sourceTree = "<group>"; };
+		BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
+		BF82707629B030E5004542C8 /* MockNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
+		BF82707829B0320A004542C8 /* MockDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
+		BF82707A29B0328D004542C8 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
+		BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceGenericsTests.swift; sourceTree = "<group>"; };
+		BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDataSourceTests.swift; sourceTree = "<group>"; };
+		BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepositoryTests.swift; sourceTree = "<group>"; };
+		BF82708229B03750004542C8 /* EmployeeListTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableCellViewModel.swift; sourceTree = "<group>"; };
+		BF82708429B0380D004542C8 /* EmployeeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModel.swift; sourceTree = "<group>"; };
+		BF82708629B0467F004542C8 /* EmployeeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModelTests.swift; sourceTree = "<group>"; };
 		BF85CFBE281C889B0022F18E /* ProfessionDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionDTOTests.swift; sourceTree = "<group>"; };
 		BF85CFC0281E6C850022F18E /* EmployeeDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDTOTests.swift; sourceTree = "<group>"; };
 		BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
@@ -189,7 +213,6 @@
 		BF9A4F0E22ADED1000769C49 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		BF9D0E6F228291F7003A8913 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		BF9D0E7122829AA0003A8913 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
-		BFA3D090286D803E00C6112E /* CommonViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModifiers.swift; sourceTree = "<group>"; };
 		BFA3D092286EDE0500C6112E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		BFA3D095287161D100C6112E /* NavigableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigableRow.swift; sourceTree = "<group>"; };
 		BFA3D0972871621300C6112E /* CommonRowRightSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRowRightSubtitle.swift; sourceTree = "<group>"; };
@@ -200,7 +223,6 @@
 		BFA3D0A52873E44D00C6112E /* EmployeeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTests.swift; sourceTree = "<group>"; };
 		BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionTests.swift; sourceTree = "<group>"; };
 		BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
-		BFBC94B12830677300B7776E /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
 		BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModel.swift; sourceTree = "<group>"; };
 		BFC659E622965B290023CE7A /* ReportTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModel.swift; sourceTree = "<group>"; };
 		BFC659E8229677F70023CE7A /* CreateReportVcDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportVcDelegate.swift; sourceTree = "<group>"; };
@@ -262,6 +284,7 @@
 				BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */,
 				BF8E724E2848A041008A8DEF /* CreateReportViewModelTests.swift */,
 				BF2194E52863E23200FD769D /* ProfileViewModelTests.swift */,
+				BF82708629B0467F004542C8 /* EmployeeListViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -297,8 +320,8 @@
 			children = (
 				BFA3D0942871209B00C6112E /* CommonViews */,
 				BF8E725C285073C7008A8DEF /* BasicShapes.swift */,
-				BFA3D090286D803E00C6112E /* CommonViewModifiers.swift */,
 				BFA3D092286EDE0500C6112E /* ViewExtensions.swift */,
+				BF82706629B02A95004542C8 /* CommonViewModifiers.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -396,6 +419,43 @@
 				BFD094EB224EBFC600953498 /* Main.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF82706829B02CD3004542C8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF82706929B02CE9004542C8 /* DataSourceGenerics.swift */,
+				BF82706B29B02D50004542C8 /* EmployeeDataSource.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BF82706F29B02EEE004542C8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */,
+				BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */,
+				BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BF82707529B030E5004542C8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				BF82707629B030E5004542C8 /* MockNetworking.swift */,
+				BF82707829B0320A004542C8 /* MockDataSource.swift */,
+				BF82707A29B0328D004542C8 /* MockRepository.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		BF82708829B048CC004542C8 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		BF8E724528455858008A8DEF /* Utility */ = {
@@ -498,6 +558,8 @@
 		BFD094E6224EBFC500953498 /* InfectionControl */ = {
 			isa = PBXGroup;
 			children = (
+				BF82708829B048CC004542C8 /* Repositories */,
+				BF82706829B02CD3004542C8 /* Data */,
 				BFD094EE224EBFC600953498 /* InfectionControl.xcdatamodeld */,
 				BFD094E7224EBFC500953498 /* AppDelegate.swift */,
 				BF774C8422A059D300B592E3 /* Supporting Files */,
@@ -511,6 +573,8 @@
 		BFD094FE224EBFC700953498 /* InfectionControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				BF82707529B030E5004542C8 /* Mocks */,
+				BF82706F29B02EEE004542C8 /* Data */,
 				BF8E724528455858008A8DEF /* Utility */,
 				BF0ADCD1282CC6DC00A58BCB /* ViewModels */,
 				BF3849F2281B8C7400670689 /* Models */,
@@ -518,7 +582,6 @@
 				BFD09501224EBFC700953498 /* Info.plist */,
 				BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */,
 				BF557CB6280F7171006600FB /* AssertableData.swift */,
-				BFBC94B12830677300B7776E /* MockNetworking.swift */,
 			);
 			path = InfectionControlTests;
 			sourceTree = "<group>";
@@ -545,6 +608,8 @@
 				BF8E7254284F0DFD008A8DEF /* EmployeeRow.swift */,
 				BF8E725E2852FBF2008A8DEF /* EmployeePerformanceIcon.swift */,
 				BF2194FB2866914100FD769D /* EmployeeListSearchController.swift */,
+				BF82708229B03750004542C8 /* EmployeeListTableCellViewModel.swift */,
+				BF82708429B0380D004542C8 /* EmployeeListViewModel.swift */,
 			);
 			path = EmployeeTableView;
 			sourceTree = "<group>";
@@ -802,14 +867,17 @@
 				BFE7D72922A20A2F00A07942 /* NetworkManager.swift in Sources */,
 				BF8E7253284DF656008A8DEF /* CommonUIViewFactory.swift in Sources */,
 				BF8E7255284F0DFD008A8DEF /* EmployeeRow.swift in Sources */,
+				BF82706C29B02D50004542C8 /* EmployeeDataSource.swift in Sources */,
 				BF55668F22546965004A13C8 /* Profession.swift in Sources */,
 				BF55669222546E8C004A13C8 /* Employee.swift in Sources */,
 				BF9D0E70228291F7003A8913 /* ReportTableViewCell.swift in Sources */,
 				BFD094F0224EBFC600953498 /* InfectionControl.xcdatamodeld in Sources */,
+				BF82706729B02A95004542C8 /* CommonViewModifiers.swift in Sources */,
 				BFA3D0A12873BDBE00C6112E /* CommonStyling.swift in Sources */,
 				BFA3D0982871621300C6112E /* CommonRowRightSubtitle.swift in Sources */,
+				BF82706A29B02CE9004542C8 /* DataSourceGenerics.swift in Sources */,
+				BF82708329B03750004542C8 /* EmployeeListTableCellViewModel.swift in Sources */,
 				BF3A478E283C0D8400362F09 /* ProfileViewModel.swift in Sources */,
-				BFA3D091286D803E00C6112E /* CommonViewModifiers.swift in Sources */,
 				BF5566982254724D004A13C8 /* Precaution.swift in Sources */,
 				BF2194FA2866805400FD769D /* CreateReportVcPickerConfig.swift in Sources */,
 				BF3A478A283C0C1600362F09 /* ProfileViewController.swift in Sources */,
@@ -836,6 +904,8 @@
 				BF8E725B284FF49A008A8DEF /* ReportRow.swift in Sources */,
 				BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */,
 				BF8E72492845CD89008A8DEF /* DTOFetch.swift in Sources */,
+				BF82708529B0380D004542C8 /* EmployeeListViewModel.swift in Sources */,
+				BF82706E29B02DAE004542C8 /* EmployeeRepository.swift in Sources */,
 				BFA3D096287161D100C6112E /* NavigableRow.swift in Sources */,
 				BF8E7259284FEAB8008A8DEF /* ReportListView.swift in Sources */,
 				BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */,
@@ -848,25 +918,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */,
+				BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */,
 				BF8E724F2848A041008A8DEF /* CreateReportViewModelTests.swift in Sources */,
 				BF8E724B28489DFD008A8DEF /* HealthPracticeTests.swift in Sources */,
 				BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */,
 				BF2194E62863E23200FD769D /* ProfileViewModelTests.swift in Sources */,
 				BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */,
+				BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */,
 				BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */,
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,
 				BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */,
+				BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */,
 				BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */,
-				BFBC94B22830677300B7776E /* MockNetworking.swift in Sources */,
 				BFA3D0A42873E44000C6112E /* LocationTests.swift in Sources */,
+				BF82707929B0320A004542C8 /* MockDataSource.swift in Sources */,
 				BF557CB7280F7171006600FB /* AssertableData.swift in Sources */,
 				BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */,
+				BF82707B29B0328D004542C8 /* MockRepository.swift in Sources */,
 				BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */,
 				BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */,
 				BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */,
 				BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */,
 				BF8E724D28489F7B008A8DEF /* PrecautionTests.swift in Sources */,
 				BF3849FC281BCFAD00670689 /* PrecautionDTOTests.swift in Sources */,
+				BF82707F29B0338E004542C8 /* EmployeeDataSourceTests.swift in Sources */,
+				BF82707D29B03359004542C8 /* DataSourceGenericsTests.swift in Sources */,
 				BF85CFC1281E6C850022F18E /* EmployeeDTOTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -977,7 +1053,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1035,7 +1111,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

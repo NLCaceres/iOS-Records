@@ -118,7 +118,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
     }
     @IBAction func unwindToCreateReportVC(sender: UIStoryboardSegue) {
         if let employeeListVc = sender.source as? EmployeeListTableViewController {
-            self.viewModel.reportEmployee = employeeListVc.selectedEmployee
+            self.viewModel.reportEmployee = employeeListVc.viewModel.selectedEmployee
             if let employee = self.viewModel.reportEmployee {
                 // SHOULD always be non-nil but best to avoid "nil nil" in the textField
                 findEmployeeTextField.text = "\(employee.firstName) \(employee.surname)"
