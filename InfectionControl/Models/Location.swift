@@ -7,7 +7,7 @@
 import Foundation
 
 struct Location: Equatable, Identifiable {
-    // Properties
+    // MARK: Properties
     var id: String?
     var facilityName: String
     var unitNum: String

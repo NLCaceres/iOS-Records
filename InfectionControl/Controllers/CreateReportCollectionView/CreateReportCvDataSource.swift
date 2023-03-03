@@ -45,11 +45,10 @@ extension CreateReportCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {
-        // Using delegate method element kind
-        switch kind {
-        // By using headers in attributes section for collectionView you get this available
+        switch kind { // This "kind" param lets us search for the Header
+        // By using headers in attributes section for collectionView you can find it via the following enum
         case UICollectionView.elementKindSectionHeader:
-            // Checking that a sectionHeader of our custom type exists and customize it
+            // THEN finally check if the sectionHeader matches our custom type and customize it
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                     withReuseIdentifier: "ReportTypeSectionHeader", for: indexPath) as? ReportSectionReusableView
                 else { fatalError("Invalid view type") }
@@ -62,7 +61,7 @@ extension CreateReportCollectionView {
             headerView.headerLabel.textColor = UserDefaults.standard.color(forKey: "themeColor")
             return headerView
             
-        default: // If made it here, a very unexpected view made it here
+        default: // If made it here, unexpected view was rendered
             assert(false, "Invalid element type")
         }
     }

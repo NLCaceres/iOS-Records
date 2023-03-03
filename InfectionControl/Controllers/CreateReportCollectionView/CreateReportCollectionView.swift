@@ -8,13 +8,13 @@ import UIKit
 
 // Could mark as final to prevent inheritance but probably not needed
 class CreateReportCollectionView: UICollectionViewController {
-    // Properties
+    // MARK: Properties
     var networkManager: CompleteNetworkManager = NetworkManager()
     var precautions: [Precaution] = []
     var healthPractices: [HealthPractice] = []
     
+    // MARK: IBOutlets
     var buttonImage: UIImage?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

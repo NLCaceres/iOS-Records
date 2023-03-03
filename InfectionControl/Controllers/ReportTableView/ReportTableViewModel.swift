@@ -19,7 +19,7 @@ class ReportTableViewModel {
     var isLoadingDisplay: Observable<Bool> {
         return isLoading.asObservable().distinctUntilChanged()
     }
-    // Making relay private ensures only viewModel can modify it. Observers/Subscribers just observe from observable props
+    // Making this BehaviorRelay private ensures only viewModel can modify it. Observers/Subscribers just observe from observable props
     private let reportCells = BehaviorRelay<[ReportTableCellViewModel]>(value: [])
     var reportCellViewModels: Observable<[ReportTableCellViewModel]> {
         return reportCells.asObservable()

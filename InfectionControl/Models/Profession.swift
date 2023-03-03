@@ -19,6 +19,7 @@ struct Profession: Equatable, Identifiable {
 }
 
 struct ProfessionDTO {
+    // MARK: Properties
     var id: String?
     var observedOccupation: String
     var serviceDiscipline: String

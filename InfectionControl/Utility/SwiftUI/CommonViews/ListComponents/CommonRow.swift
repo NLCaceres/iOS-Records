@@ -100,6 +100,7 @@ struct CommonRow<TitleContent: View, ExtraContent: View>: View, TitleStyling {
 
 struct CommonRow_Previews: PreviewProvider {
     static var previews: some View {
+        // MARK: This Group demonstrates how to use each initializer of this common view component
         Group {
             // Able to add padding around views
             CommonRow(title: "Hello World").padding(.horizontal, 5)

@@ -84,7 +84,7 @@ struct WarningSign: Shape {
         path.addArc(center: CGPoint(x: rect.midX, y: rect.midY * 0.35), radius: topArcRadius,
                     startAngle: .degrees(180.0), endAngle: .degrees(0.0), clockwise: false)
         
-        // Alternative to using an arc
+        // Alternative method is to use a quad curve rather than an arc
 //        let curveEndpoint = CGPoint(x: rect.midX * 1.4 , y: rect.midY * 0.2)
 //        path.addQuadCurve(to: curveEndpoint, control: CGPoint(x: rect.midX, y: rect.minY))
         

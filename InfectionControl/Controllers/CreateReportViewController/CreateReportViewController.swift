@@ -17,7 +17,6 @@ class CreateReportViewController: UIViewController, BaseStyling {
 
     // MARK: IBOutlets
     @IBOutlet weak var topNavBar: UINavigationItem!
-    
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBAction func cancelNewReport(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -39,7 +38,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Style nav
+        // Style the top navbar
         if let reportPracticeType = self.viewModel.reportHealthPractice?.name {
             self.topNavBar.title = "New \(reportPracticeType) Report"
         } else { self.topNavBar.title = "New Report" }
@@ -83,7 +82,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
 
             Task { @MainActor in
                 myVC.healthPracticePicker.reloadAllComponents()
-                // Name of HealthPractice is all that matters here since it's what used to decide in a picker anyway
+                // Name of HealthPractice is all that matters here since it's what is used to decide in a picker anyway
                 let healthPracticePickerRow = myVC.viewModel.healthPracticePickerOptions.firstIndex { $0.name == myVC.viewModel.reportHealthPractice?.name }
                 if let healthPracticePickerRow = healthPracticePickerRow {
                     myVC.healthPracticePicker.selectRow(healthPracticePickerRow+1, inComponent: 0, animated: true)
@@ -120,7 +119,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
         if let employeeListVc = sender.source as? EmployeeListTableViewController {
             self.viewModel.reportEmployee = employeeListVc.viewModel.selectedEmployee
             if let employee = self.viewModel.reportEmployee {
-                // SHOULD always be non-nil but best to avoid "nil nil" in the textField
+                // SHOULD always be non-nil but using "if let" avoids "nil nil" appearing in the textField
                 findEmployeeTextField.text = "\(employee.firstName) \(employee.surname)"
             }
         }

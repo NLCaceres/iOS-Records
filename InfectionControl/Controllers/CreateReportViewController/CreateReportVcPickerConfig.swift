@@ -8,13 +8,13 @@ import UIKit
 
 /* Configures the HealthPractice picker + the Location Picker */
 extension CreateReportViewController: UIPickerViewDataSource {
-    // # of Columns
+    // # of Columns of the pickers of the view (HealthPractice & Location)
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // If HealthPractice tag then return 1, TODO: else should return 3 for location facility, room, & unit
         return (pickerView.tag == 1) ? 1 : 1
     }
     
-    // # of Rows per column number - Add 1 to account for placeholder at 0-index
+    // # of Rows per column number - Add 1 if a empty placeholder row  at 0-index is needed
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let optionCount = (pickerView.tag == 1) ? self.viewModel.healthPracticePickerOptions.count
             : self.viewModel.locationPickerOptions.count
@@ -36,7 +36,7 @@ extension CreateReportViewController: UIPickerViewDelegate {
         // LocationPicker Tag (aka 2)
         else { self.viewModel.reportLocation = (row == 0) ? nil : self.viewModel.locationPickerOptions[row - 1] }
     }
-    // Row data
+    // Fill in the Row with the following data
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         // Subtract row index by 1 to account for placeholder at 0-index
         

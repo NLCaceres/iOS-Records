@@ -35,7 +35,7 @@ struct SegmentedLists: View, BaseStyling {
     
     var body: some View {
         VStack(spacing: 1) {
-            Picker("Team List Picker", selection: self.$segment) { // Currently limited in styling
+            Picker("Team List Picker", selection: self.$segment) { // Currently Pickers are limited in styling
                 Text("Team Roster").tag(0)
                 Text("Recent Report Activity").tag(1)
             }.pickerStyle(.segmented) // BUT UISegmentedControl.appearance() DOES work!

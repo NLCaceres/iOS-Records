@@ -47,11 +47,11 @@ private func oldUpdateTabBarAppearance() {
     let unselectedItemTintColor: UIColor = .white //TODO: Font color default?
     let selectedTintColor: UIColor = UserDefaults.standard.color(forKey: "themeSecondaryColor") ?? .yellow
     
-    // Selected barItem colors
+    // "Selected" state colors for barItem
     UITabBar.appearance().unselectedItemTintColor = unselectedItemTintColor
     UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : selectedTintColor], for: .normal)
     
-    // Unselected/Normal barItem colors
+    // "Unselected/Normal" state colors for barItem
     UITabBar.appearance().tintColor = selectedTintColor
     UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : unselectedItemTintColor], for: .selected)
 }

@@ -15,7 +15,7 @@ class ReportTableViewCell: UITableViewCell {
     
     var viewModel: ReportTableCellViewModel? {
         didSet { // Since viewDidLoad is only available in Controllers, could use awakeFromNib()
-            bindViewModel() // BUT keeping it simple and leveraging didSet works just as well!
+            bindViewModel() // BUT by leveraging didSet, I can keep it simple and works just as well
         }
     }
     

@@ -7,7 +7,7 @@
 import Foundation
 
 struct HealthPractice: Equatable, Identifiable {
-    // Properties
+    // MARK: Properties
     var id: String?
     var name: String
     var precautionType: Precaution?
@@ -18,7 +18,7 @@ struct HealthPractice: Equatable, Identifiable {
 }
 
 struct HealthPracticeDTO {
-    // Properties
+    // MARK: Properties
     var id: String?
     var name: String
     var precautionType: PrecautionDTO?
@@ -29,8 +29,8 @@ extension HealthPracticeDTO: Codable {
         case id = "_id", name, precautionType
     }
     
-    // Need overriden init since precautionType sometimes get sent as a array of id strings
-    init(from decoder: Decoder) throws {
+    // Need overriden decoder init since precautionType sometimes get sent as a array of id strings
+    init(from decoder: Decoder) throws { // Which would cause the decoder to fail if not customized as follows
         let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)
         let id = try? jsonKeys.decode(String.self, forKey: .id)
         let name = try jsonKeys.decode(String.self, forKey: .name)

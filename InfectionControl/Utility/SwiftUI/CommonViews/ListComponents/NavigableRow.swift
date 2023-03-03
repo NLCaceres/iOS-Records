@@ -13,6 +13,7 @@ struct NavigableRow<Content: View, Destination: View>: View, BaseStyling {
     var content: Content
     var destination: Destination
     
+    // MARK: Initializers
     // Best to use @ViewBuilder for both params in case a random closure preferred over a pre-defined component
     init(@ViewBuilder content: () -> Content, @ViewBuilder destination: () -> Destination) {
         self.content = content()
@@ -44,6 +45,7 @@ struct NavigableRow_Previews: PreviewProvider {
                             healthPractice: HealthPractice(name: "Healthpractice Name"),
                             location: Location(facilityName: "Name", unitNum: "1", roomNum: "2"),
                             date: Date())
+        // MARK: This Group demonstrates how to use each initializer of this common view component
         Group {
             // Double trailing closure style! (Could have written it NavigableRow(content:) {})
             NavigableRow {

@@ -19,7 +19,7 @@ class CreateReportViewModel: ObservableObject {
     // (without using $propName version aka its projected value, a Publisher associated type)
     @Published private(set) var isLoading = false
     
-    // Following ONLY can get vals on stream from this file. ViewController has no say.
+    // Following ONLY can get input vals into the stream from this file. ViewController has no say.
     @Published private(set) var healthPracticePickerOptions: [HealthPractice] = []
     @Published private(set) var locationPickerOptions: [Location] = []
     
@@ -49,7 +49,7 @@ class CreateReportViewModel: ObservableObject {
         self.isLoading = false
     }
     func postNewReport() async {
-        defer { print("Defer statement ran"); self.isLoading = false }
+        defer { self.isLoading = false }
         self.isLoading = true
         
         guard let employee = self.reportEmployee, let healthPractice = self.reportHealthPractice,

@@ -21,7 +21,7 @@ struct Employee: Equatable, Identifiable {
 }
 
 struct EmployeeDTO {
-    // Properties
+    // MARK: Properties
     var id: String?
     var firstName: String
     var surname: String

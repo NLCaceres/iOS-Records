@@ -18,7 +18,7 @@ extension TitleStyling {
     func titleFont(_ font: Font?) -> Self {
         var newView = self // Whole new value
         newView.titleFont = font // Change prop so newly styled view can be returned (AND chained to other style changes)
-        return newView
+        return newView // Return the newly created Struct with new underlying value
     }
 }
 protocol SubtitleStyling: FontStyling {

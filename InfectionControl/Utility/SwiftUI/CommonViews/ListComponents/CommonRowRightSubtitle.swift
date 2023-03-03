@@ -67,6 +67,7 @@ struct CommonRowRightSubtitle<TitleContent: View, SubtitleContent: View>: View, 
 
 struct CommonRowRightSubtitle_Previews: PreviewProvider {
     static var previews: some View {
+        // MARK: This Group demonstrates how to use each initializer of this common view component
         Group {
             // Default usage with simple strings
             CommonRowRightSubtitle(title: "Hello", subtitle: "World!")

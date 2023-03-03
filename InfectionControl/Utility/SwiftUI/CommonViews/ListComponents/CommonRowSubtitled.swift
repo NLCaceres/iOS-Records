@@ -51,6 +51,7 @@ struct CommonRowSubtitled_Previews: PreviewProvider {
     static var previews: some View {
         var view = CommonRowSubtitled(title: "Hello", subtitle: "World!")
         view.titleFont = .title
+        // MARK: This Group demonstrates how to use each initializer of this common view component
         return Group {
             // Default simple title and subtitle
             CommonRowSubtitled(title: "Hello", subtitle: "World!")

@@ -26,7 +26,7 @@ extension CreateReportCollectionView : UICollectionViewDelegateFlowLayout {
     // Layout size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Establishes padding (basic algebra in a sense)
+        // Establishes padding (basic algebra in a sense). See following example calculation
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1) // 50 * (2+1) = 150 currently
         let availableWidth = view.frame.width - paddingSpace // 414 iPhone 11 width - 150 = 264
         let widthPerItem = availableWidth / itemsPerRow // 264 / 2 = 132
