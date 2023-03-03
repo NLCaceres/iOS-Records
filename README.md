@@ -29,4 +29,7 @@
   - Backend App: https://github.com/NLCaceres/express-records
     - Likely to be updated to Gin (Golang) due to Express seemingly dying BUT Laravel or DotNet possibly more mature choices
 
-#### Note: XCode's README editor is pretty bad, so probably best to use VSCode to edit this file
+### Couple Notes on XCode's Quirks
+ - XCode's README editor is pretty bad, so probably best to use VSCode to edit this file
+ - If adding, removing, or moving files, ALWAYS commit the "project.pbxproj" file since it's
+ linked to the build of the whole project, tracking EVERY file that XCode is aware of
