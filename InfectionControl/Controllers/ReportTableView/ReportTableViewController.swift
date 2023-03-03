@@ -6,6 +6,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import SwiftUI
 
 /* Fairly simple list of the latest reports. Should be clickable to perform segue to detailView */
@@ -78,8 +79,8 @@ class ReportTableViewController: UIViewController, BaseStyling {
     }
 }
 
+/* Conforming to this protocol allows SwiftUI to contain a view created/written in UIKit UIViewControllers */
 struct ReportListViewController: UIViewControllerRepresentable {
-    // Conforming to this protocol allows SwiftUI to display a view represented by typical UIKit UIViewControllers
     func makeUIViewController(context: Context) -> ReportTableViewController {
         guard let viewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(identifier: "ReportTableView") as? ReportTableViewController
@@ -87,6 +88,5 @@ struct ReportListViewController: UIViewControllerRepresentable {
 
         return viewController
     }
-
     func updateUIViewController(_ uiViewController: ReportTableViewController, context: Context) { } // Update code
 }
