@@ -14,7 +14,7 @@ import RxRelay
 // Dealing with those concerns here rather than in the VC can simplify testing + keeps code decoupled/reusable
 class ReportTableViewModel {
     // MARK: Properties
-    let networkManager: FetchingNetworkManager
+    private let reportRepository: ReportRepository
     private let isLoading = BehaviorRelay(value: false)
     var isLoadingDisplay: Observable<Bool> {
         return isLoading.asObservable().distinctUntilChanged()
@@ -25,34 +25,21 @@ class ReportTableViewModel {
         return reportCells.asObservable()
     }
     
-    init(networkManager: FetchingNetworkManager = NetworkManager()) {
-        self.networkManager = networkManager
+    init(reportRepository: ReportRepository = AppReportRepository()) {
+        self.reportRepository = reportRepository
     }
     
     // MARK: DataFetching
-    func getReports() {
-        self.isLoading.accept(true)
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let myVM = self else { return }
-            myVM.networkManager.fetchTask(endpointPath: "reports", updateClosure: myVM.setupReportViewCell).resume()
+    func getReportList() async {
+        isLoading.accept(true)
+        do {
+            let reportsList = try await reportRepository.getReportList()
+            let reportCellVmList = reportsList.map { ReportTableCellViewModel(report: $0) }
+            reportCells.accept(reportCellVmList) // Emits an observable event to update the tableView
         }
-    }
-    
-    private func setupReportViewCell(data: Data?, err: Error?) {
-        self.isLoading.accept(false)
-        guard let reportData = data else { return }
-        
-        if let decodedReports = reportData.toArray(containing: ReportDTO.self) {
-            var newReports = [ReportTableCellViewModel]()
-            for decodedReport in decodedReports {
-                if let thisReport = decodedReport.toBase() {
-                    newReports.append(ReportTableCellViewModel(report: thisReport))
-                }
-                else { // Prefer if let over guard let so that func won't return + isLoading becomes false
-                    print("Initialization failed, missing important details")
-                }
-            }
-            self.reportCells.accept(newReports) // Once we're sure of our decodedVals, push in our new array as a new observableEvent
+        catch {
+            print("Got the following error while fetching reports: \(error.localizedDescription)")
         }
+        isLoading.accept(false)
     }
 }

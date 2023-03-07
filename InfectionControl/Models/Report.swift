@@ -15,8 +15,11 @@ struct Report: Equatable, Identifiable {
     
     static func ==(lhs: Report, rhs: Report) -> Bool {
         return lhs.id == rhs.id && lhs.employee == rhs.employee && lhs.healthPractice == rhs.healthPractice &&
-            lhs.location == rhs.location && lhs.date == rhs.date
-    }
+            lhs.location == rhs.location && lhs.date.description == rhs.date.description
+    } // TODO: It's possible Swift's date ==() function is too accurate causing a floating-point precision style issue
+    // Where left-date is "2023-03-06 20:30:45 +0000" vs right-date "2023-03-06 20:30:45 +0000" BUT under the hood
+    // The right side's time is actually "20:30:45.0023" and therefore not truly equal
+    // Description correctly compares the dates to a more reasonable precision BUT Calendar may be better in the long run
     
     // LangCodes to consider "en" == "Month/Day/Year"
     // "es" + "fr" + "de" + "it" == "Day/Month/Year"

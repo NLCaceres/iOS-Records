@@ -10,10 +10,9 @@ import RxCocoa
 import SwiftUI
 
 /* Fairly simple list of the latest reports. Should be clickable to perform segue to detailView */
-//TODO: DetailViewController displaying similar details but further insight like reportedBy, assessedBy, etc.
 class ReportTableViewController: UIViewController, BaseStyling {
     
-    // Must use UIViewController as parent & make a tableView prop. Otherwise RxCocoa can't set/make the tableView delegate
+    // Must use UIViewController as parent & set a UITableView prop. Otherwise RxCocoa can't set/make the tableView delegate
     @IBOutlet var tableView: UITableView!
     
     // MARK: Properties
@@ -24,29 +23,29 @@ class ReportTableViewController: UIViewController, BaseStyling {
         super.viewDidLoad()
         
         // View Styling
-        self.tableView.refreshControl = setUpRefreshControl(title: "Fetching Reports", view: self, action: #selector(fetchReports))
+        tableView.refreshControl = setUpRefreshControl(title: "Fetching Reports", view: self, action: #selector(getReportList))
         
-        self.tableView.backgroundColor = self.backgroundColor
-        self.tableView.separatorColor = self.themeColor
+        tableView.backgroundColor = self.backgroundColor
+        tableView.separatorColor = self.themeColor
         
         bindViewModel()
-        self.fetchReports()
+        getReportList()
         // ModelSelected is similar to ItemSelected which is just TableView Delegate's didSelectRow under the hood
-        self.tableView.rx.modelSelected(ReportTableCellViewModel.self).subscribe(onNext: { [weak self] reportCell in
+        tableView.rx.modelSelected(ReportTableCellViewModel.self).subscribe(onNext: { [weak self] reportCell in
             print("Clicked a report cell! \(reportCell.report)")
-            // Use following to send SwiftView into a faux HostingController in our navController and display it!
+            // Use following to send the ReportDetail SwiftUI-based view into a HostingController so the parent navController of ReportTableView can display it
             let hostingController = UIHostingController(rootView: ReportDetailView())
             self?.navigationController?.pushViewController(hostingController, animated: true)
         }).disposed(by: disposeBag)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        self.tableView.refreshControl?.endRefreshing()
+        tableView.refreshControl?.endRefreshing()
         super.viewWillDisappear(animated)
     }
     
     func bindViewModel() {
         // Setup tableView Delegate + DataSources (numRows + numSections taken care of instantly!)
-        self.viewModel.reportCellViewModels.bind(to: self.tableView.rx.items) { tableView, index, viewModel in
+        viewModel.reportCellViewModels.bind(to: self.tableView.rx.items) { tableView, index, viewModel in
             let indexPath = IndexPath(item: index, section: 0)
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReportTableViewCell", for: indexPath) as? ReportTableViewCell
             else {
@@ -60,21 +59,23 @@ class ReportTableViewController: UIViewController, BaseStyling {
             return cell
         }.disposed(by: disposeBag)
         
-        self.viewModel.isLoadingDisplay.subscribe(onNext: { [weak self] in self?.refreshLoading(loading: $0) },
-                       onDisposed: { [weak self] in self?.refreshLoading(loading: false) }).disposed(by: disposeBag)
+        viewModel.isLoadingDisplay.subscribe(
+            onNext: { [weak self] in self?.refreshLoading(loading: $0) },
+            onDisposed: { [weak self] in self?.refreshLoading(loading: false) }
+        ).disposed(by: disposeBag)
     }
     
     // Simple wrapper to prevent unrecognizedSelector issue (plus no need to mark viewModel or its func as @objc)
-    @objc private func fetchReports() {
-        self.tableView.refreshControl?.beginRefreshing()
-        self.viewModel.getReports()
+    @objc private func getReportList() {
+        tableView.refreshControl?.beginRefreshing() // TODO: Still necessary? or simply allow isLoadingDisplay to beginRefresh()
+        Task { await viewModel.getReportList() }
     }
-    func refreshLoading(loading: Bool) {
-        // Since RxSwift could run callbacks off the main thread, need to force it to since iOS DEMANDS UI updates be on the main thread
-        DispatchQueue.main.async { [weak self] in
-            guard let refreshControl = self?.tableView.refreshControl else { return }
-            // Since refresh starts w/out loading stream, check if it's already refreshing too! No need to double call
-            loading && !refreshControl.isRefreshing ? refreshControl.beginRefreshing() : refreshControl.endRefreshing()
+    // Since the following func is fairly verbose, we can use it to DRY up isLoadingDisplay.subscribe()
+    func refreshLoading(loading: Bool) { // Since RxSwift can run callbacks off the main thread, force it on the main thread via DispatchQueue.main
+        DispatchQueue.main.async { [weak self] in // .async ensures this block gets called asap w/out any UI freezing
+            guard let refreshControl = self?.tableView.refreshControl else { return } // Ensure view is alive and refreshControl available
+            if (loading && !refreshControl.isRefreshing) { refreshControl.beginRefreshing() } // If in load state and not already refreshing, then start refresh
+            else { refreshControl.endRefreshing() } // Else stop refreshControl
         }
     }
 }

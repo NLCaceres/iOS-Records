@@ -103,13 +103,19 @@
 		BFD094F5224EBFC700953498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD094F3224EBFC700953498 /* LaunchScreen.storyboard */; };
 		BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094FF224EBFC700953498 /* InfectionControlTests.swift */; };
 		BFD0950B224EBFC800953498 /* BaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0950A224EBFC800953498 /* BaseUITests.swift */; };
+		BFD84F4829B3B83B0060196D /* ReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD84F4729B3B83B0060196D /* ReportDataSource.swift */; };
+		BFD84F4A29B3EC300060196D /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD84F4929B3EC300060196D /* ReportRepository.swift */; };
+		BFD84F4C29B3EF940060196D /* RepositoryGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD84F4B29B3EF940060196D /* RepositoryGenerics.swift */; };
 		BFD9418E29AF4D3F00F8A78D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BFD9418D29AF4D3F00F8A78D /* README.md */; };
 		BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */; };
+		BFE53F6829B4295F00B4846F /* RepositoryGenericsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE53F6729B4295F00B4846F /* RepositoryGenericsTests.swift */; };
+		BFE53F6A29B431A000B4846F /* ReportRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE53F6929B431A000B4846F /* ReportRepositoryTests.swift */; };
 		BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */; };
 		BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE7D72422A1D29800A07942 /* Default-568h@2x.png */; };
 		BFE7D72722A1DB2B00A07942 /* EmployeeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */; };
 		BFE7D72922A20A2F00A07942 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72822A20A2F00A07942 /* NetworkManager.swift */; };
 		BFF15EDF229518D50078F59C /* CreateReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */; };
+		BFF831F029B5E3B800C7A837 /* ReportDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */; };
 		EF9410AA39BB96EB5E189EA1 /* libPods-InfectionControlTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 586D0FACC5D4D7676A496A13 /* libPods-InfectionControlTests.a */; };
 /* End PBXBuildFile section */
 
@@ -240,13 +246,19 @@
 		BFD09506224EBFC800953498 /* InfectionControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfectionControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD0950A224EBFC800953498 /* BaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITests.swift; sourceTree = "<group>"; };
 		BFD0950C224EBFC800953498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD84F4729B3B83B0060196D /* ReportDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataSource.swift; sourceTree = "<group>"; };
+		BFD84F4929B3EC300060196D /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
+		BFD84F4B29B3EF940060196D /* RepositoryGenerics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryGenerics.swift; sourceTree = "<group>"; };
 		BFD9418D29AF4D3F00F8A78D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BFE2B57C229335F30096BA9C /* CreateReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewController.swift; sourceTree = "<group>"; };
+		BFE53F6729B4295F00B4846F /* RepositoryGenericsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryGenericsTests.swift; sourceTree = "<group>"; };
+		BFE53F6929B431A000B4846F /* ReportRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepositoryTests.swift; sourceTree = "<group>"; };
 		BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewController.swift; sourceTree = "<group>"; };
 		BFE7D72422A1D29800A07942 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewCell.swift; sourceTree = "<group>"; };
 		BFE7D72822A20A2F00A07942 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewModel.swift; sourceTree = "<group>"; };
+		BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataSourceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +438,7 @@
 			children = (
 				BF82706929B02CE9004542C8 /* DataSourceGenerics.swift */,
 				BF82706B29B02D50004542C8 /* EmployeeDataSource.swift */,
+				BFD84F4729B3B83B0060196D /* ReportDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -435,7 +448,7 @@
 			children = (
 				BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */,
 				BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */,
-				BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */,
+				BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -454,6 +467,8 @@
 			isa = PBXGroup;
 			children = (
 				BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */,
+				BFD84F4929B3EC300060196D /* ReportRepository.swift */,
+				BFD84F4B29B3EF940060196D /* RepositoryGenerics.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -573,6 +588,7 @@
 		BFD094FE224EBFC700953498 /* InfectionControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				BFE53F6629B428BE00B4846F /* Repositories */,
 				BF82707529B030E5004542C8 /* Mocks */,
 				BF82706F29B02EEE004542C8 /* Data */,
 				BF8E724528455858008A8DEF /* Utility */,
@@ -597,6 +613,16 @@
 				BF2194F52865A77900FD769D /* SettingsViewUITests.swift */,
 			);
 			path = InfectionControlUITests;
+			sourceTree = "<group>";
+		};
+		BFE53F6629B428BE00B4846F /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */,
+				BFE53F6729B4295F00B4846F /* RepositoryGenericsTests.swift */,
+				BFE53F6929B431A000B4846F /* ReportRepositoryTests.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		BFE76540229FCECF0067A3C9 /* EmployeeTableView */ = {
@@ -857,6 +883,7 @@
 				BF8E7257284F27FA008A8DEF /* EmployeeListView.swift in Sources */,
 				BF55669622547242004A13C8 /* HealthPractice.swift in Sources */,
 				BFA3D09D287297AA00C6112E /* CommonRowSubtitled.swift in Sources */,
+				BFD84F4829B3B83B0060196D /* ReportDataSource.swift in Sources */,
 				BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */,
 				BFC659E9229677F70023CE7A /* CreateReportVcDelegate.swift in Sources */,
 				BF8E725F2852FBF2008A8DEF /* EmployeePerformanceIcon.swift in Sources */,
@@ -876,7 +903,9 @@
 				BFA3D0A12873BDBE00C6112E /* CommonStyling.swift in Sources */,
 				BFA3D0982871621300C6112E /* CommonRowRightSubtitle.swift in Sources */,
 				BF82706A29B02CE9004542C8 /* DataSourceGenerics.swift in Sources */,
+				BFD84F4A29B3EC300060196D /* ReportRepository.swift in Sources */,
 				BF82708329B03750004542C8 /* EmployeeListTableCellViewModel.swift in Sources */,
+				BFD84F4C29B3EF940060196D /* RepositoryGenerics.swift in Sources */,
 				BF3A478E283C0D8400362F09 /* ProfileViewModel.swift in Sources */,
 				BF5566982254724D004A13C8 /* Precaution.swift in Sources */,
 				BF2194FA2866805400FD769D /* CreateReportVcPickerConfig.swift in Sources */,
@@ -920,15 +949,18 @@
 				BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */,
 				BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */,
 				BF8E724F2848A041008A8DEF /* CreateReportViewModelTests.swift in Sources */,
+				BFE53F6829B4295F00B4846F /* RepositoryGenericsTests.swift in Sources */,
 				BF8E724B28489DFD008A8DEF /* HealthPracticeTests.swift in Sources */,
 				BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */,
 				BF2194E62863E23200FD769D /* ProfileViewModelTests.swift in Sources */,
 				BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */,
+				BFF831F029B5E3B800C7A837 /* ReportDataSourceTests.swift in Sources */,
 				BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */,
 				BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */,
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,
 				BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */,
 				BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */,
+				BFE53F6A29B431A000B4846F /* ReportRepositoryTests.swift in Sources */,
 				BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */,
 				BFA3D0A42873E44000C6112E /* LocationTests.swift in Sources */,
 				BF82707929B0320A004542C8 /* MockDataSource.swift in Sources */,

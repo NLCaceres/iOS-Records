@@ -49,17 +49,20 @@ class MockNetworkManager: CompleteNetworkManager {
     // Called in dataTask's completionHandler in place of closure passed into fetchTask()
     var replacementClosure: AnyClosure?
     var replacementData: Data?
+    var error: Error?
     
-    init(session: URLSession, replacementClosure: AnyClosure? = nil, replacementData: Data? = nil) {
+    init(session: URLSession = MockURLSession(), replacementClosure: AnyClosure? = nil, replacementData: Data? = nil, error: Error? = nil) {
         self.urlSession = session
         self.replacementClosure = replacementClosure
         self.replacementData = replacementData
+        self.error = error
     }
     func setClosure(_ replacementClosure: AnyClosure?) {
         self.replacementClosure = replacementClosure
     }
     
     func fetchTask(endpointPath: String) async -> Result<Data?, Error> {
+        if let error = error { return .failure(error) }
         return .success(self.replacementData)
     }
     
