@@ -24,15 +24,7 @@ struct AppEmployeeRepository: EmployeeRepository {
     }
     
     func getEmployeeList() async throws -> [Employee] {
-        let employeeApiResult = await employeeApiDataSource.getEmployeeList()
-        
-        switch employeeApiResult {
-        case .success(let employeeList):
-            return employeeList
-        case .failure(let error):
-            throw error // TODO: Maybe error case first checks CoreData to be sure no backup data?
-        } // TODO: If no backup in CoreData then let this function altogether throw then viewModel renders the error
-        
+        return try await getResult { await employeeApiDataSource.getEmployeeList() }
 //        return [
 //            Employee(firstName: "John", surname: "Smith"), Employee(firstName: "Jill", surname: "Chambers"),
 //            Employee(firstName: "Victor", surname: "Richards"), Employee(firstName: "Melody", surname: "Rios"),
@@ -40,15 +32,7 @@ struct AppEmployeeRepository: EmployeeRepository {
 //        ]
     }
     func getEmployee(id: String) async throws -> Employee? {
-        let employeeApiResult = await employeeApiDataSource.getEmployee(id: id)
-        
-        switch employeeApiResult {
-        case .success(let employee):
-            return employee
-        case .failure(let error):
-            throw error
-        }
-        
+        return try await getResult { await employeeApiDataSource.getEmployee(id: id) }
 //        return Employee(firstName: "John", surname: "Smith")
     }
     

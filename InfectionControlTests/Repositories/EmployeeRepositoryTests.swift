@@ -11,10 +11,10 @@ final class EmployeeRepositoryTests: XCTestCase {
     func testGetEmployeeList() async throws {
         let mockDataSource = MockEmployeeDataSource(employeeList: [Employee(firstName: "John", surname: "Smith")])
         let employeeRepository = AppEmployeeRepository(employeeApiDataSource: mockDataSource)
-        let employeeList = try? await employeeRepository.getEmployeeList()
+        let employeeList = try! await employeeRepository.getEmployeeList()
         XCTAssertNotNil(employeeList)
-        XCTAssertEqual(employeeList?.count, 1)
-        XCTAssertEqual(employeeList?.first?.fullName, "John Smith")
+        XCTAssertEqual(employeeList.count, 1)
+        XCTAssertEqual(employeeList.first?.fullName, "John Smith")
         
         let failingDataSource = MockEmployeeDataSource(error: NSError())
         let failingRepository = AppEmployeeRepository(employeeApiDataSource: failingDataSource)
@@ -24,7 +24,7 @@ final class EmployeeRepositoryTests: XCTestCase {
     func testGetEmployee() async throws {
         let mockDataSource = MockEmployeeDataSource(employee: Employee(firstName: "John", surname: "Smith"))
         let employeeRepository = AppEmployeeRepository(employeeApiDataSource: mockDataSource)
-        let employee = try? await employeeRepository.getEmployee(id: "1")
+        let employee = try! await employeeRepository.getEmployee(id: "1")
         XCTAssertNotNil(employee)
         XCTAssertEqual(employee!.fullName, "John Smith")
         
