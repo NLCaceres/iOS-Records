@@ -28,11 +28,20 @@ func defaultDecoder() -> JSONDecoder {
     return decoder
 }
 extension Data {
-    func toDTO<T>(of type: T.Type, using decoder: JSONDecoder = defaultDecoder()) -> T? where T: Decodable {
+    func toDTO<T: Decodable>(of type: T.Type, using decoder: JSONDecoder = defaultDecoder()) -> T? {
         return try? decoder.decode(type.self, from: self)
     }
-    func toArray<T>(containing type: T.Type, using decoder: JSONDecoder = defaultDecoder()) -> [T]? where T: Decodable {
+    func toBase<T: ToBase & Decodable>(through type: T.Type) -> T.Base? {
+        return self.toDTO(of: type)?.toBase()
+    }
+    
+    func toArray<T: Decodable>(containing type: T.Type, using decoder: JSONDecoder = defaultDecoder()) -> [T]? {
         return try? decoder.decode([T].self, from: self) // Could reuse toDTO BUT this is a bit more clear what's happening
+    }
+    func toBaseArray<T: ToBase & Decodable>(through type: T.Type)  -> [T.Base] {
+        guard let modelArr = self.toArray(containing: type) else { return [] }
+        
+        return modelArr.compactMap { $0.toBase() }
     }
 }
 
