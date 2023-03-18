@@ -24,7 +24,7 @@ struct AppEmployeeRepository: EmployeeRepository {
     }
     
     func getEmployeeList() async throws -> [Employee] {
-        return try await getResult { await employeeApiDataSource.getEmployeeList() }
+        return try await getEntity { await employeeApiDataSource.getEmployeeList() }
 //        return [
 //            Employee(firstName: "John", surname: "Smith"), Employee(firstName: "Jill", surname: "Chambers"),
 //            Employee(firstName: "Victor", surname: "Richards"), Employee(firstName: "Melody", surname: "Rios"),
@@ -32,7 +32,7 @@ struct AppEmployeeRepository: EmployeeRepository {
 //        ]
     }
     func getEmployee(id: String) async throws -> Employee? {
-        return try await getResult { await employeeApiDataSource.getEmployee(id: id) }
+        return try await getEntity { await employeeApiDataSource.getEmployee(id: id) }
 //        return Employee(firstName: "John", surname: "Smith")
     }
     

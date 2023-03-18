@@ -22,7 +22,7 @@ struct AppReportRepository: ReportRepository {
     }
     
     func getReportList() async throws -> [Report] {
-        return try await getResult { await reportApiDataSource.getReportList() }
+        return try await getEntity { await reportApiDataSource.getReportList() }
 //        return [
 //            Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
 //                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date()),
@@ -32,7 +32,7 @@ struct AppReportRepository: ReportRepository {
     }
     
     func getReport(id: String) async throws -> Report? {
-        return try await getResult { await reportApiDataSource.getReport(id: id) }
+        return try await getEntity { await reportApiDataSource.getReport(id: id) }
 //        return Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
 //                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
     }

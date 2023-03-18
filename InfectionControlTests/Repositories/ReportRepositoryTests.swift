@@ -8,11 +8,11 @@
 import XCTest
 
 final class ReportRepositoryTests: XCTestCase {
-    // Since the fetch portions of the repositories currently simply call getResult + their apiDataSource,
+    // Since the fetch portions of the repositories currently simply call getEntity + their apiDataSource,
     // there's not really much logic to test. Instead it's a bit more like testing whether they correctly call the expected
     // dataSource functions, which calls to mind "test spies" BUT there doesn't seem to be many good options out there
     // Without proper spies, it's likely best to just mock the data source and assert the expected returned entities or thrown errors
-    // Unfortunately despite the underlying "getResult" generic doing the heavy lifting, and it having very simple tests,
+    // Unfortunately despite the underlying "getEntity" generic doing the heavy lifting, and it having very simple tests,
     // The repository tests will just have to remain somewhat complex as a result of the setup and lack of spies
     func testGetReportList() async throws {
         let mockDataSource = MockReportDataSource(reportList: [
