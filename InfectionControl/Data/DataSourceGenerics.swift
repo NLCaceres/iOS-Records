@@ -8,25 +8,9 @@ import Foundation
 
 func getBaseArray<T: ToBase & Decodable>(for type: T.Type, fetchTask: () async -> Result<Data?, Error>) async -> Result<[T.Base], Error> {
     let result = await fetchTask()
-    
-    switch result {
-    case .success(let .some(data)):
-        return .success(data.toBaseArray(through: type))
-    case .success(.none):
-        return .success([])
-    case .failure(let error):
-        return .failure(error)
-    }
+    return Result { try result.get()?.toBaseArray(through: type) ?? [] } // If Data returned is nil, then return empty array. Else preserve the error
 }
 func getBase<T: ToBase & Decodable>(for type: T.Type, fetchTask: () async -> Result<Data?, Error>) async -> Result<T.Base?, Error> {
     let result = await fetchTask()
-    
-    switch result {
-    case .success(let .some(data)):
-        return .success(data.toBase(through: type))
-    case .success(.none):
-        return .success(nil)
-    case .failure(let error):
-        return .failure(error)
-    }
+    return Result { try result.get()?.toBase(through: type) } // Okay for nil to be returned BUT NOT if HTTPResponse threw an error
 }

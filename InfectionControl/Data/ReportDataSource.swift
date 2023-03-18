@@ -34,19 +34,11 @@ struct ReportApiDataSource: ReportDataSource {
     // which causes it to double optional wrap "Report" into "Report??" and at least w/ "GET List" we are forced to run a second compactMap
     func getReportList() async -> Result<[Report], Error> {
         let reportArrResult = await getBaseArray(for: ReportDTO.self) { await networkManager.fetchTask(endpointPath: "/reports") }
-        if case .failure(let error) = reportArrResult {
-            return .failure(error)
-        }
-        let reportArr = try! reportArrResult.get() // Type here is actually Result<[Report?], Error>
-        return .success(reportArr.compactMap { $0 }) // So have to compactMap it to get the desired/expected Result<[Report], Error>
+        return Result { try reportArrResult.get().compactMap { $0 } } // Need compactMap() to get the desired/expected Result<[Report], Error>
     }
     
     func getReport(id: String) async -> Result<Report?, Error> {
         let reportResult = await getBase(for: ReportDTO.self) { await networkManager.fetchTask(endpointPath: "/reports/\(id)") }
-        if case .failure(let error) = reportResult {
-            return .failure(error)
-        }
-        let report = try! reportResult.get()
-        return .success(report ?? nil)
+        return Result { try reportResult.get() ?? nil } // Similarly, need to unwrap "Report??" to simple "Report?"
     }
 }
