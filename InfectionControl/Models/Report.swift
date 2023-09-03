@@ -27,16 +27,18 @@ struct Report: Equatable, Identifiable {
     static func dateHelper(_ date: Date, long: Bool = false, langCode: String? = nil) -> String {
         let dateFormatter = DateFormatter()
         
-        dateFormatter.locale = Locale(identifier: langCode ?? Locale.current.languageCode!) // Easier to test thanks to default param
-        print("This is the language code: \(dateFormatter.locale.languageCode!)")
+        dateFormatter.locale = Locale(identifier: langCode ?? Locale.current.language.minimalIdentifier) // Easier to test thanks to default param
+        //? Most BCP-47 / IETF language tags are simple language+region subtags, while some will append a script subtag, like for Cyrillic langs
+        //? .minimalIdentifier USUALLY drops the region+script, leaving pretty much exactly what I want, the language subtag
+        //? Since MOST language subtags are only 2 chars AND always come 1st, using someString.hasPrefix() should work well!
         
-        if long && dateFormatter.locale.languageCode == "en" {
+        if long && dateFormatter.locale.identifier.hasPrefix("en") {
             dateFormatter.dateFormat = "MMM d, yyyy. h:mm a."
         }
         else if long { // Long format, NON english
             dateFormatter.dateFormat = "d MMM yyyy H:mm"
         }
-        else if dateFormatter.locale.languageCode == "en" { // Short format, english
+        else if dateFormatter.locale.identifier.hasPrefix("en") { // Short format, english
             dateFormatter.dateFormat = "M/d/yy"
         }
         else { // Short format, NON english
@@ -45,8 +47,6 @@ struct Report: Equatable, Identifiable {
 
         return dateFormatter.string(from: date)
     }
-    
-    
 }
 
 struct ReportDTO {

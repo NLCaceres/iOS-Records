@@ -10,6 +10,12 @@ import XCTest
 class ReportTests: XCTestCase {
     // Any test can be annotated as throws & async. Use 'throws' to produce an unexpected failure when your test encounters an uncaught error.
     func testDateHelper() throws {
+        // WHEN using langCode with default langCode (expected to always be "en" even on CI/CD BUT possible for it to change)
+        let defaultStyle = Report.dateHelper(ModelsFactory.createMockDate())
+        XCTAssertEqual(defaultStyle, "10/1/20") // Defaults to short form with American style MM/dd/YYYY
+        let defaultLongStyle = Report.dateHelper(ModelsFactory.createMockDate(), long: true)
+        XCTAssertEqual(defaultLongStyle, "Oct 1, 2020. 3:12 PM.") // Expected to default to American style
+        
         // WHEN using english langCode with default short form
         let shortAmericanStyle = Report.dateHelper(ModelsFactory.createMockDate(), langCode: "en")
         XCTAssertEqual(shortAmericanStyle, "10/1/20") // THEN mockdate == "10/1/20"
