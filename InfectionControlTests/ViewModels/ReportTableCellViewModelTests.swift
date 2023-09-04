@@ -14,6 +14,7 @@ class ReportTableCellViewModelTests: XCTestCase {
     override func setUp() {
         report = ModelsFactory.createReport()
         cellViewModel = ReportTableCellViewModel(report: report)
+        Report.dateFormatter.locale = Locale(identifier: "en_US")
     }
     
     func testViewCellImage() { // Check we setup our viewModel properly

@@ -8,38 +8,63 @@
 import XCTest
     
 class ReportTests: XCTestCase {
+    override func setUp() { // As a fail-safe and to prevent test pollution
+        Report.dateFormatter.locale = Locale(identifier: "en_US")
+     }
+    override func tearDown() {
+        Report.dateFormatter.locale = Locale(identifier: "en_US")
+    }
     // Any test can be annotated as throws & async. Use 'throws' to produce an unexpected failure when your test encounters an uncaught error.
-    func testDateHelper() throws {
-        // WHEN using langCode with default langCode (expected to always be "en" even on CI/CD BUT possible for it to change)
-        let defaultStyle = Report.dateHelper(ModelsFactory.createMockDate())
-        XCTAssertEqual(defaultStyle, "10/1/20") // Defaults to short form with American style MM/dd/YYYY
-        let defaultLongStyle = Report.dateHelper(ModelsFactory.createMockDate(), long: true)
-        XCTAssertEqual(defaultLongStyle, "Oct 1, 2020. 3:12 PM.") // Expected to default to American style
+    func testLocalDate() throws {
+        let report = Report(id: "id1", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "foobar"),
+                            location: Location(facilityName: "facility1", unitNum: "1", roomNum: "2"), date: ModelsFactory.createMockDate())
+        // WHEN using langCode with default langCode (expected to always be "en" or "en_US" even on CI/CD BUT possible for it to change)
+        XCTAssertEqual(report.localDate, "10/1/20") // Defaults to short form with American style MM/dd/YYYY
         
-        // WHEN using english langCode with default short form
-        let shortAmericanStyle = Report.dateHelper(ModelsFactory.createMockDate(), langCode: "en")
-        XCTAssertEqual(shortAmericanStyle, "10/1/20") // THEN mockdate == "10/1/20"
-        // WHEN using english langCode with longForm flag == true
-        let americanStyle = Report.dateHelper(ModelsFactory.createMockDate(), long: true, langCode: "en") // "MMM d, yyyy. h:mm a." == "Oct 1 2020, 3:12 PM."
-        XCTAssertEqual(americanStyle, "Oct 1, 2020. 3:12 PM.") // THEN mockdate == "Oct 1, 2020. 3:12 PM."
+        Report.dateFormatter.locale = Locale(identifier: "en") // WHEN using english langCode
+        XCTAssertEqual(report.localDate, "10/1/20") // THEN mockdate == Month Day Year
         
+        Report.dateFormatter.locale = Locale(identifier: "es") // WHEN using spanish langCode
+        XCTAssertEqual(report.localDate, "1/10/20") // THEN mockdate == Day Month Year
+        Report.dateFormatter.locale = Locale(identifier: "fr")
+        XCTAssertEqual(report.localDate, "1/10/20")
+        Report.dateFormatter.locale = Locale(identifier: "de")
+        XCTAssertEqual(report.localDate, "1/10/20")
+        Report.dateFormatter.locale = Locale(identifier: "it")
+        XCTAssertEqual(report.localDate, "1/10/20")
         
-        // WHEN using spanish langCode with default short form
-        let shortEsStyle = Report.dateHelper(ModelsFactory.createMockDate(), langCode: "es")
-        XCTAssertEqual(shortEsStyle, "1/10/20") // THEN mockdate == "1/10/20"
+        Report.dateFormatter.locale = Locale(identifier: "zh") // WHEN using chinese langCode
+        XCTAssertEqual(report.localDate, "20/10/1") // THEN mockdate == Year/Month/Day
+        Report.dateFormatter.locale = Locale(identifier: "ko")
+        XCTAssertEqual(report.localDate, "20/10/1")
+        Report.dateFormatter.locale = Locale(identifier: "ja")
+        XCTAssertEqual(report.localDate, "20/10/1")
+
+    }
+    func testLocalDateTime() throws {
+        let report = Report(id: "id1", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "foobar"),
+                            location: Location(facilityName: "facility1", unitNum: "1", roomNum: "2"), date: ModelsFactory.createMockDate())
+        // WHEN using langCode with default langCode (expected to always be "en" or "en_US" even on CI/CD BUT possible for it to change)
+        XCTAssertEqual(report.localDateTime, "Oct 1, 2020. 3:12 PM.") // Expected to default to American style
         
-        // WHEN using spanish langCode with longForm flag == true
-        let esStyle = Report.dateHelper(ModelsFactory.createMockDate(), long: true, langCode: "es") // "d MMM yyyy H:mm" == "1 Oct 2020. 15:12"
-        XCTAssertEqual(esStyle, "1 oct 2020 15:12") // THEN mockdate == "1 oct 2020 15:12"
+        Report.dateFormatter.locale = Locale(identifier: "en") // WHEN using english langCode
+        XCTAssertEqual(report.localDateTime, "Oct 1, 2020. 3:12 PM.") // THEN mockdate == Month Day Year 12H:Mins
         
+        Report.dateFormatter.locale = Locale(identifier: "es") // WHEN using spanish langCode
+        XCTAssertEqual(report.localDateTime, "1 oct 2020 15:12") // THEN mockdate == Day Month Year 24H:Mins
+        Report.dateFormatter.locale = Locale(identifier: "fr")
+        XCTAssertEqual(report.localDateTime, "1 oct. 2020 15:12")
+        Report.dateFormatter.locale = Locale(identifier: "de")
+        XCTAssertEqual(report.localDateTime, "1 Okt. 2020 15:12")
+        Report.dateFormatter.locale = Locale(identifier: "it")
+        XCTAssertEqual(report.localDateTime, "1 ott 2020 15:12")
         
-        // WHEN using chinese langCode with default short form
-        let shortZhStyle = Report.dateHelper(ModelsFactory.createMockDate(), langCode: "zh")
-        XCTAssertEqual(shortZhStyle, "1/10/20") // THEN mockdate == "1/10/20"
-        
-        // WHEN using chinese langCode with longForm flag == true
-        let zhStyle = Report.dateHelper(ModelsFactory.createMockDate(), long: true, langCode: "zh") // "d MMM yyyy H:mm"
-        XCTAssertEqual(zhStyle, "1 10月 2020 15:12") // THEN mockdate == "1 10月 2020 15:12"
+        Report.dateFormatter.locale = Locale(identifier: "zh") // WHEN using chinese langCode
+        XCTAssertEqual(report.localDateTime, "2020 10月 1 15:12") // THEN mockdate == Year Month Day 24H:Mins
+        Report.dateFormatter.locale = Locale(identifier: "ko")
+        XCTAssertEqual(report.localDateTime, "2020 10월 1 15:12")
+        Report.dateFormatter.locale = Locale(identifier: "ja")
+        XCTAssertEqual(report.localDateTime, "2020 10月 1 15:12")
     }
     // Test Equality
     func testEquality() throws {

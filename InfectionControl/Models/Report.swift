@@ -12,6 +12,39 @@ struct Report: Equatable, Identifiable {
     var healthPractice: HealthPractice
     var location: Location
     var date: Date
+    //? Most BCP-47 / IETF language tags are simple language+region subtags, while some will append a script subtag, like for Cyrillic langs
+    //? locale.language.minimalIdentifier USUALLY drops the region+script so it's also a good option to get what I want -> the language subtag
+    var localDate: String {
+        let localeID = Report.dateFormatter.locale.identifier
+        if Report.MDYLangs.contains(where: { localeID.hasPrefix($0) }) { // "en" == "Month/Day/Year"
+            Report.dateFormatter.dateFormat = "M/d/yy"
+        }
+        else if Report.YMDLangs.contains(where: { localeID.hasPrefix($0) }) { // "ko" + "ja" + "zh" == "Year/Month/Day"
+            Report.dateFormatter.dateFormat = "yy/M/d"
+        }
+        else { // "es" + "fr" + "de" + "it" == "Day/Month/Year" - Seemingly most common worldwide
+            Report.dateFormatter.dateFormat = "d/M/yy"
+        }
+        return Report.dateFormatter.string(from: date)
+    }
+    var localDateTime: String {
+        let localeID = Report.dateFormatter.locale.identifier
+        if Report.MDYLangs.contains(where: { localeID.hasPrefix($0) }) { // "en"
+            Report.dateFormatter.dateFormat = "MMM d, yyyy. h:mm a."
+        }
+        else if Report.YMDLangs.contains(where: { localeID.hasPrefix($0) }) { // "ko" + "ja" + "zh"
+            Report.dateFormatter.dateFormat = "yyyy MMM d H:mm"
+        }
+        else { // "es" + "fr" + "de" + "it"
+            Report.dateFormatter.dateFormat = "d MMM yyyy H:mm"
+        }
+        return Report.dateFormatter.string(from: date)  // Need to prefix static vars with class name
+    }
+
+    static var dateFormatter = DateFormatter() // By default, it should correctly grab the system Locale ("en_US" usually)
+    static let YMDLangs = ["ko", "ja", "zh"]
+    static let DMYLangs = ["es", "fr", "de", "it"]
+    static let MDYLangs = ["en"]
     
     static func ==(lhs: Report, rhs: Report) -> Bool {
         return lhs.id == rhs.id && lhs.employee == rhs.employee && lhs.healthPractice == rhs.healthPractice &&
@@ -20,33 +53,6 @@ struct Report: Equatable, Identifiable {
     // Where left-date is "2023-03-06 20:30:45 +0000" vs right-date "2023-03-06 20:30:45 +0000" BUT under the hood
     // The right side's time is actually "20:30:45.0023" and therefore not truly equal
     // Description correctly compares the dates to a more reasonable precision BUT Calendar may be better in the long run
-    
-    // LangCodes to consider "en" == "Month/Day/Year"
-    // "es" + "fr" + "de" + "it" == "Day/Month/Year"
-    // "ko" + "ja" + "zh" == "Year/Month/Day"
-    static func dateHelper(_ date: Date, long: Bool = false, langCode: String? = nil) -> String {
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.locale = Locale(identifier: langCode ?? Locale.current.language.minimalIdentifier) // Easier to test thanks to default param
-        //? Most BCP-47 / IETF language tags are simple language+region subtags, while some will append a script subtag, like for Cyrillic langs
-        //? .minimalIdentifier USUALLY drops the region+script, leaving pretty much exactly what I want, the language subtag
-        //? Since MOST language subtags are only 2 chars AND always come 1st, using someString.hasPrefix() should work well!
-        
-        if long && dateFormatter.locale.identifier.hasPrefix("en") {
-            dateFormatter.dateFormat = "MMM d, yyyy. h:mm a."
-        }
-        else if long { // Long format, NON english
-            dateFormatter.dateFormat = "d MMM yyyy H:mm"
-        }
-        else if dateFormatter.locale.identifier.hasPrefix("en") { // Short format, english
-            dateFormatter.dateFormat = "M/d/yy"
-        }
-        else { // Short format, NON english
-            dateFormatter.dateFormat = "d/M/yy"
-        }
-
-        return dateFormatter.string(from: date)
-    }
 }
 
 struct ReportDTO {

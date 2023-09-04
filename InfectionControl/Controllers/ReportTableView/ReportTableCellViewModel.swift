@@ -41,9 +41,8 @@ class ReportTableCellViewModel: NSObject {
         let violationAttributedString = NSAttributedString(string: violationName, attributes: violationNameAttributes)
         mainLabel.append(violationAttributedString)
         
-        let formattedDate = Report.dateHelper(self.report.date)
         let dateAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]
-        let dateAttributedString = NSAttributedString(string: formattedDate, attributes: dateAttributes)
+        let dateAttributedString = NSAttributedString(string: self.report.localDate, attributes: dateAttributes)
         mainLabel.append(dateAttributedString)
         
         return mainLabel
