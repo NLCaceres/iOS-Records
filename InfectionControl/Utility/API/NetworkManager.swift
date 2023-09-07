@@ -23,11 +23,11 @@ struct NetworkManager: CompleteNetworkManager {
     // BUT ALSO by returning "localhost" during debug/development, I can avoid pinging the real server when not in production
     var apiURL: URL {
         #if DEBUG // Forces compilation to skip when production build happens
-        if CommandLine.arguments.contains("-devServer") {
-            return URL(string:"http://localhost:3000/api")!
+        if CommandLine.arguments.contains("-devServer") { // To add this arg, go to Product > Edit Scheme > Run (Debug) > Arguments on Launch
+            return URL(string:"http://localhost:8080/api")!
         }
         #endif
-        return self.apiURL
+        return self.baseURL
     }
     
     init(baseURL: URL = URL(string: "https://infection-prevention-express.herokuapp.com/api")!, session: URLSession = .shared) {
@@ -37,7 +37,7 @@ struct NetworkManager: CompleteNetworkManager {
     
     // MARK: GET HTTP Methods + Async version 1st
     func fetchTask(endpointPath: String) async -> Result<Data?, Error> {
-        let endpointURL = self.baseURL.appendingPathComponent(endpointPath)
+        let endpointURL = self.apiURL.appendingPathComponent(endpointPath)
         do {
             let (data, response) = try await session.data(from: endpointURL)
             return onHttpResponse(data: data, response: response, error: nil, dataHandler: nil)
@@ -49,7 +49,7 @@ struct NetworkManager: CompleteNetworkManager {
     /// While the above fetchTask can be easily used with the new "async/await" syntax, the following version expects to be used the "old-fashioned way" via callbacks, accepting a trailing closure
     // Marked @escaping since dataTask calls its closure after the request/func completes meaning our update called inside it does too!
     func fetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask {
-        let endpointURL = self.baseURL.appendingPathComponent(endpointPath)
+        let endpointURL = self.apiURL.appendingPathComponent(endpointPath)
         return session.dataTask(with: endpointURL) { data, response, error in
             onHttpResponse(data: data, response: response, error: error, dataHandler: updateClosure)
         } // Returning dataTask allows controllers to store & cancel it if needed (like in viewWillDisappear)
@@ -104,7 +104,7 @@ struct NetworkManager: CompleteNetworkManager {
     // MARK: POST HTTP Methods with Async stub
     // Should be anticipating a good status code from postRequests aka 201, 202, 204
     func postRequest(endpointPath: String) -> URLRequest {
-        var newPostRequest = URLRequest(url: self.baseURL.appendingPathComponent(endpointPath))
+        var newPostRequest = URLRequest(url: self.apiURL.appendingPathComponent(endpointPath))
         newPostRequest.httpMethod = "POST" // Have to configure POST request outside of init
         newPostRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         newPostRequest.setValue("Powered by Swift!", forHTTPHeaderField: "X-Powered-By")

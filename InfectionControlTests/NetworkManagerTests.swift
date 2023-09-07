@@ -16,6 +16,18 @@ class NetworkManagerTests: XCTestCase {
         networkManager = nil
     }
     
+    func testApiUrl() {
+        let devUrlString = "http://localhost:8080/api"
+        let productionUrlString = "http://example.com/foo"
+        let exampleNetworkManager = NetworkManager(baseURL: URL(string: productionUrlString)!)
+        // Test runner uses dev args by default so "-devServer" launch arg is added in, and the "localhost" URL is used instead of baseURL
+        XCTAssertEqual(exampleNetworkManager.apiURL.absoluteString, devUrlString)
+        
+        CommandLine.arguments.remove(at: CommandLine.arguments.firstIndex(of: "-devServer")!)
+        // WHEN "-devServer" launch arg is removed, THEN the baseURL is used instead of "localhost"
+        XCTAssertEqual(exampleNetworkManager.apiURL.absoluteString, productionUrlString)
+    }
+    
     func testFetchTaskURL() { // Simulate fetchTask appending paths
         let dataTask = networkManager.fetchTask(endpointPath: "barfoo") { _, _ in () }
         let thisRequestURL = dataTask.originalRequest!.url!
