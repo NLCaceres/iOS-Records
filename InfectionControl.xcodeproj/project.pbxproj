@@ -60,6 +60,12 @@
 		BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708629B0467F004542C8 /* EmployeeListViewModelTests.swift */; };
 		BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85CFBE281C889B0022F18E /* ProfessionDTOTests.swift */; };
 		BF85CFC1281E6C850022F18E /* EmployeeDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85CFC0281E6C850022F18E /* EmployeeDTOTests.swift */; };
+		BF85F8292AAAA9D5009B41DF /* HealthPracticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F8282AAAA9D5009B41DF /* HealthPracticeDataSource.swift */; };
+		BF85F82B2AAAAA59009B41DF /* LocationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F82A2AAAAA59009B41DF /* LocationDataSource.swift */; };
+		BF85F82D2AAAAAC3009B41DF /* PrecautionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F82C2AAAAAC3009B41DF /* PrecautionDataSource.swift */; };
+		BF85F82F2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F82E2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift */; };
+		BF85F8312AAAFAB8009B41DF /* LocationDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F8302AAAFAB8009B41DF /* LocationDataSourceTests.swift */; };
+		BF85F8332AAAFADE009B41DF /* PrecautionDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F8322AAAFADE009B41DF /* PrecautionDataSourceTests.swift */; };
 		BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */; };
 		BF8E72492845CD89008A8DEF /* DTOFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E72482845CD89008A8DEF /* DTOFetch.swift */; };
 		BF8E724B28489DFD008A8DEF /* HealthPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E724A28489DFD008A8DEF /* HealthPracticeTests.swift */; };
@@ -196,6 +202,12 @@
 		BF82708629B0467F004542C8 /* EmployeeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModelTests.swift; sourceTree = "<group>"; };
 		BF85CFBE281C889B0022F18E /* ProfessionDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionDTOTests.swift; sourceTree = "<group>"; };
 		BF85CFC0281E6C850022F18E /* EmployeeDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDTOTests.swift; sourceTree = "<group>"; };
+		BF85F8282AAAA9D5009B41DF /* HealthPracticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeDataSource.swift; sourceTree = "<group>"; };
+		BF85F82A2AAAAA59009B41DF /* LocationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataSource.swift; sourceTree = "<group>"; };
+		BF85F82C2AAAAAC3009B41DF /* PrecautionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionDataSource.swift; sourceTree = "<group>"; };
+		BF85F82E2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeDataSourceTests.swift; sourceTree = "<group>"; };
+		BF85F8302AAAFAB8009B41DF /* LocationDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataSourceTests.swift; sourceTree = "<group>"; };
+		BF85F8322AAAFADE009B41DF /* PrecautionDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionDataSourceTests.swift; sourceTree = "<group>"; };
 		BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
 		BF8E72482845CD89008A8DEF /* DTOFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOFetch.swift; sourceTree = "<group>"; };
 		BF8E724A28489DFD008A8DEF /* HealthPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeTests.swift; sourceTree = "<group>"; };
@@ -436,6 +448,9 @@
 				BF82706929B02CE9004542C8 /* DataSourceGenerics.swift */,
 				BF82706B29B02D50004542C8 /* EmployeeDataSource.swift */,
 				BFD84F4729B3B83B0060196D /* ReportDataSource.swift */,
+				BF85F8282AAAA9D5009B41DF /* HealthPracticeDataSource.swift */,
+				BF85F82A2AAAAA59009B41DF /* LocationDataSource.swift */,
+				BF85F82C2AAAAAC3009B41DF /* PrecautionDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -446,6 +461,9 @@
 				BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */,
 				BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */,
 				BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */,
+				BF85F82E2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift */,
+				BF85F8302AAAFAB8009B41DF /* LocationDataSourceTests.swift */,
+				BF85F8322AAAFADE009B41DF /* PrecautionDataSourceTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -901,6 +919,7 @@
 				BF82706A29B02CE9004542C8 /* DataSourceGenerics.swift in Sources */,
 				BFD84F4A29B3EC300060196D /* ReportRepository.swift in Sources */,
 				BF82708329B03750004542C8 /* EmployeeListTableCellViewModel.swift in Sources */,
+				BF85F82D2AAAAAC3009B41DF /* PrecautionDataSource.swift in Sources */,
 				BFD84F4C29B3EF940060196D /* RepositoryGenerics.swift in Sources */,
 				BF3A478E283C0D8400362F09 /* ProfileViewModel.swift in Sources */,
 				BF5566982254724D004A13C8 /* Precaution.swift in Sources */,
@@ -919,8 +938,10 @@
 				BF2194F828667CF700FD769D /* ProfileListSection.swift in Sources */,
 				BF9D0E7222829AA0003A8913 /* ReportTableViewController.swift in Sources */,
 				BF3A478C283C0D4600362F09 /* ProfileView.swift in Sources */,
+				BF85F8292AAAA9D5009B41DF /* HealthPracticeDataSource.swift in Sources */,
 				BF29989428259C91008DE3E9 /* ToBaseProtocol.swift in Sources */,
 				BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */,
+				BF85F82B2AAAAA59009B41DF /* LocationDataSource.swift in Sources */,
 				BFA3D09B287164D600C6112E /* CommonRow.swift in Sources */,
 				BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */,
 				BF556694225470BD004A13C8 /* Location.swift in Sources */,
@@ -942,11 +963,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF85F8332AAAFADE009B41DF /* PrecautionDataSourceTests.swift in Sources */,
 				BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */,
 				BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */,
 				BF8E724F2848A041008A8DEF /* CreateReportViewModelTests.swift in Sources */,
 				BFE53F6829B4295F00B4846F /* RepositoryGenericsTests.swift in Sources */,
 				BF8E724B28489DFD008A8DEF /* HealthPracticeTests.swift in Sources */,
+				BF85F82F2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift in Sources */,
 				BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */,
 				BF2194E62863E23200FD769D /* ProfileViewModelTests.swift in Sources */,
 				BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */,
@@ -956,6 +979,7 @@
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,
 				BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */,
 				BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */,
+				BF85F8312AAAFAB8009B41DF /* LocationDataSourceTests.swift in Sources */,
 				BFE53F6A29B431A000B4846F /* ReportRepositoryTests.swift in Sources */,
 				BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */,
 				BFA3D0A42873E44000C6112E /* LocationTests.swift in Sources */,
