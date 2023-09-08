@@ -8,17 +8,14 @@
 import XCTest
 
 final class EmployeeDataSourceTests: XCTestCase {
-    var mockSession: MockURLSession!
     var mockNetworkManager: MockNetworkManager!
     var employeeApiDataSource: EmployeeApiDataSource!
     
     override func setUpWithError() throws {
-        mockSession = MockURLSession()
-        mockNetworkManager = MockNetworkManager(session: mockSession)
+        mockNetworkManager = MockNetworkManager()
         employeeApiDataSource = EmployeeApiDataSource(networkManager: mockNetworkManager)
     }
     override func tearDownWithError() throws {
-        mockSession = nil
         mockNetworkManager = nil
         employeeApiDataSource = nil
     }
