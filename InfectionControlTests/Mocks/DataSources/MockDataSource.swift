@@ -7,9 +7,7 @@
 @testable import InfectionControl
 import Foundation
 
-// TODO: Convert these structs into classes
-// TODO: Implement spies?
-// TODO: Better utilize factories
+// TODO: Split into separate files with a similar structure to the other MockDataSources
 struct MockEmployeeDataSource: EmployeeDataSource {
     var employeeList: [Employee] = []
     var employee: Employee? = nil
