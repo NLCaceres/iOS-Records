@@ -8,43 +8,43 @@
 import XCTest
 
 final class ReportRepositoryTests: XCTestCase {
-    // Since the fetch portions of the repositories currently simply call getEntity + their apiDataSource,
-    // there's not really much logic to test. Instead it's a bit more like testing whether they correctly call the expected
-    // dataSource functions, which calls to mind "test spies" BUT there doesn't seem to be many good options out there
-    // Without proper spies, it's likely best to just mock the data source and assert the expected returned entities or thrown errors
-    // Unfortunately despite the underlying "getEntity" generic doing the heavy lifting, and it having very simple tests,
-    // The repository tests will just have to remain somewhat complex as a result of the setup and lack of spies
+    // Since the fetch portions of the repositories currently simply call getEntity + their apiDataSource, logic is fairly simple to test
+    // by mocking the dataSources, asserting the returned entities match or errors are thrown as expected
+    // Additionally to test whether they correctly call the expected dataSource functions, I can imitate "test spies" by adding
+    // calledCount dictionaries that use function names as keys to the MockDataSources
     func testGetReportList() async throws {
-        let mockDataSource = MockReportDataSource(reportList: [
-            Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
-                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date()),
-            Report(id: "Barfoo", employee: Employee(firstName: "Melody", surname: "Rios"), healthPractice: HealthPractice(name: "PPE"),
-                   location: Location(facilityName: "HSC", unitNum: "3", roomNum: "213"), date: Date())
-        ])
+        let mockDataSource = MockReportDataSource()
         let reportRepository = AppReportRepository(reportApiDataSource: mockDataSource)
         let reportList = try! await reportRepository.getReportList()
         XCTAssertNotNil(reportList)
-        XCTAssertEqual(reportList.count, 2)
-        XCTAssertEqual(reportList.first?.id, "Foobar")
+        XCTAssertEqual(reportList.count, 0) // List not populated so 0 count
         
-        let failingDataSource = MockReportDataSource(error: NSError())
-        let failingRepository = AppReportRepository(reportApiDataSource: failingDataSource)
-        let nilEmployeeList = try? await failingRepository.getReportList()
-        XCTAssertNil(nilEmployeeList) // On fail, using "try?" causes thrown errors to return "nil"
+        mockDataSource.populateList()
+        let actualList = try! await reportRepository.getReportList()
+        XCTAssertEqual(actualList.count, 5)
+        XCTAssertEqual(actualList.first!.employee.fullName, "John Smith")
+        
+        mockDataSource.prepToThrow()
+        let nilReportList = try? await reportRepository.getReportList()
+        XCTAssertNil(nilReportList) // On fail, using "try?" causes thrown errors to return "nil"
+        
+        XCTAssertEqual(mockDataSource.calledCount["getReportList()"], 3)
     }
     func testGetReport() async throws {
-        let mockDataSource = MockReportDataSource(
-            report: Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
-                           location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
-        )
+        let mockDataSource = MockReportDataSource()
         let reportRepository = AppReportRepository(reportApiDataSource: mockDataSource)
-        let report = try! await reportRepository.getReport(id: "1")
-        XCTAssertNotNil(report)
-        XCTAssertEqual(report!.id, "Foobar")
+        let report = try? await reportRepository.getReport(id: "1")
+        XCTAssertNil(report) // Gets nil Report since no populated list
         
-        let failingDataSource = MockReportDataSource(error: NSError())
-        let failingRepository = AppReportRepository(reportApiDataSource: failingDataSource)
-        let nilEmployeeList = try? await failingRepository.getReport(id: "1")
-        XCTAssertNil(nilEmployeeList) // On fail, using "try?" causes thrown errors to return "nil"
+        mockDataSource.populateList()
+        let actualReport = try! await reportRepository.getReport(id: "1")
+        XCTAssertNotNil(actualReport)
+        XCTAssertEqual(actualReport!.employee.fullName, "John Smith")
+        
+        mockDataSource.prepToThrow()
+        let nilReport = try? await reportRepository.getReport(id: "1")
+        XCTAssertNil(nilReport) // On fail, using "try?" causes thrown errors to return "nil"
+        
+        XCTAssertEqual(mockDataSource.calledCount["getReport(id:)"], 3)
     }
 }
