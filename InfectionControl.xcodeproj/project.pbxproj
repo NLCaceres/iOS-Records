@@ -125,6 +125,12 @@
 		BFFE07CD2AAC475300503020 /* MockLocationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07CC2AAC475300503020 /* MockLocationDataSource.swift */; };
 		BFFE07CF2AAC47B700503020 /* MockPrecautionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07CE2AAC47B700503020 /* MockPrecautionDataSource.swift */; };
 		BFFE07D12AAD4E1900503020 /* MockReportDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07D02AAD4E1900503020 /* MockReportDataSource.swift */; };
+		BFFE07D32AAE593900503020 /* HealthPracticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07D22AAE593900503020 /* HealthPracticeRepository.swift */; };
+		BFFE07D52AAE59C000503020 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07D42AAE59C000503020 /* LocationRepository.swift */; };
+		BFFE07D72AAE5A5600503020 /* PrecautionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07D62AAE5A5600503020 /* PrecautionRepository.swift */; };
+		BFFE07D92AAE5B1500503020 /* HealthPracticeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07D82AAE5B1500503020 /* HealthPracticeRepositoryTests.swift */; };
+		BFFE07DB2AAE5B5300503020 /* LocationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07DA2AAE5B5300503020 /* LocationRepositoryTests.swift */; };
+		BFFE07DD2AAE5B8400503020 /* PrecautionRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07DC2AAE5B8400503020 /* PrecautionRepositoryTests.swift */; };
 		EF9410AA39BB96EB5E189EA1 /* libPods-InfectionControlTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 586D0FACC5D4D7676A496A13 /* libPods-InfectionControlTests.a */; };
 /* End PBXBuildFile section */
 
@@ -277,6 +283,12 @@
 		BFFE07CC2AAC475300503020 /* MockLocationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationDataSource.swift; sourceTree = "<group>"; };
 		BFFE07CE2AAC47B700503020 /* MockPrecautionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPrecautionDataSource.swift; sourceTree = "<group>"; };
 		BFFE07D02AAD4E1900503020 /* MockReportDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReportDataSource.swift; sourceTree = "<group>"; };
+		BFFE07D22AAE593900503020 /* HealthPracticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeRepository.swift; sourceTree = "<group>"; };
+		BFFE07D42AAE59C000503020 /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
+		BFFE07D62AAE5A5600503020 /* PrecautionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionRepository.swift; sourceTree = "<group>"; };
+		BFFE07D82AAE5B1500503020 /* HealthPracticeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeRepositoryTests.swift; sourceTree = "<group>"; };
+		BFFE07DA2AAE5B5300503020 /* LocationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepositoryTests.swift; sourceTree = "<group>"; };
+		BFFE07DC2AAE5B8400503020 /* PrecautionRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +502,9 @@
 			isa = PBXGroup;
 			children = (
 				BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */,
+				BFFE07D22AAE593900503020 /* HealthPracticeRepository.swift */,
+				BFFE07D42AAE59C000503020 /* LocationRepository.swift */,
+				BFFE07D62AAE5A5600503020 /* PrecautionRepository.swift */,
 				BFD84F4929B3EC300060196D /* ReportRepository.swift */,
 				BFD84F4B29B3EF940060196D /* RepositoryGenerics.swift */,
 			);
@@ -642,6 +657,9 @@
 			isa = PBXGroup;
 			children = (
 				BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */,
+				BFFE07D82AAE5B1500503020 /* HealthPracticeRepositoryTests.swift */,
+				BFFE07DA2AAE5B5300503020 /* LocationRepositoryTests.swift */,
+				BFFE07DC2AAE5B8400503020 /* PrecautionRepositoryTests.swift */,
 				BFE53F6929B431A000B4846F /* ReportRepositoryTests.swift */,
 				BFE53F6729B4295F00B4846F /* RepositoryGenericsTests.swift */,
 			);
@@ -914,6 +932,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */,
+				BFFE07D72AAE5A5600503020 /* PrecautionRepository.swift in Sources */,
 				BF2194FC2866914100FD769D /* EmployeeListSearchController.swift in Sources */,
 				BF8E7257284F27FA008A8DEF /* EmployeeListView.swift in Sources */,
 				BF55669622547242004A13C8 /* HealthPractice.swift in Sources */,
@@ -929,6 +948,7 @@
 				BFE7D72922A20A2F00A07942 /* NetworkManager.swift in Sources */,
 				BF8E7253284DF656008A8DEF /* CommonUIViewFactory.swift in Sources */,
 				BF8E7255284F0DFD008A8DEF /* EmployeeRow.swift in Sources */,
+				BFFE07D52AAE59C000503020 /* LocationRepository.swift in Sources */,
 				BF82706C29B02D50004542C8 /* EmployeeDataSource.swift in Sources */,
 				BF55668F22546965004A13C8 /* Profession.swift in Sources */,
 				BF55669222546E8C004A13C8 /* Employee.swift in Sources */,
@@ -971,6 +991,7 @@
 				BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */,
 				BF8E72492845CD89008A8DEF /* DTOFetch.swift in Sources */,
 				BF82708529B0380D004542C8 /* EmployeeListViewModel.swift in Sources */,
+				BFFE07D32AAE593900503020 /* HealthPracticeRepository.swift in Sources */,
 				BF82706E29B02DAE004542C8 /* EmployeeRepository.swift in Sources */,
 				BFA3D096287161D100C6112E /* NavigableRow.swift in Sources */,
 				BF8E7259284FEAB8008A8DEF /* ReportListView.swift in Sources */,
@@ -998,6 +1019,7 @@
 				BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */,
 				BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */,
 				BFFE07CB2AAC46D400503020 /* MockHealthPracticeDataSource.swift in Sources */,
+				BFFE07DD2AAE5B8400503020 /* PrecautionRepositoryTests.swift in Sources */,
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,
 				BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */,
 				BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */,
@@ -1011,10 +1033,12 @@
 				BFFE07CF2AAC47B700503020 /* MockPrecautionDataSource.swift in Sources */,
 				BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */,
 				BF82707B29B0328D004542C8 /* MockRepository.swift in Sources */,
+				BFFE07DB2AAE5B5300503020 /* LocationRepositoryTests.swift in Sources */,
 				BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */,
 				BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */,
 				BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */,
 				BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */,
+				BFFE07D92AAE5B1500503020 /* HealthPracticeRepositoryTests.swift in Sources */,
 				BF8E724D28489F7B008A8DEF /* PrecautionTests.swift in Sources */,
 				BF3849FC281BCFAD00670689 /* PrecautionDTOTests.swift in Sources */,
 				BF82707F29B0338E004542C8 /* EmployeeDataSourceTests.swift in Sources */,
