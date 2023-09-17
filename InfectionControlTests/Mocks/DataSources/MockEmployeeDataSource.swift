@@ -31,19 +31,9 @@ class MockEmployeeDataSource: EmployeeDataSource {
     }
     
     func populateList() {
-        employeeList = MockEmployeeDataSource.makeList()
+        employeeList = DataFactory.makeEmployees()
     }
     func prepToThrow() {
         error = NSError()
-    }
-    
-    static func makeList() -> [Employee] {
-        return [
-            Employee(firstName: "John", surname: "Smith"),
-            Employee(firstName: "Jill", surname: "Chambers"),
-            Employee(firstName: "Victor", surname: "Richards"),
-            Employee(firstName: "Melody", surname: "Rios"),
-            Employee(firstName: "Brian", surname: "Ishida")
-        ]
     }
 }

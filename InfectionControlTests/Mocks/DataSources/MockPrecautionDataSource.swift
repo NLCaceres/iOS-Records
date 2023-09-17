@@ -23,18 +23,9 @@ class MockPrecautionDataSource: PrecautionDataSource {
     
     // By making this dataSource a class, no wasteful "mutating" funcs are needed! Modify the dataSource as much as needed!
     func populateList() {
-        precautionList = MockPrecautionDataSource.makeList()
+        precautionList = DataFactory.makePrecautions()
     }
     func prepToThrow() {
         error = NSError()
-    }
-    
-    static func makeList() -> [Precaution] {
-        let healthPractices = MockHealthPracticeDataSource.makeList()
-        
-        return [
-            Precaution(name: "Standard", practices: Array(healthPractices[0..<2])), // Should grab "Hand Hygiene" and "PPE"
-            Precaution(name: "Isolation", practices: Array(healthPractices[2...])) // This will grab "Airborne", "Droplet", "Contact", & "Contact Enteric"
-        ]
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1FDAC2045C226F5D3F5FBCCA /* libPods-InfectionControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FB8FD53479FED1242289DB /* libPods-InfectionControl.a */; };
 		7A261D2F401AA94939510842 /* libPods-InfectionControlUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEF79149DBD65BEB1A76D89 /* libPods-InfectionControlUITests.a */; };
+		BF0711EF2AB612C20054F08A /* DataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0711EE2AB612C20054F08A /* DataFactory.swift */; };
 		BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */; };
 		BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */; };
 		BF1A338F22582161009F48AA /* MakeNewReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A338E22582161009F48AA /* MakeNewReportCell.swift */; };
@@ -161,6 +162,7 @@
 		586D0FACC5D4D7676A496A13 /* libPods-InfectionControlTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InfectionControlTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E1268A6EEC2F8D1A758D2A /* Pods-InfectionControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControl.release.xcconfig"; path = "Target Support Files/Pods-InfectionControl/Pods-InfectionControl.release.xcconfig"; sourceTree = "<group>"; };
 		A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlUITests.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControlUITests/Pods-InfectionControlUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF0711EE2AB612C20054F08A /* DataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFactory.swift; sourceTree = "<group>"; };
 		BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModelTests.swift; sourceTree = "<group>"; };
 		BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModelTests.swift; sourceTree = "<group>"; };
 		BF1A338E22582161009F48AA /* MakeNewReportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewReportCell.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 		BF82707529B030E5004542C8 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				BF0711EE2AB612C20054F08A /* DataFactory.swift */,
 				BFFE07C92AAC469900503020 /* DataSources */,
 				BF82707629B030E5004542C8 /* MockNetworking.swift */,
 				BF82707A29B0328D004542C8 /* MockRepository.swift */,
@@ -1029,6 +1032,7 @@
 				BFA3D0A42873E44000C6112E /* LocationTests.swift in Sources */,
 				BF82707929B0320A004542C8 /* MockEmployeeDataSource.swift in Sources */,
 				BF557CB7280F7171006600FB /* AssertableData.swift in Sources */,
+				BF0711EF2AB612C20054F08A /* DataFactory.swift in Sources */,
 				BFFE07CD2AAC475300503020 /* MockLocationDataSource.swift in Sources */,
 				BFFE07CF2AAC47B700503020 /* MockPrecautionDataSource.swift in Sources */,
 				BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */,

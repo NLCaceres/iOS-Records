@@ -24,23 +24,9 @@ class MockHealthPracticeDataSource: HealthPracticeDataSource {
     
     // By making this dataSource a class, no wasteful "mutating" funcs are needed! Modify the dataSource as much as needed!
     func populateList() {
-        healthPracticeList = MockHealthPracticeDataSource.makeList()
+        healthPracticeList = DataFactory.makeHealthPractices()
     }
     func prepToThrow() {
         error = NSError()
-    }
-    
-    static func makeList() -> [HealthPractice] {
-        let standardPrecaution = Precaution(name: "Standard")
-        let isolationPrecaution = Precaution(name: "Isolation")
-        
-        return [ // All IDs are nil by default, if needed, but may need a version that can provide IDs or use simple incrementing ints
-            HealthPractice(name: "Hand Hygiene", precautionType: standardPrecaution),
-            HealthPractice(name: "PPE", precautionType: standardPrecaution),
-            HealthPractice(name: "Airborne", precautionType: isolationPrecaution),
-            HealthPractice(name: "Droplet", precautionType: isolationPrecaution),
-            HealthPractice(name: "Contact", precautionType: isolationPrecaution),
-            HealthPractice(name: "Contact Enteric", precautionType: isolationPrecaution)
-        ]
     }
 }
