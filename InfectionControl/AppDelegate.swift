@@ -13,6 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // MARK: Unit Test Override
+        guard normalAppRun() else { //? Only Unit tests return false, forcing the app to run silently in the background
+            window = nil
+            return false
+        }
+        //? Since the above guard's else condition doesn't run for UI tests, UI Tests are also free to run the app normally
         // MARK: UI Test Overrides
         debugUITests(application)
         
@@ -34,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    private func normalAppRun() -> Bool { // UITests don't seem to actually load XCTestCases, only Unit Tests seem to do so
+        return NSClassFromString("XCTestCase") == nil // Therefore only Unit Tests cause NSClassFromString to return an Object
+    } // So "Object == nil" returns false, while UITests/Normal App running cause NSClassFromString to make the return "nil == nil" -> true
     
     func debugUITests(_ application: UIApplication) {
         #if DEBUG
