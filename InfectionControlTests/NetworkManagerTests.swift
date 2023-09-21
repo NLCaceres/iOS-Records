@@ -10,9 +10,15 @@ import XCTest
 class NetworkManagerTests: XCTestCase {
     var networkManager: NetworkManager!
     override func setUp() {
+        if !CommandLine.arguments.contains("-devServer") {
+            CommandLine.arguments.append("-devServer")
+        }
         networkManager = NetworkManager()
     }
     override func tearDown() {
+        if let devServerIndex = CommandLine.arguments.firstIndex(of: "-devServer") {
+            CommandLine.arguments.remove(at: devServerIndex)
+        }
         networkManager = nil
     }
     
@@ -28,16 +34,17 @@ class NetworkManagerTests: XCTestCase {
         XCTAssertEqual(exampleNetworkManager.apiURL.absoluteString, productionUrlString)
     }
     
+    // MARK: Fetching
     func testFetchTaskURL() { // Simulate fetchTask appending paths
         let dataTask = networkManager.fetchTask(endpointPath: "barfoo") { _, _ in () }
         let thisRequestURL = dataTask.originalRequest!.url!
-        XCTAssertEqual(thisRequestURL.absoluteString, "https://infection-prevention-express.herokuapp.com/api/barfoo")
+        XCTAssertEqual(thisRequestURL.absoluteString, "http://localhost:8080/api/barfoo")
         let thisRequestBaseURL = thisRequestURL.deletingLastPathComponent() // Should == private URL used by NetworkManager
-        XCTAssertEqual(thisRequestBaseURL.absoluteString, "https://infection-prevention-express.herokuapp.com/api/")
+        XCTAssertEqual(thisRequestBaseURL.absoluteString, "http://localhost:8080/api/")
         
         let otherDataTask = networkManager.fetchTask(endpointPath: "/foobam") { _, _ in () }
         let otherRequestURL = otherDataTask.originalRequest!.url!
-        XCTAssertEqual(otherRequestURL.absoluteString, "https://infection-prevention-express.herokuapp.com/api/foobam")
+        XCTAssertEqual(otherRequestURL.absoluteString, "http://localhost:8080/api/foobam")
     }
     func testFetchTask() {
         // Closure passed in doesn't matter since not calling resume
