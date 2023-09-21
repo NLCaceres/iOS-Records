@@ -102,15 +102,26 @@ struct NetworkManager: CompleteNetworkManager {
     
     
     // MARK: POST HTTP Methods with Async stub
-    // Should be anticipating a good status code from postRequests aka 201, 202, 204
+    // Should be anticipating a 200s status code from postRequests, likely 204
     func postRequest(endpointPath: String) -> URLRequest {
         var newPostRequest = URLRequest(url: self.apiURL.appendingPathComponent(endpointPath))
-        newPostRequest.httpMethod = "POST" // Have to configure POST request outside of init
+        newPostRequest.httpMethod = "POST" // Have to set the request to a POST one AFTER init'ing unfortunately
         newPostRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         newPostRequest.setValue("Powered by Swift!", forHTTPHeaderField: "X-Powered-By")
         return newPostRequest
     }
-    func postRequest(endpointPath: String) async {
-        
+    func sendPostRequest(with encodableData: Encodable, endpointPath: String) async -> Result<Data?, Error> {
+        let newRequest = postRequest(endpointPath: endpointPath)
+        do {
+            guard let encodedData = encodableData.toData() else { return .failure(CodingError.notEncodable) }
+            // Alternatively can use session.data() where the newRequest.httpBody is set to some Data
+            // BUT the benefit of upload() is it can run while the app is in the background (like download() or stream() can!)
+            let (data, response) = try await session.upload(for: newRequest, from: encodedData) // Plus it directly accepts and injects in our Data
+            return onHttpResponse(data: data, response: response, error: nil, dataHandler: nil)
+        }
+        catch {
+            print("Got the following error while attempting to running a POST request to - \(endpointPath): \(error.localizedDescription)")
+            return .failure(error)
+        }
     }
 }

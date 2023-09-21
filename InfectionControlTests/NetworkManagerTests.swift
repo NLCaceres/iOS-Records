@@ -158,6 +158,7 @@ class NetworkManagerTests: XCTestCase {
             XCTAssertTrue(err == nil) // THEN no err passed in!
         }
         
+        //TODO: Could use MockCodable for simpler encoding/decoding + closer to real App + can assert after dataHandler closure runs that changes were made
         let fooData = try! JSONEncoder().encode(AssertableData(didChange: true))
         var foobar = AssertableData()
         // WHEN 200 status in a normal HTTPResponse with a completion Handler
@@ -172,5 +173,70 @@ class NetworkManagerTests: XCTestCase {
             XCTAssertTrue(foobar === foobarDTO) // Now same instance
             XCTAssertEqual(true, foobar.didChange) // Started as false, now set to true based on httpResponse encoded data
         }
+    }
+    
+    // MARK: Post Requests
+    func testPostRequestMaker() {
+        let somePostRequest = networkManager.postRequest(endpointPath: "some-endpoint") // If no "/" prefixed, then no problem!
+        XCTAssertEqual(somePostRequest.url?.absoluteString, "http://localhost:8080/api/some-endpoint")
+        
+        let diffPostRequest = networkManager.postRequest(endpointPath: "/some-endpoint") // If "/" prefixed, then also no problem!
+        XCTAssertEqual(diffPostRequest.url?.absoluteString, "http://localhost:8080/api/some-endpoint")
+        
+        XCTAssertEqual(somePostRequest.httpMethod, "POST")
+        XCTAssertEqual(somePostRequest.value(forHTTPHeaderField: "Content-Type"), "application/json")
+        XCTAssertEqual(somePostRequest.value(forHTTPHeaderField: "X-Powered-By"), "Powered by Swift!")
+    }
+    func testSendPostRequest() async {
+        //TODO: requestHandler could get a setter like setRequestHandler(statusCode: Int, data: Data, headerFields: [String: String]? = nil)
+        // since url & httpVersion never change
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200,
+                                           httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
+        }
+        let mockEmployee = EmployeeDTO(firstName: "John", surname: "Smith")
+        let newNetworkManager = NetworkManager(session: MockURLSession.stubURLSession())
+        let typedResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.sendPostRequest(with: mockEmployee, endpointPath: "some-endpoint")
+        }
+        let employee = try! typedResult.get()!
+        XCTAssertEqual(employee.firstName, "Brian") // Receive an Employee back from the response
+        XCTAssertEqual(employee.surname, "Ishida") // Bonus: Proves our MockURLProtocol works!
+        
+        // WHEN the encoder fails to JSONify the data
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200,
+                                           httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            return (response, MockCodable(failingDouble: 123).toData()!) //! Even though a safe double is returned
+        }
+        let mockEncodable = MockCodable() // IF the initial data for our POST request is un-encodable
+        let unencodableDataResult = await getBase(for: MockCodable.self) {
+            await newNetworkManager.sendPostRequest(with: mockEncodable, endpointPath: "some-endpoint")
+        }
+        let unencodableResult = try? unencodableDataResult.get() // THEN .failure() returned
+        XCTAssertNil(unencodableResult) // and result is nil
+        
+        // WHEN the URL response returned is bad (i.e. 404, or 500 status codes)
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 404,
+                                           httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
+        }
+        // THEN the onHttpResponse handler should notice it, and return .failure()
+        let notFoundTypedResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.sendPostRequest(with: mockEmployee, endpointPath: "some-endpoint")
+        }
+        let notFoundEmployee = try? notFoundTypedResult.get() // So "try?" returns nil here
+        XCTAssertNil(notFoundEmployee)
+        
+        // WHEN an error occurs in the initial request itself,
+        MockURLProtocol.error = MockError.description("Bad request! It failed!")
+        let errorTypedResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.sendPostRequest(with: mockEmployee, endpointPath: "some-endpoint")
+        }
+        // THEN an error is returned in the result, causing "try?" to return a nil value
+        let errorEmployee = try? errorTypedResult.get()
+        XCTAssertNil(errorEmployee)
     }
 }

@@ -16,7 +16,8 @@ protocol FetchingNetworkManager {
 }
 protocol PostingNetworkManager {
     var apiURL: URL { get }
-    func postRequest(endpointPath: String) -> URLRequest
+    func postRequest(endpointPath: String) -> URLRequest //TODO: Keep the POST request maker in the protocol? or let the Manager decide it privately?
+    func sendPostRequest(with encodableData: Encodable, endpointPath: String) async -> Result<Data?, Error>
 }
 
 protocol CompleteNetworkManager: FetchingNetworkManager, PostingNetworkManager {
@@ -27,4 +28,5 @@ protocol CompleteNetworkManager: FetchingNetworkManager, PostingNetworkManager {
     func onHttpResponse(data: Data?, response: URLResponse?, error: Error?, dataHandler: DataUpdater?) -> Result<Data?, Error>
     
     func postRequest(endpointPath: String) -> URLRequest
+    func sendPostRequest(with encodableData: Encodable, endpointPath: String) async -> Result<Data?, Error>
 }

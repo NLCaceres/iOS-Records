@@ -58,3 +58,6 @@ extension Encodable {
         return try? encoder.encode(self)
     }
 }
+enum CodingError: Error { // Since can't add cases to enums by "extension", in this case the standard Swift EncodingError enum, make our own Coding errors!
+    case notEncodable
+}

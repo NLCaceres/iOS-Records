@@ -13,6 +13,7 @@
 		BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */; };
 		BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */; };
 		BF145A612ABC1C5F001F00D9 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145A602ABC1C5F001F00D9 /* MockError.swift */; };
+		BF145A652ABC40BE001F00D9 /* MockCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145A642ABC40BE001F00D9 /* MockCodable.swift */; };
 		BF1A338F22582161009F48AA /* MakeNewReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A338E22582161009F48AA /* MakeNewReportCell.swift */; };
 		BF1A339122585982009F48AA /* ReportSectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A339022585982009F48AA /* ReportSectionReusableView.swift */; };
 		BF2194E4286183AC00FD769D /* CommonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2194E3286183AC00FD769D /* CommonHeader.swift */; };
@@ -167,6 +168,7 @@
 		BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModelTests.swift; sourceTree = "<group>"; };
 		BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModelTests.swift; sourceTree = "<group>"; };
 		BF145A602ABC1C5F001F00D9 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
+		BF145A642ABC40BE001F00D9 /* MockCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCodable.swift; sourceTree = "<group>"; };
 		BF1A338E22582161009F48AA /* MakeNewReportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewReportCell.swift; sourceTree = "<group>"; };
 		BF1A339022585982009F48AA /* ReportSectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSectionReusableView.swift; sourceTree = "<group>"; };
 		BF2194E3286183AC00FD769D /* CommonHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHeader.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				BF82707629B030E5004542C8 /* MockNetworking.swift */,
 				BF82707A29B0328D004542C8 /* MockRepository.swift */,
 				BF145A602ABC1C5F001F00D9 /* MockError.swift */,
+				BF145A642ABC40BE001F00D9 /* MockCodable.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1049,6 +1052,7 @@
 				BFFE07D92AAE5B1500503020 /* HealthPracticeRepositoryTests.swift in Sources */,
 				BF8E724D28489F7B008A8DEF /* PrecautionTests.swift in Sources */,
 				BF3849FC281BCFAD00670689 /* PrecautionDTOTests.swift in Sources */,
+				BF145A652ABC40BE001F00D9 /* MockCodable.swift in Sources */,
 				BF82707F29B0338E004542C8 /* EmployeeDataSourceTests.swift in Sources */,
 				BF82707D29B03359004542C8 /* DataSourceGenericsTests.swift in Sources */,
 				BF85CFC1281E6C850022F18E /* EmployeeDTOTests.swift in Sources */,
