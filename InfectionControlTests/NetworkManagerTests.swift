@@ -20,6 +20,8 @@ class NetworkManagerTests: XCTestCase {
             CommandLine.arguments.remove(at: devServerIndex)
         }
         networkManager = nil
+        MockURLProtocol.requestHandler = nil
+        MockURLProtocol.error = nil
     }
     
     func testApiUrl() {
@@ -54,6 +56,44 @@ class NetworkManagerTests: XCTestCase {
         // DataTask is not yet running since no resume call (therefore suspended)
         XCTAssertEqual(dataTask.state, .suspended)
     }
+    func testAsyncFetchTask() async {
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200,
+                                           httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
+        }
+        let newNetworkManager = NetworkManager(session: MockURLSession.stubURLSession())
+        let typedResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+        }
+        let employee = try! typedResult.get()!
+        XCTAssertEqual(employee.firstName, "Brian") // Get the MockURLProtocol returned employee
+        XCTAssertEqual(employee.surname, "Ishida")
+        
+        // WHEN onHttpResponse handler finds something unexpected in the response, like a 404 status code
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 404,
+                                           httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
+        }
+        // THEN the result is a failure()
+        let notFoundResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+        }
+        let notFoundEmployee = try? notFoundResult.get()
+        XCTAssertNil(notFoundEmployee) // AND employee is nil
+        
+        // WHEN the request itself fails
+        MockURLProtocol.error = MockError.description("Bad request! It failed!")
+        let errorResult = await getBase(for: EmployeeDTO.self) {
+            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+        }
+        // THEN error is caught and .failure() returned
+        let errorEmployee = try? errorResult.get()
+        XCTAssertNil(errorEmployee) // AND employee here is also nil
+    }
+    
+    // MARK: Generic HTTP Response Handler
     func testOnUnexpectedHttpResponse() {
         // Check each error throws as expected, starting with an invalid or missing response
         // WHEN all params are nil
