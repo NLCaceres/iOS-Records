@@ -29,12 +29,58 @@ class MockURLSessionDataTask: URLSessionDataTask {
     }
 }
 
+class MockURLProtocol: URLProtocol {
+    //? These vars need to be static to be modifiable since MockURLProtocol is never actually instantiated,
+    //? the Protocol Type is just injected into the config of my NetworkManager's URLSession
+    static var error: Error?
+    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
+    
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true // Ensure our fake request runs
+    }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request // Send back our fake request without modifying it
+    }
+    
+    override func startLoading() {
+        if let error = MockURLProtocol.error {
+            client?.urlProtocol(self, didFailWithError: error)
+            return
+        }
+        
+        guard let handler = MockURLProtocol.requestHandler else {
+            assertionFailure("No handler has been set yet")
+            return
+        }
+        
+        do {
+            let (response, data) = try handler(request)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocolDidFinishLoading(self)
+        }
+        catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+    
+    override func stopLoading() {
+        // Called if a cancel signal is sent, so likely not going to be an issue during Stub/Mocking
+    }
+}
+
 class MockURLSession: URLSession {
     // Simplify param naming with this typealias
     typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
 
-    var data: Data? // Easily swap out data or error for any URLSession instance if we need
-    var error: Error?
+    var data: Data? = nil // Easily swap out data or error for any URLSession instance if we need
+    var error: Error? = nil
+    
+    static func stubURLSession() -> URLSession {
+        let configuration: URLSessionConfiguration = .ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self] // Override protocol classes to ensure requests are handled how I want
+        return URLSession(configuration: configuration)
+    }
     
     override func dataTask(with url: URL, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask {
         let data = self.data; let err = self.error
