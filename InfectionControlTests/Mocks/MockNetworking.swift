@@ -129,6 +129,6 @@ class MockNetworkManager: CompleteNetworkManager {
     }
     func sendPostRequest(with encodableData: Encodable, endpointPath: String) async -> Result<Data?, Error> {
         if let error = error { return .failure(error) }
-        return .success(encodableData.toData())
+        return .success(self.replacementData ?? encodableData.toData())
     }
 }

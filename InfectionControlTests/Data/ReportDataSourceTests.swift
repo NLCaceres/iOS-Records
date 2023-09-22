@@ -46,17 +46,32 @@ final class ReportDataSourceTests: XCTestCase {
         
         let reportResult = await reportApiDataSource.getReport(id: "foobar") // Calls the fetch and parses the returned report
         let actualReport = try! reportResult.get()!
-        let dateString = actualReport.date.description
-        let dateString2 = mockReport.date.description
-        print("\(actualReport.date.description) vs \(mockReport.date.description)")
-        print("\(dateString == dateString2)")
-        // It's possible Swift's date ==() function is too accurate causing a floating-point precision sort of issue
-        // Where date1 is "123456.123456" since 1970 and date2 after encoding/decoding is "123456.12345678" causing a slight difference and false equality
         XCTAssertEqual(actualReport, mockReport) // Using the result.success() we can get the decoded report
         
         mockNetworkManager.error = NSError()
         let thrownResult = await reportApiDataSource.getReport(id: "foobar")
         let failedFetch = try? thrownResult.get() // Since it is a failure case, calling get() with "try?" returns nil
         XCTAssertNil(failedFetch)
+    }
+    func testCreateNewReport() async throws {
+        let mockReport = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
+                                location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
+        // MockNetworkManager.sendPostRequest has a fallback if replacementData isn't filled, since post requests commonly return the data sent anyway!
+        let reportResult = await reportApiDataSource.createNewReport(mockReport)
+        let reportCreated = try! reportResult.get()! // Report created should be returned back to indicate successful content creation
+        XCTAssertEqual(reportCreated, mockReport)
+        
+        let reportDTO = ReportDTO(from: mockReport)
+        let reportData = reportDTO.toData()
+        mockNetworkManager.replacementData = reportData // EVEN if data is NOT originally filled in MockNetworkManager
+        let filledMockReportResult = await reportApiDataSource.createNewReport(mockReport)
+        let anotherReportCreated = try! filledMockReportResult.get()!
+        XCTAssertEqual(anotherReportCreated, mockReport) // EXPECT Post Requests to get the same report back
+        XCTAssertEqual(reportCreated, anotherReportCreated)
+        
+        mockNetworkManager.error = NSError()
+        let thrownResult = await reportApiDataSource.createNewReport(mockReport)
+        let failedCreation = try? thrownResult.get()
+        XCTAssertNil(failedCreation)
     }
 }

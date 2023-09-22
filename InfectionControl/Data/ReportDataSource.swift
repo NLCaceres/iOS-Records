@@ -9,6 +9,7 @@ import Foundation
 protocol ReportDataSource {
     func getReportList() async -> Result<[Report], Error>
     func getReport(id: String) async -> Result<Report?, Error>
+    func createNewReport(_ newReport: Report) async -> Result<Report?, Error>
 }
 
 struct ReportCoreDataSource: ReportDataSource {
@@ -21,12 +22,16 @@ struct ReportCoreDataSource: ReportDataSource {
         print("Get one Employee from CoreData")
         return .success(nil)
     }
+    
+    func createNewReport(_ newReport: Report) async -> Result<Report?, Error> {
+        return .failure(NSError())
+    }
 }
 
 struct ReportApiDataSource: ReportDataSource {
-    let networkManager: FetchingNetworkManager
+    let networkManager: CompleteNetworkManager
     
-    init(networkManager: FetchingNetworkManager = NetworkManager()) {
+    init(networkManager: CompleteNetworkManager = NetworkManager()) {
         self.networkManager = networkManager
     }
     
@@ -40,5 +45,12 @@ struct ReportApiDataSource: ReportDataSource {
     func getReport(id: String) async -> Result<Report?, Error> {
         let reportResult = await getBase(for: ReportDTO.self) { await networkManager.fetchTask(endpointPath: "/reports/\(id)") }
         return Result { try reportResult.get() ?? nil } // Similarly, need to unwrap "Report??" to simple "Report?"
+    }
+    
+    func createNewReport(_ newReport: Report) async -> Result<Report?, Error> {
+        let reportResult = await getBase(for: ReportDTO.self) {
+            await networkManager.sendPostRequest(with: ReportDTO(from: newReport), endpointPath: "/reports")
+        }
+        return Result { try reportResult.get() ?? nil }
     }
 }

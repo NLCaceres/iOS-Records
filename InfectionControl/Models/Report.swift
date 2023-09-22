@@ -52,6 +52,8 @@ struct Report: Equatable, Identifiable {
     } // TODO: It's possible Swift's date ==() function is too accurate causing a floating-point precision style issue
     // Where left-date is "2023-03-06 20:30:45 +0000" vs right-date "2023-03-06 20:30:45 +0000" BUT under the hood
     // The right side's time is actually "20:30:45.0023" and therefore not truly equal
+    // Alternatively, the dates can be thought of as seconds since 1970
+    // Where date1 is "123456.123456" since 1970 and date2 after encoding/decoding is "123456.12345678" causing a slight difference and false equality
     // Description correctly compares the dates to a more reasonable precision BUT Calendar may be better in the long run
 }
 
