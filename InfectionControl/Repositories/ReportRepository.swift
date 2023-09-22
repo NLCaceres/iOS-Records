@@ -9,6 +9,7 @@ import Foundation
 protocol ReportRepository {
     func getReportList() async throws -> [Report]
     func getReport(id: String) async throws -> Report?
+    func createNewReport(_ newReport: Report) async throws -> Report?
 }
 
 struct AppReportRepository: ReportRepository {
@@ -35,5 +36,9 @@ struct AppReportRepository: ReportRepository {
         return try await getEntity { await reportApiDataSource.getReport(id: id) }
 //        return Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
 //                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
+    }
+    
+    func createNewReport(_ newReport: Report) async throws -> Report? {
+        return try await getEntity { await reportApiDataSource.createNewReport(newReport) }
     }
 }

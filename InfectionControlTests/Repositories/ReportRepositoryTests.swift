@@ -47,4 +47,19 @@ final class ReportRepositoryTests: XCTestCase {
         
         XCTAssertEqual(mockDataSource.calledCount["getReport(id:)"], 3)
     }
+    func testCreateNewReport() async throws {
+        let mockDataSource = MockReportDataSource()
+        mockDataSource.populateList()
+        let mockReport = mockDataSource.reportList.first!
+        let reportRepository = AppReportRepository(reportApiDataSource: mockDataSource)
+        let reportCreated = try! await reportRepository.createNewReport(mockReport)
+        XCTAssertNotNil(reportCreated) // Should get back any report sent even if populateList() not called
+        XCTAssertEqual(mockReport, reportCreated)
+        
+        mockDataSource.prepToThrow()
+        let nilReport = try? await reportRepository.createNewReport(mockReport)
+        XCTAssertNil(nilReport) // On fail, using "try?" causes thrown errors to return "nil"
+        
+        XCTAssertEqual(mockDataSource.calledCount["createNewReport(_:)"], 2)
+    }
 }

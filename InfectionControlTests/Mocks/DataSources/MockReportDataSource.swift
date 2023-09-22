@@ -36,4 +36,12 @@ class MockReportDataSource: ReportDataSource {
     func prepToThrow() {
         error = NSError()
     }
+    func createNewReport(_ newReport: Report) async -> Result<Report?, Error> {
+        calledCount[#function, default: 0] += 1
+        if let error = error {
+            self.error = nil
+            return .failure(error)
+        }
+        return .success(reportList.first ?? newReport)
+    }
 }
