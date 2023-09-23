@@ -29,6 +29,10 @@
 		BF2194F828667CF700FD769D /* ProfileListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2194F728667CF700FD769D /* ProfileListSection.swift */; };
 		BF2194FA2866805400FD769D /* CreateReportVcPickerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2194F92866805400FD769D /* CreateReportVcPickerConfig.swift */; };
 		BF2194FC2866914100FD769D /* EmployeeListSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2194FB2866914100FD769D /* EmployeeListSearchController.swift */; };
+		BF291F132ABE61A600AAB4C3 /* MockReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF291F122ABE61A600AAB4C3 /* MockReportRepository.swift */; };
+		BF291F152ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF291F142ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift */; };
+		BF291F172ABF49C900AAB4C3 /* MockLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF291F162ABF49C900AAB4C3 /* MockLocationRepository.swift */; };
+		BF291F192ABF4A2800AAB4C3 /* MockPrecautionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF291F182ABF4A2800AAB4C3 /* MockPrecautionRepository.swift */; };
 		BF29989428259C91008DE3E9 /* ToBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */; };
 		BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */; };
 		BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */; };
@@ -54,7 +58,7 @@
 		BF82706E29B02DAE004542C8 /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */; };
 		BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707629B030E5004542C8 /* MockNetworking.swift */; };
 		BF82707929B0320A004542C8 /* MockEmployeeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707829B0320A004542C8 /* MockEmployeeDataSource.swift */; };
-		BF82707B29B0328D004542C8 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707A29B0328D004542C8 /* MockRepository.swift */; };
+		BF82707B29B0328D004542C8 /* MockEmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707A29B0328D004542C8 /* MockEmployeeRepository.swift */; };
 		BF82707D29B03359004542C8 /* DataSourceGenericsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */; };
 		BF82707F29B0338E004542C8 /* EmployeeDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */; };
 		BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */; };
@@ -184,6 +188,10 @@
 		BF2194F728667CF700FD769D /* ProfileListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListSection.swift; sourceTree = "<group>"; };
 		BF2194F92866805400FD769D /* CreateReportVcPickerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportVcPickerConfig.swift; sourceTree = "<group>"; };
 		BF2194FB2866914100FD769D /* EmployeeListSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListSearchController.swift; sourceTree = "<group>"; };
+		BF291F122ABE61A600AAB4C3 /* MockReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReportRepository.swift; sourceTree = "<group>"; };
+		BF291F142ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHealthPracticeRepository.swift; sourceTree = "<group>"; };
+		BF291F162ABF49C900AAB4C3 /* MockLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationRepository.swift; sourceTree = "<group>"; };
+		BF291F182ABF4A2800AAB4C3 /* MockPrecautionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPrecautionRepository.swift; sourceTree = "<group>"; };
 		BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToBaseProtocol.swift; sourceTree = "<group>"; };
 		BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
 		BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
@@ -209,7 +217,7 @@
 		BF82706D29B02DAE004542C8 /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
 		BF82707629B030E5004542C8 /* MockNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
 		BF82707829B0320A004542C8 /* MockEmployeeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmployeeDataSource.swift; sourceTree = "<group>"; };
-		BF82707A29B0328D004542C8 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
+		BF82707A29B0328D004542C8 /* MockEmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmployeeRepository.swift; sourceTree = "<group>"; };
 		BF82707C29B03359004542C8 /* DataSourceGenericsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceGenericsTests.swift; sourceTree = "<group>"; };
 		BF82707E29B0338D004542C8 /* EmployeeDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDataSourceTests.swift; sourceTree = "<group>"; };
 		BF82708029B033C5004542C8 /* EmployeeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepositoryTests.swift; sourceTree = "<group>"; };
@@ -393,6 +401,18 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		BF291F112ABE611200AAB4C3 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				BF82707A29B0328D004542C8 /* MockEmployeeRepository.swift */,
+				BF291F142ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift */,
+				BF291F162ABF49C900AAB4C3 /* MockLocationRepository.swift */,
+				BF291F182ABF4A2800AAB4C3 /* MockPrecautionRepository.swift */,
+				BF291F122ABE61A600AAB4C3 /* MockReportRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		BF3849F2281B8C7400670689 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,8 +519,8 @@
 			children = (
 				BF0711EE2AB612C20054F08A /* DataFactory.swift */,
 				BFFE07C92AAC469900503020 /* DataSources */,
+				BF291F112ABE611200AAB4C3 /* Repositories */,
 				BF82707629B030E5004542C8 /* MockNetworking.swift */,
-				BF82707A29B0328D004542C8 /* MockRepository.swift */,
 				BF145A602ABC1C5F001F00D9 /* MockError.swift */,
 				BF145A642ABC40BE001F00D9 /* MockCodable.swift */,
 			);
@@ -1023,6 +1043,7 @@
 				BF85F82F2AAAADFE009B41DF /* HealthPracticeDataSourceTests.swift in Sources */,
 				BFD09500224EBFC700953498 /* InfectionControlTests.swift in Sources */,
 				BF2194E62863E23200FD769D /* ProfileViewModelTests.swift in Sources */,
+				BF291F192ABF4A2800AAB4C3 /* MockPrecautionRepository.swift in Sources */,
 				BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */,
 				BFF831F029B5E3B800C7A837 /* ReportDataSourceTests.swift in Sources */,
 				BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */,
@@ -1031,6 +1052,7 @@
 				BFFE07DD2AAE5B8400503020 /* PrecautionRepositoryTests.swift in Sources */,
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,
 				BF85CFBF281C889B0022F18E /* ProfessionDTOTests.swift in Sources */,
+				BF291F172ABF49C900AAB4C3 /* MockLocationRepository.swift in Sources */,
 				BF82707729B030E5004542C8 /* MockNetworking.swift in Sources */,
 				BF85F8312AAAFAB8009B41DF /* LocationDataSourceTests.swift in Sources */,
 				BFE53F6A29B431A000B4846F /* ReportRepositoryTests.swift in Sources */,
@@ -1043,8 +1065,10 @@
 				BFFE07CF2AAC47B700503020 /* MockPrecautionDataSource.swift in Sources */,
 				BF145A612ABC1C5F001F00D9 /* MockError.swift in Sources */,
 				BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */,
-				BF82707B29B0328D004542C8 /* MockRepository.swift in Sources */,
+				BF82707B29B0328D004542C8 /* MockEmployeeRepository.swift in Sources */,
+				BF291F132ABE61A600AAB4C3 /* MockReportRepository.swift in Sources */,
 				BFFE07DB2AAE5B5300503020 /* LocationRepositoryTests.swift in Sources */,
+				BF291F152ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift in Sources */,
 				BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */,
 				BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */,
 				BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */,
