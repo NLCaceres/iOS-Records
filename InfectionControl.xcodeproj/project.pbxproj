@@ -74,7 +74,6 @@
 		BF85F8312AAAFAB8009B41DF /* LocationDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F8302AAAFAB8009B41DF /* LocationDataSourceTests.swift */; };
 		BF85F8332AAAFADE009B41DF /* PrecautionDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85F8322AAAFADE009B41DF /* PrecautionDataSourceTests.swift */; };
 		BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */; };
-		BF8E72492845CD89008A8DEF /* DTOFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E72482845CD89008A8DEF /* DTOFetch.swift */; };
 		BF8E724B28489DFD008A8DEF /* HealthPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E724A28489DFD008A8DEF /* HealthPracticeTests.swift */; };
 		BF8E724D28489F7B008A8DEF /* PrecautionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E724C28489F7B008A8DEF /* PrecautionTests.swift */; };
 		BF8E724F2848A041008A8DEF /* CreateReportViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E724E2848A041008A8DEF /* CreateReportViewModelTests.swift */; };
@@ -233,7 +232,6 @@
 		BF85F8302AAAFAB8009B41DF /* LocationDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataSourceTests.swift; sourceTree = "<group>"; };
 		BF85F8322AAAFADE009B41DF /* PrecautionDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionDataSourceTests.swift; sourceTree = "<group>"; };
 		BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionTests.swift; sourceTree = "<group>"; };
-		BF8E72482845CD89008A8DEF /* DTOFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOFetch.swift; sourceTree = "<group>"; };
 		BF8E724A28489DFD008A8DEF /* HealthPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeTests.swift; sourceTree = "<group>"; };
 		BF8E724C28489F7B008A8DEF /* PrecautionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionTests.swift; sourceTree = "<group>"; };
 		BF8E724E2848A041008A8DEF /* CreateReportViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewModelTests.swift; sourceTree = "<group>"; };
@@ -472,7 +470,6 @@
 				BF55668E22546965004A13C8 /* Profession.swift */,
 				BF5566992254725F004A13C8 /* Report.swift */,
 				BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */,
-				BF8E72482845CD89008A8DEF /* DTOFetch.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1018,7 +1015,6 @@
 				BFC659EB22967CB10023CE7A /* CreateReportCvDataSource.swift in Sources */,
 				BF8E725B284FF49A008A8DEF /* ReportRow.swift in Sources */,
 				BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */,
-				BF8E72492845CD89008A8DEF /* DTOFetch.swift in Sources */,
 				BF82708529B0380D004542C8 /* EmployeeListViewModel.swift in Sources */,
 				BFFE07D32AAE593900503020 /* HealthPracticeRepository.swift in Sources */,
 				BF82706E29B02DAE004542C8 /* EmployeeRepository.swift in Sources */,
