@@ -10,6 +10,7 @@ import Foundation
 class MockPrecautionRepository: PrecautionRepository {
     var precautionList: [Precaution] = []
     var error: Error? = nil
+    var calledCount: [String: Int] = [:]
     
     func populateList() {
         precautionList = DataFactory.makePrecautions()
@@ -19,6 +20,7 @@ class MockPrecautionRepository: PrecautionRepository {
     }
     
     func getPrecautionList() async throws -> [Precaution] {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error

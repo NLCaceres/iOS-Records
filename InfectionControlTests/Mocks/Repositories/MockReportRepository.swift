@@ -10,6 +10,7 @@ import Foundation
 class MockReportRepository: ReportRepository {
     var reportList: [Report] = []
     var error: Error? = nil
+    var calledCount: [String: Int] = [:]
     
     func populateList() {
         reportList = DataFactory.makeReports()
@@ -19,6 +20,7 @@ class MockReportRepository: ReportRepository {
     }
     
     func getReportList() async throws -> [Report] {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error
@@ -27,6 +29,7 @@ class MockReportRepository: ReportRepository {
     }
     
     func getReport(id: String) async throws -> Report? {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error
@@ -34,6 +37,7 @@ class MockReportRepository: ReportRepository {
         return reportList.first
     }
     func createNewReport(_ newReport: Report) async throws -> Report? {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error

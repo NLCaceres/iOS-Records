@@ -10,6 +10,7 @@ import Foundation
 class MockEmployeeRepository: EmployeeRepository {
     var employeeList: [Employee] = []
     var error: Error? = nil
+    var calledCount: [String: Int] = [:]
     
     func populateList() {
         employeeList = DataFactory.makeEmployees()
@@ -19,6 +20,7 @@ class MockEmployeeRepository: EmployeeRepository {
     }
     
     func getEmployeeList() async throws -> [Employee] {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error
@@ -27,6 +29,7 @@ class MockEmployeeRepository: EmployeeRepository {
     }
     
     func getEmployee(id: String) async throws -> Employee? {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error

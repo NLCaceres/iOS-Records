@@ -10,6 +10,7 @@ import Foundation
 class MockHealthPracticeRepository: HealthPracticeRepository {
     var healthPracticeList: [HealthPractice] = []
     var error: Error? = nil
+    var calledCount: [String: Int] = [:]
     
     func populateList() {
         healthPracticeList = DataFactory.makeHealthPractices()
@@ -19,6 +20,7 @@ class MockHealthPracticeRepository: HealthPracticeRepository {
     }
     
     func getHealthPracticeList() async throws -> [HealthPractice] {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error

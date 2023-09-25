@@ -10,6 +10,7 @@ import Foundation
 class MockLocationRepository: LocationRepository {
     var locationList: [Location] = []
     var error: Error? = nil
+    var calledCount: [String: Int] = [:]
     
     func populateList() {
         locationList = DataFactory.makeLocations()
@@ -19,6 +20,7 @@ class MockLocationRepository: LocationRepository {
     }
     
     func getLocationList() async throws -> [Location] {
+        calledCount[#function, default: 0] += 1
         if let error = error {
             self.error = nil
             throw error
