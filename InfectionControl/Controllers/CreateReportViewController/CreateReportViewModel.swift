@@ -10,7 +10,9 @@ import Combine
 class CreateReportViewModel: ObservableObject {
     
     // MARK: Properties
-    let networkManager: CompleteNetworkManager
+    private let healthPracticeRepository: HealthPracticeRepository
+    private let locationRepository: LocationRepository
+    private let reportRepository: ReportRepository
     
     // CURRENTLY @Published is syntactic sugar for CurrentValueSubject<Type, Never>
     // PROS: In an ObservableObject, ANY changes to @Published props causes
@@ -28,46 +30,58 @@ class CreateReportViewModel: ObservableObject {
     @Published var reportLocation: Location?
     @Published var reportDate: Date? = Date()
     
+    @Published private(set) var errorMessage: String = "" // If empty string, then view should determine no error has occurred
+    
     var saveButtonEnabled: AnyPublisher<Bool, Never> {
         self.$reportEmployee.combineLatest(self.$reportHealthPractice, self.$reportLocation, self.$reportDate) {
             return $0 != nil && $1 != nil && $2 != nil && $3 != nil
         }.eraseToAnyPublisher() // If all report values set, then time to send
     }
     
-    init(networkManager: CompleteNetworkManager = NetworkManager()) {
-        self.networkManager = networkManager
+    init(healthPracticeRepository: HealthPracticeRepository = AppHealthPracticeRepository(),
+         locationRepository: LocationRepository = AppLocationRepository(),
+         reportRepository: ReportRepository = AppReportRepository()) {
+        self.healthPracticeRepository = healthPracticeRepository
+        self.locationRepository = locationRepository
+        self.reportRepository = reportRepository
     }
     
     // MARK: Async Func
     func beginFetching() async {
         self.isLoading = true
-        // Following await should run both funcs in parallel
-        (healthPracticePickerOptions, locationPickerOptions) = await (
-            fetchDTOArr(endpointPath: "healthpractices", containing: HealthPracticeDTO.self, networkManager: self.networkManager),
-            fetchDTOArr(endpointPath: "locations", containing: LocationDTO.self, networkManager: self.networkManager)
-        )
-        self.isLoading = false
+        // Using "async let" as follows OR "await withTaskGroup()" is pretty much the only guaranteed way to do parallel execution
+        async let healthPractices = healthPracticeRepository.getHealthPracticeList()
+        async let locations = locationRepository.getLocationList()
+        do { /// To learn how to visualize concurrency via "Points of Interest" instruments + TimeProfile, then check out "https://developer.apple.com/videos/play/wwdc2022/110350/"
+            (healthPracticePickerOptions, locationPickerOptions) = try await (healthPractices, locations)
+        }
+        catch {
+            print("Got the following error while fetching the healthPractices and locations - \(error.localizedDescription)")
+        }
+        self.isLoading = false //? Should still run after catch block handles any errors. No defer needed!
     }
     func postNewReport() async {
-        defer { self.isLoading = false }
+        defer { self.isLoading = false } // Helps with the guard clause
         self.isLoading = true
         
         guard let employee = self.reportEmployee, let healthPractice = self.reportHealthPractice,
               let location = self.reportLocation, let date = self.reportDate else { return }
         
         let fullReport = Report(employee: employee, healthPractice: healthPractice, location: location, date: date)
-
-        let jsonReport = ReportDTO(from: fullReport).toData() // Use ! since JUST set fullReport above
-        let postRequest = self.networkManager.postRequest(endpointPath: "reports/create")
-        let putTask = URLSession.shared.uploadTask(with: postRequest, from: jsonReport) { data, response, error in
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("Data was returned: \(dataString)")
-            }
-            if let httpResponse = response as? HTTPURLResponse {
-                print("Received a response: \(httpResponse.statusCode)")
-            }
+        
+        do {
+            let successfullyCreatedReport = try await self.reportRepository.createNewReport(fullReport)
+            self.clearReport()
         }
-        putTask.resume()
-        self.isLoading = false
+        catch {
+            print("Got the following error while attempting to create a new Report - \(error.localizedDescription)")
+            self.errorMessage = error.localizedDescription
+        }
+    }
+    private func clearReport() {
+        self.reportEmployee = nil
+        self.reportHealthPractice = nil
+        self.reportLocation = nil
+        self.reportDate = nil
     }
 }

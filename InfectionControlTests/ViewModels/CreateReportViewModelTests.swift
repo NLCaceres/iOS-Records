@@ -9,19 +9,20 @@ import XCTest
 import Combine
 
 class CreateReportViewModelTests: XCTestCase {
-    var mockSession: MockURLSession!
-    var mockNetworkManager: MockNetworkManager!
     var createReportViewModel: CreateReportViewModel!
+    var mockHealthPracticeRepository: MockHealthPracticeRepository!
+    var mockLocationRepository: MockLocationRepository!
+    var mockReportRepository: MockReportRepository!
     
     override func setUp() {
-        mockSession = MockURLSession()
-        mockNetworkManager = MockNetworkManager(session: mockSession)
-        createReportViewModel = CreateReportViewModel(networkManager: mockNetworkManager)
-    }
-    override func tearDown() {
-        createReportViewModel = nil
-        mockNetworkManager = nil // Any replacementClosure becomes nil
-        mockSession = nil
+        mockHealthPracticeRepository = MockHealthPracticeRepository()
+        mockHealthPracticeRepository.populateList()
+        mockLocationRepository = MockLocationRepository()
+        mockLocationRepository.populateList()
+        mockReportRepository = MockReportRepository()
+        mockReportRepository.populateList()
+        createReportViewModel = CreateReportViewModel(healthPracticeRepository: mockHealthPracticeRepository,
+                                                      locationRepository: mockLocationRepository, reportRepository: mockReportRepository)
     }
 
     func testLoading() async {
@@ -31,6 +32,7 @@ class CreateReportViewModelTests: XCTestCase {
             numTimesCalled % 2 == 0 ? XCTAssertFalse($0) : XCTAssert($0)
             numTimesCalled += 1
         }.store(in: &cancellables)
+        // 1st emitted value is always False then all requests emit True followed by False on completion
         await createReportViewModel.beginFetching() // Stream --F--T--F-->
         await createReportViewModel.postNewReport() // Stream --T--F-->
     }
@@ -44,9 +46,45 @@ class CreateReportViewModelTests: XCTestCase {
             else { XCTAssertFalse($0) }
             numTimesCalled += 1
         }.store(in: &cancellables)
-        createReportViewModel.reportEmployee = Employee(firstName: "foo", surname: "bar")
-        createReportViewModel.reportHealthPractice = HealthPractice(name: "Foo")
-        createReportViewModel.reportLocation = Location(facilityName: "foo", unitNum: "1", roomNum: "2")
-        createReportViewModel.reportDate = Date(timeIntervalSinceNow: -3600) // Date is 3:00pm if currentTime is 4:00pm
+        
+        fillReportData()
+    }
+    
+    func testPostNewReport() async {
+        var cancellables: Set<AnyCancellable> = []
+        var numTimesCalled = 0
+        createReportViewModel.$isLoading.sink { // Expected: 1st = ---False--True--F--> THEN all others = --T--F-->
+            numTimesCalled % 2 == 0 ? XCTAssertFalse($0) : XCTAssert($0)
+            numTimesCalled += 1
+        }.store(in: &cancellables)
+        
+        // WHEN no report data input
+        await createReportViewModel.postNewReport()
+        // THEN guard return hit due to nil values, defer should run to end load, without calling createNewReport()
+        XCTAssertNil(mockReportRepository.calledCount["createNewReport(_:)"]) // So no key/val pair in the dictionary yet
+        
+        // WHEN report data input completely
+        fillReportData()
+        await createReportViewModel.postNewReport()
+        // THEN createNewReport called, completed and old input data cleared as view returns to ReportList
+        XCTAssertEqual(mockReportRepository.calledCount["createNewReport(_:)"], 1)
+        XCTAssertNil(createReportViewModel.reportEmployee)
+        XCTAssertNil(createReportViewModel.reportHealthPractice)
+        XCTAssertNil(createReportViewModel.reportLocation)
+        XCTAssertNil(createReportViewModel.reportDate)
+
+        // WHEN error occurs
+        fillReportData()
+        let errMessage = "Post request failed"
+        mockReportRepository.prepToThrow(description: errMessage)
+        await createReportViewModel.postNewReport()
+        // THEN it is caught and error message should be rendered
+        XCTAssertEqual(createReportViewModel.errorMessage, errMessage)
+    }
+    private func fillReportData() {
+        createReportViewModel.reportEmployee = mockReportRepository.reportList.first?.employee
+        createReportViewModel.reportHealthPractice = mockReportRepository.reportList.first?.healthPractice
+        createReportViewModel.reportLocation = mockReportRepository.reportList.first?.location
+        createReportViewModel.reportDate = mockReportRepository.reportList.first?.date
     }
 }

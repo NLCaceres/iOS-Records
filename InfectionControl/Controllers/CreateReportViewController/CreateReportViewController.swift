@@ -10,8 +10,6 @@ import Combine
 class CreateReportViewController: UIViewController, BaseStyling {
     
     // MARK: Standard Properties
-    var networkManager: CompleteNetworkManager = NetworkManager()
-    
     let viewModel = CreateReportViewModel()
     private var cancellables: Set<AnyCancellable> = [] // To dispose subs later
 
@@ -106,10 +104,18 @@ class CreateReportViewController: UIViewController, BaseStyling {
                 myVC.saveButton.isEnabled = isEnabled
             }
         }.store(in: &cancellables)
+        
+        setupErrorMessage()
+    }
+    
+    func setupErrorMessage() { // TODO: Insert into view, let viewModel determine message based on error type?
+        self.viewModel.$errorMessage.sink {
+            print("Received the following error - \($0)")
+        }.store(in: &cancellables)
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // Only handles saveButton, backButton handles itself
         guard let button = sender as? UIBarButtonItem, button === saveButton
         else { print("Save button not pressed, Cancel button was. Going back in Nav stack"); return }
         
@@ -123,10 +129,6 @@ class CreateReportViewController: UIViewController, BaseStyling {
                 findEmployeeTextField.text = "\(employee.firstName) \(employee.surname)"
             }
         }
-    }
-    
-    func renderError(_ error: Error) { // TODO: Handle Network errs
-        
     }
 }
 
