@@ -19,6 +19,10 @@ class ReportTableViewModel {
     var isLoadingDisplay: Observable<Bool> {
         return isLoading.asObservable().distinctUntilChanged()
     }
+    private let errorMessage = PublishRelay<String>() // Starts with empty string w/out initial replay of the Behavior version
+    var errMessage: Observable<String> {
+        return errorMessage.asObservable().distinctUntilChanged()
+    }
     // Making this BehaviorRelay private ensures only viewModel can modify it. Observers/Subscribers just observe from observable props
     private let reportCells = BehaviorRelay<[ReportTableCellViewModel]>(value: [])
     var reportCellViewModels: Observable<[ReportTableCellViewModel]> {
@@ -39,6 +43,8 @@ class ReportTableViewModel {
         }
         catch {
             print("Got the following error while fetching reports: \(error.localizedDescription)")
+            //TODO: Based on error type, make error message more human-friendly and insert into view
+            errorMessage.accept(error.localizedDescription)
         }
         isLoading.accept(false)
     }

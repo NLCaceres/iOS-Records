@@ -9,74 +9,77 @@ import XCTest
 import RxSwift
 
 class ReportTableViewModelTests: XCTestCase {
-    func testGetReports() async throws {
+    var reportTableViewModel: ReportTableViewModel!
+    var mockReportRepository: MockReportRepository!
+    
+    override func setUp() {
+        mockReportRepository = MockReportRepository()
+        mockReportRepository.populateList()
+        reportTableViewModel = ReportTableViewModel(reportRepository: mockReportRepository)
+    }
+    
+    func testGetReportsLoading() async throws {
         // SETUP
-        let mockRepository = MockReportRepository(reportList: [
-            Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
-                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date()),
-            Report(employee: Employee(firstName: "Melody", surname: "Rios"), healthPractice: HealthPractice(name: "PPE"),
-                   location: Location(facilityName: "HSC", unitNum: "3", roomNum: "213"), date: Date())
-        ])
-        let tableViewModel = ReportTableViewModel(reportRepository: mockRepository)
         let disposeBag = DisposeBag()
-        
+        XCTAssertNil(mockReportRepository.calledCount["getReportList()"])
         var loadingTimesCalled = 0
         // WHEN onNext 1st runs, it replays initVal which is false
-        tableViewModel.isLoadingDisplay.subscribe(onNext: {
+        reportTableViewModel.isLoadingDisplay.subscribe(onNext: {
             loadingTimesCalled % 2 == 0 ? XCTAssertFalse($0) : XCTAssertTrue($0)
             loadingTimesCalled += 1
         }).disposed(by: disposeBag)
         // WHEN getReportList is called, THEN "true" is added to the loading stream -F--> making -F-T-->
-        await tableViewModel.getReportList()
+        await reportTableViewModel.getReportList()
+        XCTAssertEqual(mockReportRepository.calledCount["getReportList()"], 1)
     }
-    
+
     func testSetupReportViewCell() async throws {
         // SETUP
-        let mockRepository = MockReportRepository(reportList: [
-            Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
-                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date()),
-            Report(employee: Employee(firstName: "Melody", surname: "Rios"), healthPractice: HealthPractice(name: "PPE"),
-                   location: Location(facilityName: "HSC", unitNum: "3", roomNum: "213"), date: Date())
-        ])
-        let tableViewModel = ReportTableViewModel(reportRepository: mockRepository)
         let disposeBag = DisposeBag() // Dipose sub on test complete
-        
+        XCTAssertNil(mockReportRepository.calledCount["getReportList()"])
+        // WHEN GetReportList called
         var reportCellTimesCalled = 0
-        tableViewModel.reportCellViewModels.subscribe(onNext: {
-            let expectedCount = reportCellTimesCalled == 0 ? 0 : 2 // Initially have 0 report cells
-            XCTAssertEqual($0.count, expectedCount) // After getting report list of 2 reports, now have 2 report cells
+        reportTableViewModel.reportCellViewModels.subscribe(onNext: {
+            // THEN BehaviorRelay initially sends 0 report cells
+            let expectedCount = reportCellTimesCalled == 0 ? 0 : 5
+            XCTAssertEqual($0.count, expectedCount) // THEN after getting report list of 5 reports, now have 5 report cells
             reportCellTimesCalled += 1
         }).disposed(by: disposeBag)
-        await tableViewModel.getReportList()
-        
-        let throwingRepository = MockReportRepository(error: NSError())
-        let thrownTableViewModel = ReportTableViewModel(reportRepository: throwingRepository)
+        await reportTableViewModel.getReportList()
+        XCTAssertEqual(mockReportRepository.calledCount["getReportList()"], 1)
+
+        // WHEN GetReportList called, regardless of success or failure
         var loadingTimesCalled = 0
-        thrownTableViewModel.isLoadingDisplay.subscribe(onNext: {
+        reportTableViewModel.isLoadingDisplay.subscribe(onNext: {
+            // THEN loading stream from BehaviorRelay = --F--T--F-->
             loadingTimesCalled % 2 == 0 ? XCTAssertFalse($0) : XCTAssertTrue($0)
             loadingTimesCalled += 1
         }).disposed(by: disposeBag)
-        // WHEN repository throws in getReports(), THEN isLoading still fed false!
-        await thrownTableViewModel.getReportList()
-    }
-    func testSetupReportViewCellPositiveConditional() async throws {
-        // SETUP
-        let mockRepository = MockReportRepository(reportList: [
-            Report(employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
-                   location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date()),
-            Report(employee: Employee(firstName: "Melody", surname: "Rios"), healthPractice: HealthPractice(name: "PPE"),
-                   location: Location(facilityName: "HSC", unitNum: "3", roomNum: "213"), date: Date())
-        ])
-        let tableViewModel = ReportTableViewModel(reportRepository: mockRepository)
-        let disposeBag = DisposeBag()
-
-        // Expect to get 2 tableView cells based on the 2 above reports
-        let reportsAddedExpectation = expectation(description: "Should get a [] of 2 viewCellModels")
-        tableViewModel.reportCellViewModels.subscribe(onNext: { // $0 == reportViewCellModels
-            if ($0.count == 2) { reportsAddedExpectation.fulfill() }
-        }).disposed(by: disposeBag)
         
-        await tableViewModel.getReportList() // Fire off the "GET list" request
+        // WHEN repository throws in getReports()
+        let expectedErrMsg = "Get Report List failed!"
+        reportTableViewModel.errMessage.subscribe(onNext: {
+            // THEN error message is caught and saved
+            XCTAssertEqual($0, expectedErrMsg)
+        }).disposed(by: disposeBag)
+        mockReportRepository.prepToThrow(description: expectedErrMsg)
+        await reportTableViewModel.getReportList()
+        
+        XCTAssertEqual(mockReportRepository.calledCount["getReportList()"], 2)
+    }
+    // An alternative method for testing callback or promise based async programming is XCTestExpectations
+    func testSetupReportViewCellWithExpectations() async throws {
+        // SETUP
+        let disposeBag = DisposeBag()
+        XCTAssertNil(mockReportRepository.calledCount["getReportList()"])
+        // Expect to get 5 tableView cells based on 5 returned reports
+        let reportsAddedExpectation = expectation(description: "Should get a [] of 5 viewCellModels")
+        reportTableViewModel.reportCellViewModels.subscribe(onNext: { // $0 == reportViewCellModels
+            if ($0.count == 5) { reportsAddedExpectation.fulfill() }
+        }).disposed(by: disposeBag)
+
+        await reportTableViewModel.getReportList() // Fire off the "GET list" request
         await waitForExpectations(timeout: 0.1)
+        XCTAssertEqual(mockReportRepository.calledCount["getReportList()"], 1)
     }
 }

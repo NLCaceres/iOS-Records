@@ -63,6 +63,10 @@ class ReportTableViewController: UIViewController, BaseStyling {
             onNext: { [weak self] in self?.refreshLoading(loading: $0) },
             onDisposed: { [weak self] in self?.refreshLoading(loading: false) }
         ).disposed(by: disposeBag)
+        
+        viewModel.errMessage.subscribe(
+            onNext: { print("Received the following error - \($0)") }
+        ).disposed(by: disposeBag)
     }
     
     // Simple wrapper to prevent unrecognizedSelector issue (plus no need to mark viewModel or its func as @objc)
