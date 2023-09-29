@@ -9,12 +9,17 @@ import Foundation
 
 struct DataFactory {
     static func makeEmployees() -> [Employee] {
-        return [
-            Employee(firstName: "John", surname: "Smith"),
-            Employee(firstName: "Jill", surname: "Chambers"),
-            Employee(firstName: "Victor", surname: "Richards"),
-            Employee(firstName: "Melody", surname: "Rios"),
-            Employee(firstName: "Brian", surname: "Ishida")
+        return [ //? ID is important since it helps to be sure two employees are actually the same and don't just have the same name
+            Employee(id: "0", firstName: "John", surname: "Smith",
+                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Nurse")),
+            Employee(id: "1", firstName: "Jill", surname: "Chambers",
+                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Nurse")),
+            Employee(id: "2", firstName: "Victor", surname: "Richards",
+                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Doctor")),
+            Employee(id: "3", firstName: "Melody", surname: "Rios",
+                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Doctor")),
+            Employee(id: "4", firstName: "Brian", surname: "Ishida",
+                     profession: Profession(observedOccupation: "Clinic", serviceDiscipline: "Doctor"))
         ]
     }
     static func makeHealthPractices() -> [HealthPractice] {

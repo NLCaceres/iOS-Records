@@ -10,13 +10,13 @@ import Combine
 class EmployeeListViewModel: ObservableObject {
     
     // MARK: Properties
-    let employeeRepository: EmployeeRepository
+    private let employeeRepository: EmployeeRepository
     
     @Published private(set) var isLoading = false
     @Published private(set) var employeeList = [Employee]()
     
-    @Published var searchBarOpen = false
-    @Published private(set) var searchTerm: String = ""
+    @Published private(set) var searching = false // Indicates search bar is open and user is ready to enter text
+    @Published private(set) var searchTerm = ""
     @Published private(set) var filteredEmployeeList = [Employee]()
     @Published private(set) var selectedEmployee: Employee? = nil
     
@@ -40,9 +40,10 @@ class EmployeeListViewModel: ObservableObject {
     func getEmployee(index: Int) -> Employee {
         return filteringBegan() ? filteredEmployeeList[index] : employeeList[index]
     }
-    func filterEmployeeList(searchTerm: String?) {
-        guard let searchTerm = searchTerm, !searchTerm.isEmpty else { return }
-        self.searchTerm = searchTerm
+    func updateSearchTerm(_ term: String?) {
+        searchTerm = term ?? ""
+    }
+    func filterEmployeeList(searchTerm: String) {
         // Take the most recent array of employees, looking for matching names BUT ensure the Char's case is not a concern via lowercased()
         filteredEmployeeList = employeeList.filter { employee in
             let pattern = #"\b"# + searchTerm
@@ -56,7 +57,6 @@ class EmployeeListViewModel: ObservableObject {
 
             return searchRegex?.firstMatch(in: fullEmployeeInfo, range: NSRange(location: 0, length: fullEmployeeInfo.count)) != nil
         }
-        print(filteredEmployeeList)
     }
     @discardableResult // May not need to even use the result in all cases but return it for easy usage anyway!
     func selectEmployee(index: Int) -> (Int, Employee?) { // Use tableView index to grab correct employee from arrays
@@ -74,8 +74,11 @@ class EmployeeListViewModel: ObservableObject {
         return (index ?? -1, selectedEmployee)
     }
     
+    func beginSearching(_ start: Bool) {
+        searching = start
+    }
     func filteringBegan() -> Bool { // Instead of using searchBar.combineLatest(searchTerm), just combine underlying values when needed
-        return searchBarOpen && !searchTerm.isEmpty // Why? Because on eraseToAnyPublisher(), AnyPublisher has no recent value property
+        return searching && !searchTerm.isEmpty // Why? Because on eraseToAnyPublisher(), AnyPublisher has no recent value property
     } // BUT CurrentValueSubject does! Problem is there's no way to convert to a specific type of Swift Combine Publisher
     // It is technically possible to use the erased AnyPublisher left over to react and then currentValSubj.send(anyPubValue)
     // BUT unless you're calling sink() on the currentValSubj, directly accessing the recent value property may NOT ALWAYS get the most recent combined/transformed val
