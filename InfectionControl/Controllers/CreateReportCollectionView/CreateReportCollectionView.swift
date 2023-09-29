@@ -62,6 +62,7 @@ class CreateReportCollectionView: UICollectionViewController {
         
         createReportController.viewModel.reportHealthPractice = HealthPractice(name: reportLabel)
     }
+    // Expected to unwind from CreateReportVC after successfully submitting new Report. Redirects to ReportTableView
     @IBAction func unwindHereAndSwitchTabs(sender: UIStoryboardSegue) {
         if let tabBar: UITabBarController = self.tabBarController {
             print("The tab bar has: \(tabBar.viewControllers?.count ?? 0) VCs")

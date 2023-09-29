@@ -54,8 +54,8 @@ class EmployeeListTableViewController: UITableViewController, BaseStyling {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let button = sender as? UIBarButtonItem, button === selectButton
-        else { print("The select button not pressed, cancelling"); return }
+        guard let button = sender as? UIBarButtonItem, button === selectButton // Select button pressed, unwind to CreateReportVC
+        else { print("The select button not pressed, cancelling"); return } // Else - cancel button tapped, dismiss w/out sending an employee to CreateReportVC
     }
 }
 

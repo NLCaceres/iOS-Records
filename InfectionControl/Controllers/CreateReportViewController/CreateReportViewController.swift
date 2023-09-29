@@ -121,6 +121,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
         
         Task { await self.viewModel.postNewReport() }
     }
+    // Expected to unwind from EmployeeTableView after selecting an employee to fill Employee data for the new Report
     @IBAction func unwindToCreateReportVC(sender: UIStoryboardSegue) {
         if let employeeListVc = sender.source as? EmployeeListTableViewController {
             self.viewModel.reportEmployee = employeeListVc.viewModel.selectedEmployee
