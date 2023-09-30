@@ -8,8 +8,7 @@ import UIKit
 
 extension EmployeeListTableViewController {
     func setUpSearchController() {
-        // (searchResultsController: nil) means use THIS VC to display results
-        searchController = UISearchController(searchResultsController: nil)
+        searchController = UISearchController(searchResultsController: nil) // Using nil means use EmployeeListTableVC
         searchController.obscuresBackgroundDuringPresentation = false
         
         searchController.searchResultsUpdater = self
@@ -21,14 +20,14 @@ extension EmployeeListTableViewController {
         searchController.searchBar.searchTextField.leftView?.tintColor = self.themeSecondaryColor // Changes icon color
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search by name or profession",
                                                                                               attributes: [.foregroundColor: UIColor.yellow])
-        // Following publisher can replace using UISearchResultsUpdating protocol
-        searchController.searchBar.publisher(for: \.text)
-            .debounce(for: 0.5, scheduler: RunLoop.main).removeDuplicates()
-            .sink { [weak viewModel] in
-                viewModel?.filterEmployeeList(searchTerm: $0)
-                self.tableView.reloadData()
-            }
-            .store(in: &cancellables)
+        
+        // searchController.searchBar.publisher(for: \.text) SHOULD work with a debounce + sink BUT seems Apple never actually implemented it
+        // so it never emits events, leaving the following combined with UISearchResultsUpdating as the better choice
+        viewModel.$searchTerm.debounce(for: 0.5, scheduler: DispatchQueue.main).removeDuplicates()
+            .sink { [weak self] in
+                self?.viewModel.filterEmployeeList(searchTerm: $0)
+                self?.tableView.reloadData()
+            }.store(in: &cancellables)
         
         navigationItem.searchController = searchController // Place the search bar in the navigation bar.
         navigationItem.hidesSearchBarWhenScrolling = false // Keep it visible.
@@ -39,17 +38,20 @@ extension EmployeeListTableViewController {
 // MARK: SearchBar Delagate + Results Updater
 extension EmployeeListTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
     // Delegate Funcs
+    // Following called just before searchBarShouldEndEditing(_), so nav buttons will reappear above list
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.beginSearching(false)
         viewModel.selectEmployee(index: -1) // Effectively disables selectButton by unselecting any emploee
     }
+    // Following called after searchTextField tapped and user can begin typing, called just after searchBarShouldBeginEditing(_)
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        viewModel.beginSearching(true)
         viewModel.selectEmployee(index: -1) // Effectively disables selectButton
     }
     
     // This is similar to the searchBarDelegate, it fires off events every new char
     func updateSearchResults(for searchController: UISearchController) {
-        viewModel.filterEmployeeList(searchTerm: searchController.searchBar.text)
-        tableView.reloadData()
+        viewModel.updateSearchTerm(searchController.searchBar.text)
     }
 }
 
