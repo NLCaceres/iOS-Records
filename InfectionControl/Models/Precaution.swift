@@ -23,9 +23,9 @@ struct PrecautionDTO {
 }
 
 extension PrecautionDTO: Codable {
-    // Unlike HealthPracticeDTO, no "expected string BUT got array" issue while decoding since "practices" key is usually an array of stringIDs
+    // Unlike HealthPracticeDTO, don't get an "expected string BUT got array" issue while decoding since "practices" key is usually an array of stringIDs
     enum CodingKeys: String, CodingKey {
-        case id = "_id", name, practices
+        case id, name, practices = "healthPractices"
     }
     
     init(from base: Precaution) {

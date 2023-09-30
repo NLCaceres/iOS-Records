@@ -27,9 +27,9 @@ struct ProfessionDTO {
 
 extension ProfessionDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case observedOccupation = "observed_occupation"
-        case serviceDiscipline = "service_discipline"
+        case id // Alternatively can write all cases on a single line like the other models
+        case observedOccupation
+        case serviceDiscipline
     }
     
     init(from base: Profession) {

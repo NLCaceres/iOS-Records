@@ -30,8 +30,9 @@ struct EmployeeDTO {
 
 extension EmployeeDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id", firstName = "first_name", surname, profession
+        case id, firstName, surname, profession
     }
+    // TODO: Double check if this init decoder still needed since String/[String] issue should be resolved
     // Profession key gets sent a string or [string] so need to override unfortunately
     init(from decoder: Decoder) throws {
         let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)

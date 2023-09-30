@@ -29,8 +29,8 @@ struct LocationDTO {
 
 extension LocationDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id", facilityName, unitNum, roomNum
-    } // Only need a raw value string for id, rest get coded just fine
+        case id, facilityName, unitNum, roomNum
+    }
     
     init(from base: Location) {
         self.init(id: base.id, facilityName: base.facilityName, unitNum: base.unitNum, roomNum: base.roomNum)

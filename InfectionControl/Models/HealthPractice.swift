@@ -26,9 +26,10 @@ struct HealthPracticeDTO {
 
 extension HealthPracticeDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case id = "_id", name, precautionType
+        case id, name, precautionType = "precaution"
     }
     
+    //TODO: GraphQL API may fix precautionType problem but might be able to drop this decoder init, regardless, similarly to PrecautionDTO or ReportDTO
     // Need overriden decoder init since precautionType sometimes get sent as a array of id strings
     init(from decoder: Decoder) throws { // Which would cause the decoder to fail if not customized as follows
         let jsonKeys = try decoder.container(keyedBy: CodingKeys.self)

@@ -67,7 +67,7 @@ struct ReportDTO {
 
 extension ReportDTO: Codable {
     enum CodingKeys: String, CodingKey {
-        case date = "date_reported", employee, id = "_id", healthPractice, location
+        case id, employee, healthPractice, location, date
     }
     
     init(from base: Report) {
