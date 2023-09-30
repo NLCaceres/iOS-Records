@@ -35,20 +35,22 @@ class EmployeeListTableViewController: UITableViewController, BaseStyling {
         
         viewModel.doneButtonEnabled.sink { isEnabled in self.selectButton.isEnabled = isEnabled }.store(in: &cancellables)
         
-        viewModel.$isLoading
+        viewModel.$isLoading.receive(on: DispatchQueue.main)
             .sink { $0 ? self.tableView.refreshControl?.beginRefreshing() : self.tableView.refreshControl?.endRefreshing() }
             .store(in: &cancellables)
         self.tableView.refreshControl = setUpRefreshControl(title: "Fetching Employee List", view: self, action: #selector(fetchEmployees))
         
         setUpSearchController() /// Call extension: ``EmployeeListTableViewController/setUpSearchController()``
         
-        viewModel.$employeeList.sink { newEmployeeList in self.tableView.reloadData() }.store(in: &cancellables)
+        viewModel.$employeeList.receive(on: DispatchQueue.main)
+            .sink { newEmployeeList in self.tableView.reloadData() }
+            .store(in: &cancellables)
         
         fetchEmployees()
     }
     
     // MARK: HTTP Methods
-    @objc func fetchEmployees() {
+    @objc private func fetchEmployees() {
         Task { await viewModel.getEmployeeList() } // Use a task to fire off async func, replacing DispatchQueue.global().async { }
     }
     
