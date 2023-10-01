@@ -36,6 +36,8 @@
 		BF29989428259C91008DE3E9 /* ToBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */; };
 		BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */; };
 		BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */; };
+		BF382CD12AC948D700838254 /* CodableDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD02AC948D700838254 /* CodableDefaults.swift */; };
+		BF382CD32AC94A5F00838254 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD22AC94A5F00838254 /* DataExtensions.swift */; };
 		BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */; };
 		BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F5281B8E6200670689 /* ModelsFactory.swift */; };
 		BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F9281BCB8600670689 /* HealthPracticeDTOTests.swift */; };
@@ -194,6 +196,8 @@
 		BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToBaseProtocol.swift; sourceTree = "<group>"; };
 		BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
 		BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		BF382CD02AC948D700838254 /* CodableDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDefaults.swift; sourceTree = "<group>"; };
+		BF382CD22AC94A5F00838254 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTOTests.swift; sourceTree = "<group>"; };
 		BF3849F5281B8E6200670689 /* ModelsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsFactory.swift; sourceTree = "<group>"; };
 		BF3849F9281BCB8600670689 /* HealthPracticeDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeDTOTests.swift; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 				BF55668E22546965004A13C8 /* Profession.swift */,
 				BF5566992254725F004A13C8 /* Report.swift */,
 				BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */,
+				BF382CD02AC948D700838254 /* CodableDefaults.swift */,
+				BF382CD22AC94A5F00838254 /* DataExtensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -957,6 +963,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF382CD32AC94A5F00838254 /* DataExtensions.swift in Sources */,
 				BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */,
 				BFFE07D72AAE5A5600503020 /* PrecautionRepository.swift in Sources */,
 				BF2194FC2866914100FD769D /* EmployeeListSearchController.swift in Sources */,
@@ -1009,6 +1016,7 @@
 				BFE2B57D229335F30096BA9C /* CreateReportViewController.swift in Sources */,
 				BF85F82B2AAAAA59009B41DF /* LocationDataSource.swift in Sources */,
 				BFA3D09B287164D600C6112E /* CommonRow.swift in Sources */,
+				BF382CD12AC948D700838254 /* CodableDefaults.swift in Sources */,
 				BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */,
 				BF556694225470BD004A13C8 /* Location.swift in Sources */,
 				BF8E726628571040008A8DEF /* BaseStyling.swift in Sources */,
