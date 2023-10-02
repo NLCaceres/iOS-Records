@@ -33,12 +33,12 @@ struct ModelsFactory {
         return location
     }
     static func LocationJSON(hasID: Bool = false) -> String {
-        let firstPropLine = jsonLine("facilityName", to: "facility\(createdLocations)")
-        // If JSON keys not inserted in ascending order, will NEVER match Encoder's [.prettyPrinted, .sortedKeys]
-        let idLine = jsonLine("_id", to: "locationId\(createdLocations)")
-        let keyStartStr = hasID ? idLine + firstPropLine : firstPropLine
-        let locationJSON = jsonStart() + keyStartStr + jsonLine("roomNum", to: "room\(createdLocations)") +
-        jsonLine("unitNum", to: "unit\(createdLocations)", finalLine: true)
+        let facilityNameLine = jsonLine("facilityName", to: "facility\(createdLocations)")
+        let idLine = hasID ? jsonLine("id", to: "locationId\(createdLocations)") : ""
+        let roomLine = jsonLine("roomNum", to: "room\(createdLocations)")
+        let unitLine = jsonLine("unitNum", to: "unit\(createdLocations)", finalLine: true)
+        
+        let locationJSON = jsonStart() + facilityNameLine + idLine + roomLine + unitLine
         
         createdLocations += 1
         return locationJSON
@@ -58,10 +58,12 @@ struct ModelsFactory {
         return employee
     }
     static func EmployeeJSON(hasID: Bool = false, hasProfession: Bool = false, indentLevel: Int = 0) -> String {
-        let firstPropLine = jsonLine("first_name", to: "name\(createdEmployees)", indentLevel: indentLevel)
-        let keyStartStr = hasID ? jsonLine("_id", to: "employeeId\(createdEmployees)", indentLevel: indentLevel) + firstPropLine : firstPropLine
+        let firstNameLine = jsonLine("firstName", to: "name\(createdEmployees)", indentLevel: indentLevel)
+        let idLine = hasID ? jsonLine("id", to: "employeeId\(createdEmployees)", indentLevel: indentLevel) : ""
         let professionLine = hasProfession ? jsonLine("profession", to: ProfessionJSON(indentLevel: 1)) : ""
-        let employeeJSON = jsonStart() + keyStartStr + professionLine + jsonLine("surname", to: "surname\(createdEmployees)", finalLine: true)
+        let surnameLine = jsonLine("surname", to: "surname\(createdEmployees)", finalLine: true)
+        
+        let employeeJSON = jsonStart() + firstNameLine + idLine + professionLine + surnameLine
         
         createdEmployees += 1
         return employeeJSON
@@ -78,10 +80,11 @@ struct ModelsFactory {
         return healthPractice
     }
     static func HealthPracticeJSON(hasID: Bool = false, hasPrecaution: Bool = false, indentLevel: Int = 0) -> String {
-        let firstPropLine = jsonLine("name", to: "name\(createdHealthPractices)", finalLine: !hasPrecaution, indentLevel: indentLevel)
-        let idLine = jsonLine("_id", to: "healthPracticeId\(createdHealthPractices)", indentLevel: indentLevel)
-        let keyStartStr = hasID ? idLine + firstPropLine : firstPropLine
-        let precautionLine = hasPrecaution ? jsonLine("precautionType", to: PrecautionJSON(indentLevel: 1), finalLine: true) : ""
+        let nameLine = jsonLine("name", to: "name\(createdHealthPractices)", finalLine: !hasPrecaution, indentLevel: indentLevel)
+        let idLine = jsonLine("id", to: "healthPracticeId\(createdHealthPractices)", indentLevel: indentLevel)
+        let keyStartStr = hasID ? idLine + nameLine : nameLine
+        let precautionLine = hasPrecaution ? jsonLine("precaution", to: PrecautionJSON(indentLevel: 1), finalLine: true) : ""
+        
         let healthPracticeJSON = jsonStart() + keyStartStr + precautionLine
         
         createdHealthPractices += 1
@@ -98,11 +101,12 @@ struct ModelsFactory {
         return precaution
     }
     static func PrecautionJSON(hasID: Bool = false, numPractices: Int = 0, indentLevel: Int = 0) -> String {
-        let firstPropLine = jsonLine("name", to: "name\(createdPrecautions)", finalLine: true, indentLevel: indentLevel) // ALWAYS is last but ALWAYS there
-        let idLine = jsonLine("_id", to: "precautionId\(createdPrecautions)", indentLevel: indentLevel)
+        let nameLine = jsonLine("name", to: "name\(createdPrecautions)", finalLine: true, indentLevel: indentLevel) // ALWAYS is last but ALWAYS there
+        let idLine = jsonLine("id", to: "precautionId\(createdPrecautions)", indentLevel: indentLevel)
         let healthPractices = numPractices > 0 ? jsonLine("healthPractices", to: HealthPracticeJSON()) : ""
-        let keySet = hasID ? idLine + healthPractices + firstPropLine :
-            (numPractices > 0) ? healthPractices + firstPropLine : firstPropLine
+        let keySet = hasID ? idLine + healthPractices + nameLine :
+            (numPractices > 0) ? healthPractices + nameLine : nameLine
+        
         let precautionJSON = jsonStart() + keySet
 
         createdPrecautions += 1
@@ -120,10 +124,11 @@ struct ModelsFactory {
     }
     static func ProfessionJSON(hasID: Bool = false, indentLevel: Int = 0) -> String {
 //        let endStr = String(repeating: "  ", count: indentLevel)
-        let firstPropLine = jsonLine("observed_occupation", to: "occupation\(createdProfessions)", indentLevel: indentLevel)
-        let idLine = jsonLine("_id", to: "professionId\(createdProfessions)", indentLevel: indentLevel)
-        let keyStartStr = hasID ? idLine + firstPropLine : firstPropLine
-        let disciplineLine = jsonLine("service_discipline", to: "discipline\(createdProfessions)", finalLine: true, indentLevel: indentLevel)
+        let occupationLine = jsonLine("observedOccupation", to: "occupation\(createdProfessions)", indentLevel: indentLevel)
+        let idLine = jsonLine("id", to: "professionId\(createdProfessions)", indentLevel: indentLevel)
+        let keyStartStr = hasID ? idLine + occupationLine : occupationLine
+        let disciplineLine = jsonLine("serviceDiscipline", to: "discipline\(createdProfessions)", finalLine: true, indentLevel: indentLevel)
+        
         let professionJSON = jsonStart() + keyStartStr + disciplineLine
         
         createdProfessions += 1
