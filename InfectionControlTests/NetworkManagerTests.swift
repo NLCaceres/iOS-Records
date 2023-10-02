@@ -158,22 +158,28 @@ class NetworkManagerTests: XCTestCase {
             XCTAssertTrue(err == nil) // THEN no err passed in!
         }
         
-        //TODO: Could use MockCodable for simpler encoding/decoding + closer to real App + can assert after dataHandler closure runs that changes were made
-        let fooData = try! JSONEncoder().encode(AssertableData(didChange: true))
-        var foobar = AssertableData()
+        var originalMockDTO = MockCodable(testDouble: 123)
+        let mockDataReceived = originalMockDTO.toData()
         // WHEN 200 status in a normal HTTPResponse with a completion Handler
-        networkManager.onHttpResponse(data: fooData, response: validHttpResponse, error: nil) { data, err in
+        networkManager.onHttpResponse(data: mockDataReceived, response: validHttpResponse, error: nil) { dataReceived, err in
+            // THEN this dataHandler closure is called with our mockData AND without an error
             XCTAssertTrue(err == nil)
-            guard let data = data else { return }
+            guard let responseData = dataReceived else { return }
             
-            XCTAssertEqual(false, foobar.didChange) // Started as false, should be updated to true
-            let foobarDTO = AssertableData(try! JSONDecoder().decode(AssertableData.self, from: data)) // Pass in data
-            XCTAssertTrue(foobar !== foobarDTO) // Two different AssertableData instances
-            foobar = foobarDTO
-            XCTAssertTrue(foobar === foobarDTO) // Now same instance
-            XCTAssertEqual(true, foobar.didChange) // Started as false, now set to true based on httpResponse encoded data
+            // AND the data matches expected values
+            var mockDTOReceived = responseData.toDTO(of: MockCodable.self)!
+            XCTAssertEqual(mockDTOReceived.testDouble, 123)
+            
+            mockDTOReceived.testDouble = 234 // Since MockCodable is a struct, changing this ref
+            XCTAssertEqual(mockDTOReceived.testDouble, 234) // ONLY effects this ref
+            XCTAssertNotEqual(originalMockDTO.testDouble, 234) // The original is not changed!
+            
+            originalMockDTO.testDouble = 234 // Performing a callback-style update directly to the original ref
+            XCTAssertEqual(originalMockDTO.testDouble, 234) // DOES cause the expected change
         }
-    }
+        // AND any changes that the callback induced should be visible here as well!
+        XCTAssertEqual(originalMockDTO.testDouble, 234) // Even though, MockCodable is a struct
+    } //? Swift structs become entirely new instances when their underlying data changes, making the final AssertEquals possible!
     
     // MARK: Post Requests
     func testPostRequestMaker() {
@@ -208,7 +214,7 @@ class NetworkManagerTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200,
                                            httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
-            return (response, MockCodable(failingDouble: 123).toData()!) //! Even though a safe double is returned
+            return (response, MockCodable(testDouble: 123).toData()!) //! Even though a safe double is returned
         }
         let mockEncodable = MockCodable() // IF the initial data for our POST request is un-encodable
         let unencodableDataResult = await getBase(for: MockCodable.self) {
