@@ -25,7 +25,7 @@ class LocationDTOTests: XCTestCase {
     }
     
     func testLocationEncoder() {
-        let encoder = JSONEncoder()
+        let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         let locationJSON = ModelsFactory.LocationJSON(hasID: true)

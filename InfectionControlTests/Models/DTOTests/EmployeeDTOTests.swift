@@ -17,7 +17,7 @@ class EmployeeDTOTests: XCTestCase {
     }
     
     func testEmployeeEncoder() throws {
-        let encoder = JSONEncoder()
+        let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         // When employee has no id or profession for encoding

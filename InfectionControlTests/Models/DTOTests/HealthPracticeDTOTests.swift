@@ -50,7 +50,7 @@ class HealthPracticeDTOTests: XCTestCase {
     }
     
     func testHealthPracticeEncoder() {
-        let encoder = JSONEncoder()
+        let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         let healthPracticeJSON = ModelsFactory.HealthPracticeJSON(hasID: false)

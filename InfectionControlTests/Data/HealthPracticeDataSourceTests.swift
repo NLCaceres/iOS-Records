@@ -23,7 +23,7 @@ final class HealthPracticeDataSourceTests: XCTestCase {
     func testGetHealthPracticeList() async throws {
         let expectedList = [HealthPractice(name: "Hand Hygiene"), HealthPractice(name: "Contact")]
         let healthPracticeDtoArray = [HealthPracticeDTO(from: expectedList[0]), HealthPracticeDTO(from: expectedList[1])]
-        let jsonEncoder = JSONEncoder()
+        let jsonEncoder = defaultEncoder()
         let healthPracticeDtoArrayData = try? jsonEncoder.encode(healthPracticeDtoArray)
         mockNetworkManager.replacementData = healthPracticeDtoArrayData // Inject data that the networkManager will fetch
         

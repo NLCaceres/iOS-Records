@@ -41,7 +41,7 @@ final class DataSourceGenericsTests: XCTestCase {
         
         // SUCCESSFUL RESULT WITH VALID DATA of ARRAY
         let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")), EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
-        let jsonEncoder = JSONEncoder()
+        let jsonEncoder = defaultEncoder()
         let employeeDtoArrayData = try? jsonEncoder.encode(employeeDtoArray)
         let validDataResult = await getBaseArray(for: toBaseDecodableType) { return .success(employeeDtoArrayData) }
         let successResult = try? validDataResult.get()

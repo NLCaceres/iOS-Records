@@ -24,7 +24,7 @@ class ProfessionDTOTests: XCTestCase {
     }
     
     func testProfessionEncoder() {
-        let encoder = JSONEncoder()
+        let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         let professionJSON = ModelsFactory.ProfessionJSON(hasID: true)

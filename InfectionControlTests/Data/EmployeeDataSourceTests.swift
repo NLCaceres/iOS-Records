@@ -22,7 +22,7 @@ final class EmployeeDataSourceTests: XCTestCase {
     
     func testGetEmployeeList() async throws {
         let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")), EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
-        let jsonEncoder = JSONEncoder()
+        let jsonEncoder = defaultEncoder()
         let employeeDtoArrayData = try? jsonEncoder.encode(employeeDtoArray)
         mockNetworkManager.replacementData = employeeDtoArrayData // Create data to let the networkManager fetch
         
