@@ -40,7 +40,6 @@
 		BF382CD12AC948D700838254 /* CodableDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD02AC948D700838254 /* CodableDefaults.swift */; };
 		BF382CD32AC94A5F00838254 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD22AC94A5F00838254 /* DataExtensions.swift */; };
 		BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */; };
-		BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F5281B8E6200670689 /* ModelsFactory.swift */; };
 		BF3849FA281BCB8600670689 /* HealthPracticeDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F9281BCB8600670689 /* HealthPracticeDTOTests.swift */; };
 		BF3849FC281BCFAD00670689 /* PrecautionDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849FB281BCFAD00670689 /* PrecautionDTOTests.swift */; };
 		BF3A47872838C8BD00362F09 /* CreateReportCvRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3A47862838C8BD00362F09 /* CreateReportCvRobot.swift */; };
@@ -200,7 +199,6 @@
 		BF382CD02AC948D700838254 /* CodableDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDefaults.swift; sourceTree = "<group>"; };
 		BF382CD22AC94A5F00838254 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTOTests.swift; sourceTree = "<group>"; };
-		BF3849F5281B8E6200670689 /* ModelsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsFactory.swift; sourceTree = "<group>"; };
 		BF3849F9281BCB8600670689 /* HealthPracticeDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPracticeDTOTests.swift; sourceTree = "<group>"; };
 		BF3849FB281BCFAD00670689 /* PrecautionDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionDTOTests.swift; sourceTree = "<group>"; };
 		BF3A47862838C8BD00362F09 /* CreateReportCvRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportCvRobot.swift; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				BFA3D0A22873E40500C6112E /* DTOTests */,
-				BF3849F5281B8E6200670689 /* ModelsFactory.swift */,
 				BFA3D0A52873E44D00C6112E /* EmployeeTests.swift */,
 				BF8E724A28489DFD008A8DEF /* HealthPracticeTests.swift */,
 				BFA3D0A32873E44000C6112E /* LocationTests.swift */,
@@ -1073,7 +1070,6 @@
 				BF291F132ABE61A600AAB4C3 /* MockReportRepository.swift in Sources */,
 				BFFE07DB2AAE5B5300503020 /* LocationRepositoryTests.swift in Sources */,
 				BF291F152ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift in Sources */,
-				BF3849F6281B8E6200670689 /* ModelsFactory.swift in Sources */,
 				BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */,
 				BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */,
 				BF8E7247284558C2008A8DEF /* UIColorExtensionTests.swift in Sources */,
