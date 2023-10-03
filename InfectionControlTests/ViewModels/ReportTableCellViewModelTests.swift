@@ -12,7 +12,7 @@ class ReportTableCellViewModelTests: XCTestCase {
     var cellViewModel: ReportTableCellViewModel!
     
     override func setUp() {
-        report = ModelsFactory.createReport()
+        report = DataFactory.makeReports().first
         cellViewModel = ReportTableCellViewModel(report: report)
         Report.dateFormatter.locale = Locale(identifier: "en_US")
     }
@@ -51,7 +51,7 @@ class ReportTableCellViewModelTests: XCTestCase {
     
     func testCreateTitleText() {
         let healthPracticeName = "\(self.report.healthPractice.name)"
-        let dateStr = "10/1/20" // MockDate ALWAYS this date. CellViewModel uses Report's default short date format
+        let dateStr = "5/18/19" // MockDate ALWAYS this date. CellViewModel uses Report's default short date format
         let fullStr = "\(healthPracticeName) Violation \(dateStr)"
         let mainText = cellViewModel.titleText
         XCTAssertTrue(mainText.mutableString.hasPrefix(healthPracticeName))

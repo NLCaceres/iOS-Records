@@ -72,11 +72,16 @@ struct DataFactory {
         ]
         
         return [
-            Report(employee: employeeList[0], healthPractice: healthPracticeList[0], location: locationList[1], date: dateList[0]),
-            Report(employee: employeeList[1], healthPractice: healthPracticeList[4], location: locationList[3], date: dateList[1]),
-            Report(employee: employeeList[2], healthPractice: healthPracticeList[3], location: locationList[2], date: dateList[2]),
-            Report(employee: employeeList[3], healthPractice: healthPracticeList[0], location: locationList[4], date: dateList[3]),
-            Report(employee: employeeList[4], healthPractice: healthPracticeList[1], location: locationList[0], date: dateList[4]),
+            Report(id: "0", employee: employeeList[0], healthPractice: healthPracticeList[0], location: locationList[1], date: dateList[0]),
+            Report(id: "1", employee: employeeList[1], healthPractice: healthPracticeList[4], location: locationList[3], date: dateList[1]),
+            Report(id: "2", employee: employeeList[2], healthPractice: healthPracticeList[3], location: locationList[2], date: dateList[2]),
+            Report(id: "3", employee: employeeList[3], healthPractice: healthPracticeList[0], location: locationList[4], date: dateList[3]),
+            Report(id: "4", employee: employeeList[4], healthPractice: healthPracticeList[1], location: locationList[0], date: dateList[4]),
         ]
+        // ID: 0,  John Smith, Clinic Nurse, Hand Hygiene - Standard, USC 4 202, May 19 2019
+        // ID: 1,  Jill Chambers, Clinic Nurse, Contact - Isolation, HSC 3 321, May 20 2019
+        // ID: 2,  Victor Richards, Clinic Doctor, Droplet - Isolation, HSC 3 213, May 26 2019
+        // ID: 3,  Melody Rios, Clinic Doctor, Hand Hygiene - Standard, HSC 5 121, May 14 2019
+        // ID: 4,  Brian Ishida, Clinic Doctor, PPE - Standard, USC 2 213, April 22 2019
     }
 }
