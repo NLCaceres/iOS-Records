@@ -9,7 +9,7 @@ import XCTest
 
 /* Test that our Data Transfer Objects and their coding keys properly translate via Codable Protocol
    Also checks our normal Struct can be created from DTOs */
-/* Bonus: Test ModelsFactory JSON maker spits out valid JSON */
+/* Bonus: Test JsonFactory spits out valid JSON */
 class EmployeeDTOTests: XCTestCase {
 
     func testEmployeeDecoder() throws {
@@ -21,8 +21,8 @@ class EmployeeDTOTests: XCTestCase {
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         // When employee has no id or profession for encoding
-        let expectedEmployeeJSON = ModelsFactory.EmployeeJSON(hasID: false)
-        let firstID = ModelsFactory.expectedEmployeeID
+        let expectedEmployeeJSON = JsonFactory.EmployeeJSON(hasID: false)
+        let firstID = JsonFactory.expectedEmployeeID
         let employee = EmployeeDTO(firstName: "name\(firstID)", surname: "surname\(firstID)")
         let employeeEncoded = try! encoder.encode(employee)
         let employeeEncodedStr = String(data: employeeEncoded, encoding: .utf8)!
@@ -30,8 +30,8 @@ class EmployeeDTOTests: XCTestCase {
         XCTAssertEqual(expectedEmployeeJSON, employeeEncodedStr)
         
         // When Employee has ID for encoding
-        let employeeWithIdJSON = ModelsFactory.EmployeeJSON(hasID: true)
-        let nextID = ModelsFactory.expectedEmployeeID
+        let employeeWithIdJSON = JsonFactory.EmployeeJSON(hasID: true)
+        let nextID = JsonFactory.expectedEmployeeID
         let employeeWithId = EmployeeDTO(id: "employeeId\(nextID)", firstName: "name\(nextID)", surname: "surname\(nextID)")
         let employeeWithIdEncoded = try! encoder.encode(employeeWithId)
         let employeeWithIdEncodedStr = String(data: employeeWithIdEncoded, encoding: .utf8)!
@@ -39,9 +39,9 @@ class EmployeeDTOTests: XCTestCase {
         XCTAssertEqual(employeeWithIdJSON, employeeWithIdEncodedStr)
         
         // When Employee has Profession for encoding
-        let expectedEmployeeWithProfessionJSON = ModelsFactory.EmployeeJSON(hasID: true, hasProfession: true)
-        let finalID = ModelsFactory.expectedEmployeeID
-        let profID = ModelsFactory.expectedProfessionID
+        let expectedEmployeeWithProfessionJSON = JsonFactory.EmployeeJSON(hasID: true, hasProfession: true)
+        let finalID = JsonFactory.expectedEmployeeID
+        let profID = JsonFactory.expectedProfessionID
         let newProfession = ProfessionDTO(observedOccupation: "occupation\(profID)", serviceDiscipline: "discipline\(profID)")
         let employeeWithProfession = EmployeeDTO(id: "employeeId\(finalID)", firstName: "name\(finalID)",
                                                  surname: "surname\(finalID)", profession: newProfession)

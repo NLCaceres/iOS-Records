@@ -36,6 +36,7 @@
 		BF29989428259C91008DE3E9 /* ToBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */; };
 		BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */; };
 		BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */; };
+		BF369D462ACAC3A20077DA93 /* JsonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF369D452ACAC3A20077DA93 /* JsonFactory.swift */; };
 		BF382CD12AC948D700838254 /* CodableDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD02AC948D700838254 /* CodableDefaults.swift */; };
 		BF382CD32AC94A5F00838254 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD22AC94A5F00838254 /* DataExtensions.swift */; };
 		BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */; };
@@ -195,6 +196,7 @@
 		BF29989328259C91008DE3E9 /* ToBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToBaseProtocol.swift; sourceTree = "<group>"; };
 		BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
 		BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		BF369D452ACAC3A20077DA93 /* JsonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFactory.swift; sourceTree = "<group>"; };
 		BF382CD02AC948D700838254 /* CodableDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDefaults.swift; sourceTree = "<group>"; };
 		BF382CD22AC94A5F00838254 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTOTests.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				BF82707629B030E5004542C8 /* MockNetworking.swift */,
 				BF145A602ABC1C5F001F00D9 /* MockError.swift */,
 				BF145A642ABC40BE001F00D9 /* MockCodable.swift */,
+				BF369D452ACAC3A20077DA93 /* JsonFactory.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1036,6 +1039,7 @@
 			files = (
 				BF85F8332AAAFADE009B41DF /* PrecautionDataSourceTests.swift in Sources */,
 				BFFE07D12AAD4E1900503020 /* MockReportDataSource.swift in Sources */,
+				BF369D462ACAC3A20077DA93 /* JsonFactory.swift in Sources */,
 				BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */,
 				BF82708129B033C5004542C8 /* EmployeeRepositoryTests.swift in Sources */,
 				BF8E724F2848A041008A8DEF /* CreateReportViewModelTests.swift in Sources */,

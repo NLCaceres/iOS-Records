@@ -9,12 +9,12 @@ import XCTest
 
 /* Test that our Data Transfer Objects and their coding keys properly translate via Codable Protocol
    Also checks our normal Struct can be created from DTOs */
-/* Bonus: Test ModelsFactory JSON maker spits out valid JSON */
+/* Bonus: Test JsonFactory spits out valid JSON */
 class LocationDTOTests: XCTestCase {
 
     func testLocationDecoder() throws {
-        let locationJSON = ModelsFactory.LocationJSON(hasID: true)
-        let firstID = ModelsFactory.expectedLocationID
+        let locationJSON = JsonFactory.LocationJSON(hasID: true)
+        let firstID = JsonFactory.expectedLocationID
         let locationData = locationJSON.data(using: .utf8)!
         let locationDecoded = try! JSONDecoder().decode(LocationDTO.self, from: locationData)
         let location = LocationDTO(id: "locationId\(firstID)", facilityName: "facility\(firstID)", unitNum: "unit\(firstID)", roomNum: "room\(firstID)")
@@ -28,8 +28,8 @@ class LocationDTOTests: XCTestCase {
         let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
-        let locationJSON = ModelsFactory.LocationJSON(hasID: true)
-        let firstID = ModelsFactory.expectedLocationID
+        let locationJSON = JsonFactory.LocationJSON(hasID: true)
+        let firstID = JsonFactory.expectedLocationID
         let location = LocationDTO(id: "locationId\(firstID)", facilityName: "facility\(firstID)", unitNum: "unit\(firstID)", roomNum: "room\(firstID)")
         
         let locationEncoded = try! encoder.encode(location)

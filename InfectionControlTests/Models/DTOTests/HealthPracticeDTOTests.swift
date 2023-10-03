@@ -9,13 +9,13 @@ import XCTest
 
 /* Test that our Data Transfer Objects and their coding keys properly translate via Codable Protocol
    Also checks our normal Struct can be created from DTOs */
-/* Bonus: Test ModelsFactory JSON maker spits out valid JSON */
+/* Bonus: Test JsonFactory spits out valid JSON */
 class HealthPracticeDTOTests: XCTestCase {
 
     func testHealthPracticeDecoder() throws {
         // When healthPractice JSON has no ID key
-        let healthPracticeJSON = ModelsFactory.HealthPracticeJSON()
-        let firstID = ModelsFactory.expectedHealthPracticeID
+        let healthPracticeJSON = JsonFactory.HealthPracticeJSON()
+        let firstID = JsonFactory.expectedHealthPracticeID
         let healthPracticeData = healthPracticeJSON.data(using: .utf8)!
         let healthPracticeDecoded = try! JSONDecoder().decode(HealthPracticeDTO.self, from: healthPracticeData)
         let healthPractice = HealthPracticeDTO(name: "name\(firstID)")
@@ -25,8 +25,8 @@ class HealthPracticeDTOTests: XCTestCase {
         XCTAssertEqual(healthPracticeDecoded.name, healthPractice.name)
         
         // When healthPractice JSON has an ID Key
-        let healthPracticeWithIdJSON = ModelsFactory.HealthPracticeJSON(hasID: true)
-        let nextID = ModelsFactory.expectedHealthPracticeID
+        let healthPracticeWithIdJSON = JsonFactory.HealthPracticeJSON(hasID: true)
+        let nextID = JsonFactory.expectedHealthPracticeID
         let healthPracticeWithIdData = healthPracticeWithIdJSON.data(using: .utf8)!
         let healthPracticeWithIdDecoded = try! JSONDecoder().decode(HealthPracticeDTO.self, from: healthPracticeWithIdData)
         let healthPracticeWithId = HealthPracticeDTO(id: "healthPracticeId\(nextID)", name: "name\(nextID)")
@@ -36,9 +36,9 @@ class HealthPracticeDTOTests: XCTestCase {
         XCTAssertEqual(healthPracticeWithIdDecoded.name, healthPracticeWithId.name)
         
         // When healthPractice JSON has a precaution key
-        let healthPracticeWithPrecautionJSON = ModelsFactory.HealthPracticeJSON(hasID: true, hasPrecaution: true)
-        let finalID = ModelsFactory.expectedHealthPracticeID
-        let precautionID = ModelsFactory.expectedPrecautionID
+        let healthPracticeWithPrecautionJSON = JsonFactory.HealthPracticeJSON(hasID: true, hasPrecaution: true)
+        let finalID = JsonFactory.expectedHealthPracticeID
+        let precautionID = JsonFactory.expectedPrecautionID
         let healthPracticeWithPrecautionData = healthPracticeWithPrecautionJSON.data(using: .utf8)!
         let healthPracticeWithPrecautionDecoded = try! JSONDecoder().decode(HealthPracticeDTO.self, from: healthPracticeWithPrecautionData)
         let newPrecaution = PrecautionDTO(name: "precaution\(precautionID)")
@@ -53,23 +53,23 @@ class HealthPracticeDTOTests: XCTestCase {
         let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
-        let healthPracticeJSON = ModelsFactory.HealthPracticeJSON(hasID: false)
-        let firstID = ModelsFactory.expectedHealthPracticeID
+        let healthPracticeJSON = JsonFactory.HealthPracticeJSON(hasID: false)
+        let firstID = JsonFactory.expectedHealthPracticeID
         let healthPractice = HealthPracticeDTO(name: "name\(firstID)", precautionType: nil)
         let healthPracticeEncoded = try! encoder.encode(healthPractice)
         let healthPracticeEncodedStr = String(data: healthPracticeEncoded, encoding: .utf8)!
         XCTAssertEqual(healthPracticeJSON, healthPracticeEncodedStr)
         
-        let healthPracticeWithIdJSON = ModelsFactory.HealthPracticeJSON(hasID: true)
-        let nextID = ModelsFactory.expectedHealthPracticeID
+        let healthPracticeWithIdJSON = JsonFactory.HealthPracticeJSON(hasID: true)
+        let nextID = JsonFactory.expectedHealthPracticeID
         let healthPracticeWithId = HealthPracticeDTO(id: "healthPracticeId\(nextID)", name: "name\(nextID)", precautionType: nil)
         let healthPracticeWithIdEncoded = try! encoder.encode(healthPracticeWithId)
         let healthPracticeWithIdEncodedStr = String(data: healthPracticeWithIdEncoded, encoding: .utf8)!
         XCTAssertEqual(healthPracticeWithIdJSON, healthPracticeWithIdEncodedStr)
         
-        let healthPracticeWithPrecautionJSON = ModelsFactory.HealthPracticeJSON(hasID: true, hasPrecaution: true)
-        let finalID = ModelsFactory.expectedHealthPracticeID
-        let precautionID = ModelsFactory.expectedPrecautionID
+        let healthPracticeWithPrecautionJSON = JsonFactory.HealthPracticeJSON(hasID: true, hasPrecaution: true)
+        let finalID = JsonFactory.expectedHealthPracticeID
+        let precautionID = JsonFactory.expectedPrecautionID
         let newPrecaution = PrecautionDTO(name: "name\(precautionID)")
         let healthPracticeWithPrecaution = HealthPracticeDTO(id: "healthPracticeId\(finalID)", name: "name\(finalID)", precautionType: newPrecaution)
         let healthPracticeWithPrecautionEncoded = try! encoder.encode(healthPracticeWithPrecaution)

@@ -9,11 +9,11 @@ import XCTest
 
 /* Test that our Data Transfer Objects and their coding keys properly translate via Codable Protocol
    Also checks our normal Struct can be created from DTOs */
-/* Bonus: Test ModelsFactory JSON maker spits out valid JSON */
+/* Bonus: Test JsonFactory spits out valid JSON */
 class PrecautionDTOTests: XCTestCase {
 
     func testPrecautionDecoder() throws {
-        print(ModelsFactory.PrecautionJSON())
+        print(JsonFactory.PrecautionJSON())
         let myTuple = ((0, 1), "Line")
         print(myTuple)
     }
