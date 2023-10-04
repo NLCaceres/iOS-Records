@@ -13,7 +13,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
     let viewModel = CreateReportViewModel()
     private var cancellables: Set<AnyCancellable> = [] // To dispose subs later
 
-    // MARK: IBOutlets
+    // MARK: Navbar
     @IBOutlet weak var topNavBar: UINavigationItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBAction func cancelNewReport(_ sender: Any) {
@@ -21,15 +21,16 @@ class CreateReportViewController: UIViewController, BaseStyling {
     }
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    // MARK: Employee TextField
     @IBOutlet weak var findEmployeeTextField: UITextField!
     private let employeeListSegue = "EmployeeListSegue"
     @objc func searchEmployee(gesture: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: employeeListSegue, sender: self)
+        self.performSegue(withIdentifier: employeeListSegue, sender: findEmployeeTextField)
     }
     
+    // MARK: Pickers
     @IBOutlet weak var healthPracticePicker: UIPickerView!
     @IBOutlet weak var locationPicker: UIPickerView!
-    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func dateChanged(_ sender: Any) { changeDate(sender) }
     
@@ -57,7 +58,7 @@ class CreateReportViewController: UIViewController, BaseStyling {
         self.findEmployeeTextField.addGestureRecognizer(tapGesture)
     }
     
-    // MARK: DatePicker Config
+    // MARK: DatePicker UI Config
     func configDatePicker() {
         self.datePicker.contentHorizontalAlignment = .left
         self.datePicker.minimumDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
@@ -71,10 +72,39 @@ class CreateReportViewController: UIViewController, BaseStyling {
     
     // MARK: ViewModel Config
     func bindViewModel() { // Config subscriptions
-        self.viewModel.$isLoading.sink { isLoading in
-            print("IsLoading: \(isLoading)")
-        }.store(in: &cancellables)
+        setupLoading()
+        setupSaveButton()
+        setupErrorMessage()
         
+        setupHealthPracticePicker()
+        setupLocationPicker()
+    }
+    
+    func setupLoading() {
+        self.viewModel.$isLoading.sink { isLoading in
+            print("CreateReportView loading: \(isLoading)")
+        }.store(in: &cancellables)
+    }
+    
+    func setupSaveButton() {
+        self.viewModel.saveButtonEnabled.sink { [weak self] isEnabled in
+            guard let myVC = self else { return }
+            
+            Task { @MainActor in
+                myVC.saveButton.isEnabled = isEnabled
+            }
+        }.store(in: &cancellables)
+    }
+    
+    func setupErrorMessage() { // TODO: Insert into view, let viewModel determine message based on error type?
+        self.viewModel.$errorMessage.sink {
+            if !$0.isEmpty {
+                print("Received the following error - \($0)")
+            }
+        }.store(in: &cancellables)
+    }
+    
+    func setupHealthPracticePicker() {
         self.viewModel.$healthPracticePickerOptions.sink { [weak self] healthPracticeArr in
             guard let myVC = self else { return }
 
@@ -87,37 +117,27 @@ class CreateReportViewController: UIViewController, BaseStyling {
                 }
             }
         }.store(in: &cancellables)
-        
+    }
+    
+    func setupLocationPicker() {
         self.viewModel.$locationPickerOptions.sink { [weak self] locationArr in
             guard let myVC = self else { return }
 
             Task { @MainActor in // Nicer than "Task { await MainActor.run {} }" version
                 myVC.locationPicker.reloadAllComponents()
-            } // and better than good ol' DispatchQueue.main.async
-        }.store(in: &cancellables)
-        
-        self.viewModel.saveButtonEnabled.sink { [weak self] isEnabled in
-            guard let myVC = self else { return }
-            
-            Task { @MainActor in
-                print("Running save button sub: \(isEnabled)")
-                myVC.saveButton.isEnabled = isEnabled
-            }
-        }.store(in: &cancellables)
-        
-        setupErrorMessage()
-    }
-    
-    func setupErrorMessage() { // TODO: Insert into view, let viewModel determine message based on error type?
-        self.viewModel.$errorMessage.sink {
-            print("Received the following error - \($0)")
+            } // and better than good ol' "DispatchQueue.main.async"
         }.store(in: &cancellables)
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // Only handles saveButton, backButton handles itself
-        guard let button = sender as? UIBarButtonItem, button === saveButton
-        else { print("Save button not pressed, Cancel button was. Going back in Nav stack"); return }
+        guard let button = sender as? UIBarButtonItem else {
+            sender as? UITextField != nil ?
+                print("Employee input pressed so will display list of employees") :
+                print("Unknown segue sender")
+            return
+        }
+        guard button === saveButton else { print("Cancel button pressed, so going back in Nav stack"); return }
         
         Task { await self.viewModel.postNewReport() }
     }
