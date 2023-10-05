@@ -1,5 +1,5 @@
 //
-//  InfectionControlViewController.swift
+//  CreateReportCollectionView.swift
 //  InfectionControl
 //
 //  Copyright © 2022 Nick Caceres. All rights reserved.
@@ -9,7 +9,7 @@ import UIKit
 // Could mark as final to prevent inheritance but probably not needed
 class CreateReportCollectionView: UICollectionViewController {
     // MARK: Properties
-    var networkManager: CompleteNetworkManager = NetworkManager()
+    let precautionRepository: PrecautionRepository = AppPrecautionRepository()
     var precautions: [Precaution] = []
     var healthPractices: [HealthPractice] = []
     
@@ -19,7 +19,8 @@ class CreateReportCollectionView: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = UserDefaults.standard.color(forKey: "backgroundColor") // USC Light Gray
-        self.collectionView.refreshControl = setUpRefreshControl(title: "Fetching Report Types", view: self, action: #selector(fetchPrecautionReportTypes))
+        self.collectionView.refreshControl = setUpRefreshControl(title: "Fetching Precaution Types",
+                                                                 view: self, action: #selector(fetchPrecautionReportTypes))
         fetchPrecautionReportTypes()
     }
     
@@ -29,46 +30,44 @@ class CreateReportCollectionView: UICollectionViewController {
     }
     
     @objc private func fetchPrecautionReportTypes() {
-        self.collectionView.refreshControl?.beginRefreshing()
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let myVC = self else { return }
-            myVC.networkManager.fetchTask(endpointPath: "precautions", updateClosure: myVC.updatePrecautions).resume()
-        }
-    }
-    
-    func updatePrecautions(data: Data?, err: Error?) {
-        guard err == nil, let precautionData = data else { return }
-
-        self.precautions.removeAll()
-        if let decodedPrecautions = precautionData.toArray(containing: PrecautionDTO.self) {
-            for decodedPrecaution in decodedPrecautions { self.precautions.append(decodedPrecaution.toBase()) }
-        }
-        
-        DispatchQueue.main.async { // Likely not long running so no capture list
-            self.collectionView.reloadData()
-            self.collectionView.refreshControl?.endRefreshing()
+        Task {
+            defer { // In case, guard-else clause causes an early return
+                DispatchQueue.main.async { // Likely not long running so no capture list
+                    self.collectionView.reloadData()
+                    self.collectionView.refreshControl?.endRefreshing()
+                }
+            }
+            precautions.removeAll()
+            let newPrecautionList = try? await precautionRepository.getPrecautionList()
+            guard let filledPrecautionList = newPrecautionList else { precautions = []; return }
+            precautions.append(contentsOf: filledPrecautionList)
         }
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navController = segue.destination as? UINavigationController,
-                let clickedCell = sender as? MakeNewReportCell
-        else { print("Issue with the nav controller embedding"); return }
+        guard let navController = segue.destination as? UINavigationController else {
+            print("Issue with the CreateReportCV Nav Controller embedding"); return
+        }
+        // After tapping the Precaution cell icon, prep to segue to CreateReportVC
+        guard let clickedCell = sender as? MakeNewReportCell else { print("CreateReportCV segue received unexpected sender"); return }
+
+        // TopViewController is the controller at the top of the stack, and PROBABLY being displayed
+        // VisibleViewController, here, happens to be the same despite still being in prep to show CreateReportVC!
+        // Likely a result of ".visibleViewcontroller" using ".topViewController" as a fallback
+        guard let createReportController = navController.topViewController as? CreateReportViewController
+        else { print("NavController didn't seem to add CreateReportViewController to the stack"); return }
         
-        guard let createReportController = navController.viewControllers.first as? CreateReportViewController,
-            let reportLabel = clickedCell.reportTypeLabel.text
-        else { print("Issue with new view controller"); return }
-        
-        createReportController.viewModel.reportHealthPractice = HealthPractice(name: reportLabel)
+        // Could also use "segue.identifier" as an extra check in case of multiple navigation paths
+        let healthPractice = clickedCell.reportTypeLabel.text != nil ? HealthPractice(name: clickedCell.reportTypeLabel.text!) : nil
+        createReportController.viewModel.reportHealthPractice = healthPractice
     }
     // Expected to unwind from CreateReportVC after successfully submitting new Report. Redirects to ReportTableView
     @IBAction func unwindHereAndSwitchTabs(sender: UIStoryboardSegue) {
-        if let tabBar: UITabBarController = self.tabBarController {
-            print("The tab bar has: \(tabBar.viewControllers?.count ?? 0) VCs")
-            DispatchQueue.main.async { // Likely not long running so no capture list
-                tabBar.selectedViewController = tabBar.viewControllers![2]
-            }
+        guard let tabBar = self.tabBarController else { print("Issue with CreateReportCV Tab Controller embedding"); return }
+        // Could also use "tabBar.selectedIndex = 2" w/out the "if let" instead of ".selectedViewController"
+        if let reportTableVC = tabBar.viewControllers?[2] {
+            DispatchQueue.main.async { tabBar.selectedViewController = reportTableVC }
         }
     }
 }
