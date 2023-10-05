@@ -106,7 +106,7 @@
 		BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */; };
 		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
 		BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E622965B290023CE7A /* ReportTableViewModel.swift */; };
-		BFC659E9229677F70023CE7A /* CreateReportVcDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E8229677F70023CE7A /* CreateReportVcDelegate.swift */; };
+		BFC659E9229677F70023CE7A /* CreateReportCvDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E8229677F70023CE7A /* CreateReportCvDelegate.swift */; };
 		BFC659EB22967CB10023CE7A /* CreateReportCvDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659EA22967CB10023CE7A /* CreateReportCvDataSource.swift */; };
 		BFD094E8224EBFC500953498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD094E7224EBFC500953498 /* AppDelegate.swift */; };
 		BFD094ED224EBFC600953498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD094EB224EBFC600953498 /* Main.storyboard */; };
@@ -265,7 +265,7 @@
 		BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModel.swift; sourceTree = "<group>"; };
 		BFC659E622965B290023CE7A /* ReportTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModel.swift; sourceTree = "<group>"; };
-		BFC659E8229677F70023CE7A /* CreateReportVcDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportVcDelegate.swift; sourceTree = "<group>"; };
+		BFC659E8229677F70023CE7A /* CreateReportCvDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportCvDelegate.swift; sourceTree = "<group>"; };
 		BFC659EA22967CB10023CE7A /* CreateReportCvDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportCvDataSource.swift; sourceTree = "<group>"; };
 		BFD094E4224EBFC500953498 /* InfectionControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfectionControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD094E7224EBFC500953498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 				BF55668C22546169004A13C8 /* CreateReportCollectionView.swift */,
 				BF1A338E22582161009F48AA /* MakeNewReportCell.swift */,
 				BF1A339022585982009F48AA /* ReportSectionReusableView.swift */,
-				BFC659E8229677F70023CE7A /* CreateReportVcDelegate.swift */,
+				BFC659E8229677F70023CE7A /* CreateReportCvDelegate.swift */,
 				BFC659EA22967CB10023CE7A /* CreateReportCvDataSource.swift */,
 			);
 			path = CreateReportCollectionView;
@@ -969,7 +969,7 @@
 				BFA3D09D287297AA00C6112E /* CommonRowSubtitled.swift in Sources */,
 				BFD84F4829B3B83B0060196D /* ReportDataSource.swift in Sources */,
 				BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */,
-				BFC659E9229677F70023CE7A /* CreateReportVcDelegate.swift in Sources */,
+				BFC659E9229677F70023CE7A /* CreateReportCvDelegate.swift in Sources */,
 				BF8E725F2852FBF2008A8DEF /* EmployeePerformanceIcon.swift in Sources */,
 				BF55669A2254725F004A13C8 /* Report.swift in Sources */,
 				BF8E72642855D6EA008A8DEF /* TabBarConfig.swift in Sources */,
