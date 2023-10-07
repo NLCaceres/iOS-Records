@@ -76,7 +76,7 @@ extension ReportDTO: Codable {
     }
 }
 
-extension ReportDTO: ToBase {
+extension ReportDTO: BaseTypeConvertible {
     func toBase() -> Report? {
         guard let employee = self.employee?.toBase(), let healthPractice = self.healthPractice?.toBase(),
                 let location = self.location?.toBase() else { return nil }

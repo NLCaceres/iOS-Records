@@ -9,48 +9,47 @@ import XCTest
 
 final class DataSourceGenericsTests: XCTestCase {
     func testGetBase() async throws {
-        let toBaseDecodableType = ProfessionDTO.self
+        let baseTypeConvertibleConformingType = ProfessionDTO.self
         
-        // SUCCESSFUL RESULT BUT BAD DATA
-        let nilDataResult = await getBase(for: toBaseDecodableType) { return .success(nil) }
-        let nilSuccessResult = try? nilDataResult.get() // Access the success return  BUT it's nil due to invalid data
+        // WHEN result is successful but the data is bad or nil
+        let nilDataResult = await getBase(for: baseTypeConvertibleConformingType) { return .success(nil) }
+        let nilSuccessResult = try? nilDataResult.get() // Access the success's return BUT due to invalid data,
         let nilProfession: Profession? = nil
-        XCTAssertEqual(nilSuccessResult, nilProfession) // If result is successful BUT data nil THEN receive nil
+        XCTAssertEqual(nilSuccessResult, nilProfession) // THEN receive nil Profession
         
-        // SUCCESSFUL RESULT WITH VALID DATA
+        // WHEN result is successful with valid data
         let professionDTO = ProfessionDTO(from: Profession(observedOccupation: "Foobar", serviceDiscipline: "Barfoo"))
         let professionData = professionDTO.toData()
-        let validDataResult = await getBase(for: toBaseDecodableType) { return .success(professionData) }
-        let successResult = try? validDataResult.get() // Access the success return and receive its valid Profession value!
-        let profession = Profession(observedOccupation: "Foobar", serviceDiscipline: "Barfoo")
-        XCTAssertEqual(successResult, profession) // If result is successful BUT nil THEN receive a result with an empty array
+        let validDataResult = await getBase(for: baseTypeConvertibleConformingType) { return .success(professionData) }
+        let successResult = try? validDataResult.get() // Access the success's return
+        let expectedProfession = Profession(observedOccupation: "Foobar", serviceDiscipline: "Barfoo")
+        XCTAssertEqual(successResult, expectedProfession) // THEN receive a result with valid matching Profession value
         
-        // FAILURE RESULT FROM THROWN ERROR
-        let errorResult = await getBase(for: toBaseDecodableType) { return .failure(NSError()) }
-        let failureResult = try? errorResult.get() // Should throw, resulting in another nil return
-        XCTAssertEqual(failureResult, nil) // If result is successful BUT nil THEN receive a result with an empty array
+        // WHEN result is a failure from a thrown error
+        let errorResult = await getBase(for: baseTypeConvertibleConformingType) { return .failure(NSError()) }
+        let failureResult = try? errorResult.get()
+        XCTAssertEqual(failureResult, nil) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
     }
     func testGetBaseArray() async throws {
-        let toBaseDecodableType = EmployeeDTO.self
+        let baseTypeConvertibleConformingType = EmployeeDTO.self
         
-        // SUCCESSFUL RESULT BUT BAD DATA
-        let nilDataResult = await getBase(for: toBaseDecodableType) { return .success(nil) }
-        let nilSuccessResult = try? nilDataResult.get() // Access the success return  BUT it's nil due to invalid data
-        let nilEmployee: Employee? = nil
-        XCTAssertEqual(nilSuccessResult, nilEmployee) // If result is successful BUT data nil THEN receive nil
+        // WHEN result is successful BUT data is bad or nil
+        let nilDataResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .success(nil) }
+        let nilSuccessResult = try? nilDataResult.get() // Access the success's return BUT due to invalid data,
+        XCTAssertEqual(nilSuccessResult, []) // THEN receive an empty array
         
-        // SUCCESSFUL RESULT WITH VALID DATA of ARRAY
-        let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")), EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
-        let jsonEncoder = defaultEncoder()
-        let employeeDtoArrayData = try? jsonEncoder.encode(employeeDtoArray)
-        let validDataResult = await getBaseArray(for: toBaseDecodableType) { return .success(employeeDtoArrayData) }
+        // WHEN result is successful with valid data
+        let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")),
+                                EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
+        let employeeDtoArrayData = employeeDtoArray.toData()
+        let validDataResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .success(employeeDtoArrayData) }
         let successResult = try? validDataResult.get()
-        let employee = [Employee(firstName: "John", surname: "Smith"), Employee(firstName: "Melody", surname: "Rios")]
-        XCTAssertEqual(successResult, employee) // If result is successful BUT nil THEN receive a result with an empty array
+        let expectedEmployeeList = [Employee(firstName: "John", surname: "Smith"), Employee(firstName: "Melody", surname: "Rios")]
+        XCTAssertEqual(successResult, expectedEmployeeList) // THEN receive a result with a valid Array of Employees with matching names
         
-        // FAILURE RESULT FROM THROWN ERROR
-        let errorResult = await getBase(for: toBaseDecodableType) { return .failure(NSError()) }
-        let failureResult = try? errorResult.get() // Should throw, resulting in another nil return
-        XCTAssertEqual(failureResult, nil) // If result is successful BUT nil THEN receive a result with an empty array
+        // WHEN result is failure from a thrown error
+        let errorResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .failure(NSError()) }
+        let failureResult = try? errorResult.get()
+        XCTAssertEqual(failureResult, nil) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
     }
 }

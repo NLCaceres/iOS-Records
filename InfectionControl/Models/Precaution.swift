@@ -37,7 +37,7 @@ extension PrecautionDTO: Codable {
     }
 }
 
-extension PrecautionDTO: ToBase {
+extension PrecautionDTO: BaseTypeConvertible {
     func toBase() -> Precaution {
         let practices = self.practices?.map { $0.toBase() }
         return Precaution(id: self.id, name: self.name, practices: practices)

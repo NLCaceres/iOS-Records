@@ -46,7 +46,7 @@ extension HealthPracticeDTO: Codable {
     }
 }
 
-extension HealthPracticeDTO: ToBase {
+extension HealthPracticeDTO: BaseTypeConvertible {
     func toBase() -> HealthPractice { // OK for precaution to be nil since API often returns stringID or [ID]
         let precautionType = self.precautionType?.toBase()
         return HealthPractice(id: self.id, name: self.name, precautionType: precautionType)

@@ -37,7 +37,7 @@ extension LocationDTO: Codable {
     }
 }
 
-extension LocationDTO: ToBase {
+extension LocationDTO: BaseTypeConvertible {
     func toBase() -> Location {
         Location(id: self.id, facilityName: self.facilityName, unitNum: self.unitNum, roomNum: self.roomNum)
     }

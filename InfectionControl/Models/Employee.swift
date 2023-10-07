@@ -51,7 +51,7 @@ extension EmployeeDTO: Codable {
     }
 }
 
-extension EmployeeDTO: ToBase {
+extension EmployeeDTO: BaseTypeConvertible {
     func toBase() -> Employee {
         let profession = self.profession?.toBase() // Profession is often a stringID in reportsList so nil is OK
         return Employee(id: self.id, firstName: self.firstName, surname: self.surname, profession: profession)

@@ -37,7 +37,7 @@ extension ProfessionDTO: Codable {
     }
 }
 
-extension ProfessionDTO: ToBase {
+extension ProfessionDTO: BaseTypeConvertible {
     func toBase() -> Profession {
         return Profession(id: self.id, observedOccupation: self.observedOccupation, serviceDiscipline: self.serviceDiscipline)
     }
