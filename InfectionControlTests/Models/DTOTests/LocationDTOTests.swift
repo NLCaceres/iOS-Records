@@ -13,11 +13,13 @@ import XCTest
 class LocationDTOTests: XCTestCase {
 
     func testLocationDecoder() throws {
+        // WHEN location JSON has an ID
         let locationJSON = JsonFactory.LocationJSON(hasID: true)
         let firstID = JsonFactory.expectedLocationID
         let locationData = locationJSON.data(using: .utf8)!
-        let locationDecoded = try! JSONDecoder().decode(LocationDTO.self, from: locationData)
+        let locationDecoded = locationData.toDTO(of: LocationDTO.self)! // Uses defaultDecoder() to convert Data into a DTO
         let location = LocationDTO(id: "locationId\(firstID)", facilityName: "facility\(firstID)", unitNum: "unit\(firstID)", roomNum: "room\(firstID)")
+        // THEN the default decoder will produce a locationDTO with a matching ID
         XCTAssertEqual(locationDecoded.id, location.id)
         XCTAssertEqual(locationDecoded.facilityName, location.facilityName)
         XCTAssertEqual(locationDecoded.unitNum, location.unitNum)
@@ -27,31 +29,31 @@ class LocationDTOTests: XCTestCase {
     func testLocationEncoder() {
         let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
-        
+        // WHEN the default encoder receives a standard Location
         let locationJSON = JsonFactory.LocationJSON(hasID: true)
         let firstID = JsonFactory.expectedLocationID
         let location = LocationDTO(id: "locationId\(firstID)", facilityName: "facility\(firstID)", unitNum: "unit\(firstID)", roomNum: "room\(firstID)")
         
         let locationEncoded = try! encoder.encode(location)
         let locationEncodedStr = String(data: locationEncoded, encoding: .utf8)!
-        
+        // THEN the encoded JSON String will match our expected JSON
         XCTAssertEqual(locationJSON, locationEncodedStr)
     }
     
     func testCreateLocation() {
-        // When locationDTO with no ID makes Location
+        // WHEN locationDTO with no ID
         let locationDTO = LocationDTO(id: nil, facilityName: "facility0", unitNum: "unit0", roomNum: "room0")
         let location = locationDTO.toBase()
-        // Then Matching facilityName, unitNum, and roomNum, nil ID
+        // THEN its toBase() will return  a Location with a matching facilityName, unitNum, and roomNum, AS WELL AS nil ID
         XCTAssertEqual(location.id, nil)
         XCTAssertEqual(location.facilityName, locationDTO.facilityName)
         XCTAssertEqual(location.unitNum, locationDTO.unitNum)
         XCTAssertEqual(location.roomNum, locationDTO.roomNum)
         
-        // When locationDTO with an ID makes Location
+        // WHEN locationDTO with an ID
         let nextLocationDTO = LocationDTO(id: "locationId0", facilityName: "facility0", unitNum: "unit0", roomNum: "room0")
         let nextLocation = nextLocationDTO.toBase()
-        // Then ID is not nil and matching
+        // THEN its toBase() will return a Location with matching ID
         XCTAssertTrue(nextLocation.id != nil)
         XCTAssertEqual(nextLocation.id, nextLocationDTO.id)
     }
