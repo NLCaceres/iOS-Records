@@ -23,8 +23,7 @@ final class PrecautionDataSourceTests: XCTestCase {
     func testGetPrecautionList() async throws {
         let expectedList = [Precaution(name: "Standard"), Precaution(name: "Isolation")]
         let precautionDtoArray = [PrecautionDTO(from: expectedList[0]), PrecautionDTO(from: expectedList[1])]
-        let jsonEncoder = defaultEncoder()
-        let precautionDtoArrayData = try? jsonEncoder.encode(precautionDtoArray)
+        let precautionDtoArrayData = precautionDtoArray.toData() // Uses defaultEncoder() to convert to Data
         mockNetworkManager.replacementData = precautionDtoArrayData // Inject data that the networkManager will fetch
         
         let precautionListResult = await precautionApiDataSource.getPrecautionList() // Calls networkManager.fetch and parses the returned data

@@ -23,8 +23,7 @@ final class LocationDataSourceTests: XCTestCase {
     func testGetLocationList() async throws {
         let expectedList = [Location(facilityName: "USC", unitNum: "2", roomNum: "123"), Location(facilityName: "HSC", unitNum: "4", roomNum: "202")]
         let locationDtoArray = [LocationDTO(from: expectedList[0]), LocationDTO(from: expectedList[1])]
-        let jsonEncoder = defaultEncoder()
-        let locationDtoArrayData = try? jsonEncoder.encode(locationDtoArray)
+        let locationDtoArrayData = locationDtoArray.toData() // Uses defaultEncoder() to convert to Data
         mockNetworkManager.replacementData = locationDtoArrayData // Inject data that the networkManager will fetch
         
         let locationListResult = await locationApiDataSource.getLocationList() // Calls networkManager.fetch and parses the returned data

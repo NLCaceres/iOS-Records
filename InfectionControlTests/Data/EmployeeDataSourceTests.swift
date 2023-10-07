@@ -21,9 +21,9 @@ final class EmployeeDataSourceTests: XCTestCase {
     }
     
     func testGetEmployeeList() async throws {
-        let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")), EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
-        let jsonEncoder = defaultEncoder()
-        let employeeDtoArrayData = try? jsonEncoder.encode(employeeDtoArray)
+        let employeeDtoArray = [EmployeeDTO(from: Employee(firstName: "John", surname: "Smith")),
+                                EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
+        let employeeDtoArrayData = employeeDtoArray.toData() // Uses defaultEncoder() to convert to Data
         mockNetworkManager.replacementData = employeeDtoArrayData // Create data to let the networkManager fetch
         
         let employeeListResult = await employeeApiDataSource.getEmployeeList() // Calls networkManager.fetch and parses the returned data
