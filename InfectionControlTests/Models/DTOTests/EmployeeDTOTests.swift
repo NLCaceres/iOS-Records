@@ -13,32 +13,56 @@ import XCTest
 class EmployeeDTOTests: XCTestCase {
 
     func testEmployeeDecoder() throws {
+        // WHEN the Employee JSON has an ID
+        let employeeJSON = JsonFactory.EmployeeJSON(hasID: true)
+        let firstID = JsonFactory.expectedEmployeeID
+        let employeeData = employeeJSON.data(using: .utf8)!
+        let employeeDTODecoded = employeeData.toDTO(of: EmployeeDTO.self)! // Uses defaultDecoder() to convert Data into a DTO
+        let employee = EmployeeDTO(id: "employeeId\(firstID)", firstName: "name\(firstID)", surname: "surname\(firstID)")
+        // THEN the default decoder will produce an EmployeeDTO with a matching ID
+        XCTAssertEqual(employeeDTODecoded.id, employee.id)
+        XCTAssertEqual(employeeDTODecoded.firstName, employee.firstName)
+        XCTAssertEqual(employeeDTODecoded.surname, employee.surname)
         
+        // WHEN the EmployeeJSON has a Profession
+        let employeeWithProfessionJSON = JsonFactory.EmployeeJSON(hasID: true, hasProfession: true)
+        let secondID = JsonFactory.expectedEmployeeID
+        let professionID = JsonFactory.expectedProfessionID
+        let employeeWithProfessionData = employeeWithProfessionJSON.data(using: .utf8)!
+        let employeeWithProfessionDTODecoded = employeeWithProfessionData.toDTO(of: EmployeeDTO.self)!
+        let expectedProfession = ProfessionDTO(observedOccupation: "occupation\(professionID)", serviceDiscipline: "discipline\(professionID)")
+        let employeeWithProfession = EmployeeDTO(id: "employeeId\(secondID)", firstName: "name\(secondID)",
+                                                 surname: "surname\(secondID)", profession: expectedProfession)
+        // THEN the default decoder will produce an EmployeeDTO with a Profession with its own matching properties
+        XCTAssertEqual(employeeWithProfessionDTODecoded.id, employeeWithProfession.id)
+        XCTAssertEqual(employeeWithProfessionDTODecoded.firstName, employeeWithProfession.firstName)
+        XCTAssertEqual(employeeWithProfessionDTODecoded.surname, employeeWithProfession.surname)
+        XCTAssertEqual(employeeWithProfessionDTODecoded.profession!.observedOccupation, employeeWithProfession.profession!.observedOccupation)
     }
     
     func testEmployeeEncoder() throws {
         let encoder = defaultEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
-        // When employee has no id or profession for encoding
+        // WHEN employee has no ID or Profession for encoding
         let expectedEmployeeJSON = JsonFactory.EmployeeJSON(hasID: false)
         let firstID = JsonFactory.expectedEmployeeID
         let employee = EmployeeDTO(firstName: "name\(firstID)", surname: "surname\(firstID)")
         let employeeEncoded = try! encoder.encode(employee)
         let employeeEncodedStr = String(data: employeeEncoded, encoding: .utf8)!
-        // Then matches expectedJSON
+        // THEN matches expected JSON
         XCTAssertEqual(expectedEmployeeJSON, employeeEncodedStr)
         
-        // When Employee has ID for encoding
+        // WHEN Employee has ID for encoding
         let employeeWithIdJSON = JsonFactory.EmployeeJSON(hasID: true)
         let nextID = JsonFactory.expectedEmployeeID
         let employeeWithId = EmployeeDTO(id: "employeeId\(nextID)", firstName: "name\(nextID)", surname: "surname\(nextID)")
         let employeeWithIdEncoded = try! encoder.encode(employeeWithId)
         let employeeWithIdEncodedStr = String(data: employeeWithIdEncoded, encoding: .utf8)!
-        // Then matches expectedJSON
+        // THEN matches expected JSON with a matching ID
         XCTAssertEqual(employeeWithIdJSON, employeeWithIdEncodedStr)
         
-        // When Employee has Profession for encoding
+        // WHEN Employee has Profession for encoding
         let expectedEmployeeWithProfessionJSON = JsonFactory.EmployeeJSON(hasID: true, hasProfession: true)
         let finalID = JsonFactory.expectedEmployeeID
         let profID = JsonFactory.expectedProfessionID
@@ -47,33 +71,36 @@ class EmployeeDTOTests: XCTestCase {
                                                  surname: "surname\(finalID)", profession: newProfession)
         let employeeWithProfessionEncoded = try! encoder.encode(employeeWithProfession)
         let employeeWithProfessionEncodedStr = String(data: employeeWithProfessionEncoded, encoding: .utf8)!
-        // Then matches expectedJSON
+        // THEN matches expected JSON with a matching Profession object
         XCTAssertEqual(expectedEmployeeWithProfessionJSON, employeeWithProfessionEncodedStr)
     }
     
     func testCreateEmployee() throws {
-        // When EmployeeDTO used to Make Employee
-        let employeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: nil)
+        // WHEN EmployeeDTO w/out an ID
+        let employeeDTO = EmployeeDTO(firstName: "name0", surname: "surname0", profession: nil)
         let employee = employeeDTO.toBase()
-        //Then Matching firstName and surname
+        // THEN its toBase() will return an Employee matching firstName and surname
+        XCTAssertEqual(employee.id, employeeDTO.id)
+        XCTAssertNil(employee.id)
         XCTAssertEqual(employee.firstName, employeeDTO.firstName)
         XCTAssertEqual(employee.surname, employeeDTO.surname)
         
-        // When EmployeeDTO with ID used to make Employee
+        // WHEN EmployeeDTO with ID
         let nextEmployeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: nil)
         let nextEmployee = nextEmployeeDTO.toBase()
-        // Then Matching IDs
+        // THEN its toBase() will return an Employee matching IDs
         XCTAssertEqual(nextEmployee.id, nextEmployeeDTO.id)
+        XCTAssertNotNil(nextEmployee.id)
         
-        // When EmployeeDTO with Profession used to make Employee
+        // WHEN EmployeeDTO with a ProfessionDTO
         let profession = ProfessionDTO(id: "profesionId0", observedOccupation: "occupation0", serviceDiscipline: "discipline0")
         let finalEmployeeDTO = EmployeeDTO(id: "employeeId0", firstName: "name0", surname: "surname0", profession: profession)
         let finalEmployee = finalEmployeeDTO.toBase()
-        // Then Matching IDs, occupation, and discipline from ProfessionDTO for Profession
+        // THEN its toBase() will return an Employee with a matching Profession with its own matching ID, occupation, and discipline
         XCTAssertEqual(finalEmployee.id, finalEmployeeDTO.id)
-        XCTAssertEqual(finalEmployee.profession?.id, finalEmployeeDTO.profession?.id)
-        XCTAssertEqual(finalEmployee.profession?.observedOccupation, finalEmployeeDTO.profession?.observedOccupation)
-        XCTAssertEqual(finalEmployee.profession?.serviceDiscipline, finalEmployeeDTO.profession?.serviceDiscipline)
+        XCTAssertEqual(finalEmployee.profession!.id, finalEmployeeDTO.profession!.id)
+        XCTAssertEqual(finalEmployee.profession!.observedOccupation, finalEmployeeDTO.profession!.observedOccupation)
+        XCTAssertEqual(finalEmployee.profession!.serviceDiscipline, finalEmployeeDTO.profession!.serviceDiscipline)
     }
 
 }

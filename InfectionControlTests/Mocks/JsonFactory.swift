@@ -28,8 +28,8 @@ struct JsonFactory {
     static func EmployeeJSON(hasID: Bool = false, hasProfession: Bool = false, indentLevel: Int = 0) -> String {
         let firstNameLine = jsonLine("firstName", to: "name\(createdEmployees)", indentLevel: indentLevel)
         let idLine = hasID ? jsonLine("id", to: "employeeId\(createdEmployees)", indentLevel: indentLevel) : ""
-        let professionLine = hasProfession ? jsonLine("profession", to: ProfessionJSON(indentLevel: 1)) : ""
-        let surnameLine = jsonLine("surname", to: "surname\(createdEmployees)", finalLine: true)
+        let professionLine = hasProfession ? jsonLine("profession", to: ProfessionJSON(indentLevel: indentLevel + 1)) : ""
+        let surnameLine = jsonLine("surname", to: "surname\(createdEmployees)", finalLine: true, indentLevel: indentLevel)
         
         let employeeJSON = jsonStart() + firstNameLine + idLine + professionLine + surnameLine
         
