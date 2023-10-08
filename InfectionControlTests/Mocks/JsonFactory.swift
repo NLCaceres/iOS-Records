@@ -10,16 +10,23 @@ struct JsonFactory {
     // TODO: Maybe consider simple json file reading
     // MARK: Utility String Builders
     static func jsonStart() -> String { return "{\n" }
-    static func jsonLine(_ key: String, to value: String, finalLine: Bool = false, indentLevel: Int = 0) -> String {
-        let objOrArrCheck = value.hasPrefix("{") || value.hasPrefix("[")
-        let valStr = objOrArrCheck ? "\(value)" : "\"\(value)\""
+    static func jsonLine(_ key: String, to value: String, isArray: Bool = false, finalLine: Bool = false, indentLevel: Int = 0) -> String {
+        let isObj = value.hasPrefix("{")
+        
+        let valStr = isArray ? "[\n  \(arrayValue(value))" :
+            isObj ? "\(value)" : "\"\(value)\""
         let keyValStr = "\"\(key)\" : " + valStr
         
         let startIndentStr = String(repeating: "  ", count: indentLevel + 1)
-        let newLineStr = objOrArrCheck && finalLine ? "\(startIndentStr)}\n" :
-            objOrArrCheck ? "\(startIndentStr)},\n" : finalLine ? "\n" : ",\n"
+        let newLineStr = isArray && finalLine ? "\(startIndentStr)  }\n]" :
+            isArray ? "\(startIndentStr)  }\n  ],\n" :
+            isObj && finalLine ? "\(startIndentStr)}\n" :
+            isObj ? "\(startIndentStr)},\n" : finalLine ? "\n" : ",\n"
         let thisJsonLine = startIndentStr + keyValStr + newLineStr
         return finalLine && indentLevel == 0 ? thisJsonLine + "}" : thisJsonLine
+    }
+    static func arrayValue(_ value: String) -> String { // Adds 2 spaces to each line
+        return value.split(separator: "\n").map { "  " + $0 + "\n" }.joined()
     }
     
     // MARK: Employees
@@ -55,10 +62,10 @@ struct JsonFactory {
     static private var createdHealthPractices = 0
     static var expectedHealthPracticeID: Int { return createdHealthPractices > 0 ? createdHealthPractices - 1 : 0 }
     static func HealthPracticeJSON(hasID: Bool = false, hasPrecaution: Bool = false, indentLevel: Int = 0) -> String {
-        let nameLine = jsonLine("name", to: "name\(createdHealthPractices)", finalLine: !hasPrecaution, indentLevel: indentLevel)
         let idLine = jsonLine("id", to: "healthPracticeId\(createdHealthPractices)", indentLevel: indentLevel)
+        let nameLine = jsonLine("name", to: "name\(createdHealthPractices)", finalLine: !hasPrecaution, indentLevel: indentLevel)
         let keyStartStr = hasID ? idLine + nameLine : nameLine
-        let precautionLine = hasPrecaution ? jsonLine("precaution", to: PrecautionJSON(indentLevel: 1), finalLine: true) : ""
+        let precautionLine = hasPrecaution ? jsonLine("precaution", to: PrecautionJSON(indentLevel: indentLevel + 1), finalLine: true) : ""
         
         let healthPracticeJSON = jsonStart() + keyStartStr + precautionLine
         
@@ -71,8 +78,9 @@ struct JsonFactory {
     static func PrecautionJSON(hasID: Bool = false, numPractices: Int = 0, indentLevel: Int = 0) -> String {
         let nameLine = jsonLine("name", to: "name\(createdPrecautions)", finalLine: true, indentLevel: indentLevel) // ALWAYS is last but ALWAYS there
         let idLine = jsonLine("id", to: "precautionId\(createdPrecautions)", indentLevel: indentLevel)
-        let healthPractices = numPractices > 0 ? jsonLine("healthPractices", to: HealthPracticeJSON()) : ""
-        let keySet = hasID ? idLine + healthPractices + nameLine :
+        let healthPractices = numPractices > 0 && indentLevel < 2 ? // Avoid unneccesary, but likely, brief JSON recursion/nesting/deep tree
+            jsonLine("healthPractices", to: HealthPracticeJSON(indentLevel: indentLevel + 1), isArray: true) : ""
+        let keySet = hasID ? healthPractices + idLine + nameLine :
             (numPractices > 0) ? healthPractices + nameLine : nameLine
         
         let precautionJSON = jsonStart() + keySet
