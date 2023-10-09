@@ -92,11 +92,11 @@ struct JsonFactory {
     // MARK: Locations
     static private var createdLocations = 0
     static var expectedLocationID: Int { return createdLocations > 0 ? createdLocations - 1 : 0 }
-    static func LocationJSON(hasID: Bool = false) -> String {
-        let facilityNameLine = jsonLine("facilityName", to: "facility\(createdLocations)")
-        let idLine = hasID ? jsonLine("id", to: "locationId\(createdLocations)") : ""
-        let roomLine = jsonLine("roomNum", to: "room\(createdLocations)")
-        let unitLine = jsonLine("unitNum", to: "unit\(createdLocations)", finalLine: true)
+    static func LocationJSON(hasID: Bool = false, indentLevel: Int = 0) -> String {
+        let facilityNameLine = jsonLine("facilityName", to: "facility\(createdLocations)", indentLevel: indentLevel)
+        let idLine = hasID ? jsonLine("id", to: "locationId\(createdLocations)", indentLevel: indentLevel) : ""
+        let roomLine = jsonLine("roomNum", to: "room\(createdLocations)", indentLevel: indentLevel)
+        let unitLine = jsonLine("unitNum", to: "unit\(createdLocations)", finalLine: true, indentLevel: indentLevel)
         
         let locationJSON = jsonStart() + facilityNameLine + idLine + roomLine + unitLine
         
@@ -111,8 +111,14 @@ struct JsonFactory {
     static private var createdReports = 0
     static var expectedReportID: Int { return createdReports > 0 ? createdReports - 1 : 0 }
     static func ReportJSON(hasID: Bool = false) -> String {
-        let reportJSON = ""
-        // TODO: If report JSON needed, likely a similar solution to Precaution handling HealthPracticeJSON()
+        let dateLine = jsonLine("date", to: "2019-05-19T06:36:05.000Z")
+        let employeeLine = jsonLine("employee", to: EmployeeJSON(indentLevel: 1))
+        let healthPracticeLine = jsonLine("healthPractice", to: HealthPracticeJSON(indentLevel: 1))
+        let idLine = hasID ? jsonLine("id", to: "reportId\(createdReports)") : ""
+        let locationLine = jsonLine("location", to: LocationJSON(indentLevel: 1), finalLine: true)
+
+        let reportJSON = jsonStart() + dateLine + employeeLine + healthPracticeLine + idLine + locationLine
+        
         createdReports += 1
         return reportJSON
     }

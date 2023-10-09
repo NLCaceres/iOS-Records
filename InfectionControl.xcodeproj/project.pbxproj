@@ -10,6 +10,7 @@
 		1FDAC2045C226F5D3F5FBCCA /* libPods-InfectionControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FB8FD53479FED1242289DB /* libPods-InfectionControl.a */; };
 		7A261D2F401AA94939510842 /* libPods-InfectionControlUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEF79149DBD65BEB1A76D89 /* libPods-InfectionControlUITests.a */; };
 		BF0711EF2AB612C20054F08A /* DataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0711EE2AB612C20054F08A /* DataFactory.swift */; };
+		BF081E512AD1BD7D00F9DE83 /* ReportDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF081E502AD1BD7D00F9DE83 /* ReportDTOTests.swift */; };
 		BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */; };
 		BF0ADCD5282CC90D00A58BCB /* ReportTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */; };
 		BF145A612ABC1C5F001F00D9 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145A602ABC1C5F001F00D9 /* MockError.swift */; };
@@ -169,6 +170,7 @@
 		78E1268A6EEC2F8D1A758D2A /* Pods-InfectionControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControl.release.xcconfig"; path = "Target Support Files/Pods-InfectionControl/Pods-InfectionControl.release.xcconfig"; sourceTree = "<group>"; };
 		A377BC2801955B2C2DA5FD0A /* Pods-InfectionControlUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfectionControlUITests.debug.xcconfig"; path = "Target Support Files/Pods-InfectionControlUITests/Pods-InfectionControlUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF0711EE2AB612C20054F08A /* DataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFactory.swift; sourceTree = "<group>"; };
+		BF081E502AD1BD7D00F9DE83 /* ReportDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTOTests.swift; sourceTree = "<group>"; };
 		BF0ADCD2282CC77000A58BCB /* ReportTableCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModelTests.swift; sourceTree = "<group>"; };
 		BF0ADCD4282CC90D00A58BCB /* ReportTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModelTests.swift; sourceTree = "<group>"; };
 		BF145A602ABC1C5F001F00D9 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
@@ -599,6 +601,7 @@
 				BF3849F3281B8CBC00670689 /* LocationDTOTests.swift */,
 				BF3849FB281BCFAD00670689 /* PrecautionDTOTests.swift */,
 				BF85CFBE281C889B0022F18E /* ProfessionDTOTests.swift */,
+				BF081E502AD1BD7D00F9DE83 /* ReportDTOTests.swift */,
 			);
 			path = DTOTests;
 			sourceTree = "<group>";
@@ -1069,6 +1072,7 @@
 				BF82707B29B0328D004542C8 /* MockEmployeeRepository.swift in Sources */,
 				BF291F132ABE61A600AAB4C3 /* MockReportRepository.swift in Sources */,
 				BFFE07DB2AAE5B5300503020 /* LocationRepositoryTests.swift in Sources */,
+				BF081E512AD1BD7D00F9DE83 /* ReportDTOTests.swift in Sources */,
 				BF291F152ABE669D00AAB4C3 /* MockHealthPracticeRepository.swift in Sources */,
 				BF3849F4281B8CBC00670689 /* LocationDTOTests.swift in Sources */,
 				BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */,

@@ -23,8 +23,10 @@ func defaultDecoder() -> JSONDecoder {
 func defaultEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     let dateFormatter = DateFormatter()
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // WHEN using UTC, in particular due to fixed formats like ISO-8601 or RFC 3339,
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) // THEN this locale and timezone are recommended
+    // Need to surround Z with single-quotes to escape it to prevent the user's timezone from being appended instead, i.e. -0700 for PST
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     encoder.dateEncodingStrategy = .formatted(dateFormatter)
     return encoder
 }
