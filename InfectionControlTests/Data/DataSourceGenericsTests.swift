@@ -21,14 +21,14 @@ final class DataSourceGenericsTests: XCTestCase {
         let professionDTO = ProfessionDTO(from: Profession(observedOccupation: "Foobar", serviceDiscipline: "Barfoo"))
         let professionData = professionDTO.toData()
         let validDataResult = await getBase(for: baseTypeConvertibleConformingType) { return .success(professionData) }
-        let successResult = try? validDataResult.get() // Access the success's return
+        let successResult = try! validDataResult.get() // Access the success's return
         let expectedProfession = Profession(observedOccupation: "Foobar", serviceDiscipline: "Barfoo")
         XCTAssertEqual(successResult, expectedProfession) // THEN receive a result with valid matching Profession value
         
         // WHEN result is a failure from a thrown error
-        let errorResult = await getBase(for: baseTypeConvertibleConformingType) { return .failure(NSError()) }
+        let errorResult = await getBase(for: baseTypeConvertibleConformingType) { return .failure(MockError.description("getBase() failed")) }
         let failureResult = try? errorResult.get()
-        XCTAssertEqual(failureResult, nil) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
+        XCTAssertNil(failureResult) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
     }
     func testGetBaseArray() async throws {
         let baseTypeConvertibleConformingType = EmployeeDTO.self
@@ -43,13 +43,13 @@ final class DataSourceGenericsTests: XCTestCase {
                                 EmployeeDTO(from: Employee(firstName: "Melody", surname: "Rios"))]
         let employeeDtoArrayData = employeeDtoArray.toData()
         let validDataResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .success(employeeDtoArrayData) }
-        let successResult = try? validDataResult.get()
+        let successResult = try! validDataResult.get()
         let expectedEmployeeList = [Employee(firstName: "John", surname: "Smith"), Employee(firstName: "Melody", surname: "Rios")]
         XCTAssertEqual(successResult, expectedEmployeeList) // THEN receive a result with a valid Array of Employees with matching names
         
         // WHEN result is failure from a thrown error
-        let errorResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .failure(NSError()) }
+        let errorResult = await getBaseArray(for: baseTypeConvertibleConformingType) { return .failure(MockError.description("getBaseArray() failed")) }
         let failureResult = try? errorResult.get()
-        XCTAssertEqual(failureResult, nil) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
+        XCTAssertNil(failureResult) // THEN the error thrown by get() finding .failure() results in a nil due to "try?"
     }
 }

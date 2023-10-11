@@ -9,7 +9,7 @@ import XCTest
 
 final class RepositoryGenericsTests: XCTestCase {
     func testOnSuccess() async throws {
-        let someEntity = try? await getEntity { return .success(1) }
+        let someEntity = try! await getEntity { return .success(1) }
         XCTAssertEqual(someEntity, 1) // Should successfully get the expected data from the success case
     }
     func testOnFailure() async throws {

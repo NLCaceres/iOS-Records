@@ -44,8 +44,8 @@ class LocationDTOTests: XCTestCase {
         // WHEN locationDTO with no ID
         let locationDTO = LocationDTO(id: nil, facilityName: "facility0", unitNum: "unit0", roomNum: "room0")
         let location = locationDTO.toBase()
-        // THEN its toBase() will return  a Location with a matching facilityName, unitNum, and roomNum, AS WELL AS nil ID
-        XCTAssertEqual(location.id, nil)
+        // THEN its toBase() will return a Location with a matching facilityName, unitNum, and roomNum, AS WELL AS nil ID
+        XCTAssertNil(location.id)
         XCTAssertEqual(location.facilityName, locationDTO.facilityName)
         XCTAssertEqual(location.unitNum, locationDTO.unitNum)
         XCTAssertEqual(location.roomNum, locationDTO.roomNum)
@@ -54,7 +54,7 @@ class LocationDTOTests: XCTestCase {
         let nextLocationDTO = LocationDTO(id: "locationId0", facilityName: "facility0", unitNum: "unit0", roomNum: "room0")
         let nextLocation = nextLocationDTO.toBase()
         // THEN its toBase() will return a Location with matching ID
-        XCTAssertTrue(nextLocation.id != nil)
+        XCTAssertNotNil(nextLocation.id)
         XCTAssertEqual(nextLocation.id, nextLocationDTO.id)
     }
 }

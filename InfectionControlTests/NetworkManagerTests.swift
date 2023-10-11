@@ -155,7 +155,7 @@ class NetworkManagerTests: XCTestCase {
         // WHEN 200 status code in a normal HTTPResponse
         let validHttpResponse = HTTPURLResponse(url: fooURL, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])
         networkManager.onHttpResponse(data: nil, response: validHttpResponse, error: nil) { data, err in
-            XCTAssertTrue(err == nil) // THEN no err passed in!
+            XCTAssertNil(err) // THEN no err passed in!
         }
         
         var originalMockDTO = MockCodable(testDouble: 123)
@@ -163,7 +163,7 @@ class NetworkManagerTests: XCTestCase {
         // WHEN 200 status in a normal HTTPResponse with a completion Handler
         networkManager.onHttpResponse(data: mockDataReceived, response: validHttpResponse, error: nil) { dataReceived, err in
             // THEN this dataHandler closure is called with our mockData AND without an error
-            XCTAssertTrue(err == nil)
+            XCTAssertNil(err)
             guard let responseData = dataReceived else { return }
             
             // AND the data matches expected values

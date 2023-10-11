@@ -23,7 +23,7 @@ class HealthPracticeDTOTests: XCTestCase {
         let healthPracticeDecoded = healthPracticeData.toDTO(of: HealthPracticeDTO.self)! // Uses defaultDecoder() to convert Data into a DTO
         let healthPractice = HealthPracticeDTO(name: "name\(firstID)")
         // THEN name matches BUT ID is nil
-        XCTAssertEqual(healthPracticeDecoded.id, nil)
+        XCTAssertNil(healthPracticeDecoded.id)
         XCTAssertEqual(healthPracticeDecoded.id, healthPractice.id)
         XCTAssertEqual(healthPracticeDecoded.name, healthPractice.name)
         
@@ -91,7 +91,7 @@ class HealthPracticeDTOTests: XCTestCase {
         let healthPracticeDTO = HealthPracticeDTO(id: nil, name: "name0", precautionType: nil)
         let healthPractice = healthPracticeDTO.toBase()
         // THEN its toBase() will return a HealthPractice with matching names only
-        XCTAssertEqual(healthPractice.id, nil)
+        XCTAssertNil(healthPractice.id)
         XCTAssertEqual(healthPractice.name, healthPracticeDTO.name)
         
         // WHEN HealthPracticeDTO with ID

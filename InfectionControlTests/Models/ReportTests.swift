@@ -104,14 +104,13 @@ class ReportTests: XCTestCase {
                                               healthPractice: HealthPractice(name: "barfoo"), location: expectedLocation, date: expectedDate)
         XCTAssertFalse(report == reportDiffHealthPractice) // THEN == returns false
         let reportHealthPracticeMissingPrecaution = Report(id: expectedID, employee: expectedEmployee,
-                                                           healthPractice: HealthPractice(name: "Hand Hygiene"), location: expectedLocation,
-                                                           date: expectedDate)
+                                                           healthPractice: HealthPractice(name: "Hand Hygiene"),
+                                                           location: expectedLocation, date: expectedDate)
         XCTAssertFalse(report == reportHealthPracticeMissingPrecaution) // THEN == returns false BECAUSE HealthPractice.PrecautionType DOESN'T MATCH
         
         // WHEN reports differ in Location ("USC" vs "badFacility")
         let reportDiffLocation = Report(id: expectedID, employee: expectedEmployee, healthPractice: expectedHealthPractice,
-                                        location: Location(facilityName: "badFacility", unitNum: "1", roomNum: "2"),
-                                        date: expectedDate)
+                                        location: Location(facilityName: "badFacility", unitNum: "1", roomNum: "2"), date: expectedDate)
         XCTAssertFalse(report == reportDiffLocation) // THEN == returns false
         
         // WHEN reports differ in Date

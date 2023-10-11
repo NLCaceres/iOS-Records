@@ -21,9 +21,11 @@ final class ReportDataSourceTests: XCTestCase {
     }
     
     func testGetReportList() async throws {
-        let report1 = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
+        let report1 = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"),
+                             healthPractice: HealthPractice(name: "Hand Hygiene"),
                              location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
-        let report2 = Report(id: "Barfoo", employee: Employee(firstName: "Melody", surname: "Rios"), healthPractice: HealthPractice(name: "PPE"),
+        let report2 = Report(id: "Barfoo", employee: Employee(firstName: "Melody", surname: "Rios"),
+                             healthPractice: HealthPractice(name: "PPE"),
                              location: Location(facilityName: "HSC", unitNum: "3", roomNum: "213"), date: Date())
         let reportDtoArray = [ReportDTO(from: report1), ReportDTO(from: report2)]
         mockNetworkManager.replacementData = reportDtoArray.toData() // Create data to let the networkManager fetch
@@ -32,13 +34,14 @@ final class ReportDataSourceTests: XCTestCase {
         let expectedList = [report1, report2]
         XCTAssertEqual(try! reportListResult.get(), expectedList) // Using the result.success() we can get the decoded array
         
-        mockNetworkManager.error = NSError()
+        mockNetworkManager.error = MockError.description("Error thrown while fetching Report List")
         let thrownResult = await reportApiDataSource.getReportList()
         let failedFetch = try? thrownResult.get() // Since it is a failure case, calling get() with "try?" returns nil
         XCTAssertNil(failedFetch)
     }
     func testGetReport() async throws {
-        let mockReport = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
+        let mockReport = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"),
+                                healthPractice: HealthPractice(name: "Hand Hygiene"),
                                 location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
         let reportDTO = ReportDTO(from: mockReport)
         let reportData = reportDTO.toData() // Create data to let the networkManager fetch
@@ -48,13 +51,14 @@ final class ReportDataSourceTests: XCTestCase {
         let actualReport = try! reportResult.get()!
         XCTAssertEqual(actualReport, mockReport) // Using the result.success() we can get the decoded report
         
-        mockNetworkManager.error = NSError()
+        mockNetworkManager.error = MockError.description("Error thrown while fetching a Report")
         let thrownResult = await reportApiDataSource.getReport(id: "foobar")
         let failedFetch = try? thrownResult.get() // Since it is a failure case, calling get() with "try?" returns nil
         XCTAssertNil(failedFetch)
     }
     func testCreateNewReport() async throws {
-        let mockReport = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"), healthPractice: HealthPractice(name: "Hand Hygiene"),
+        let mockReport = Report(id: "Foobar", employee: Employee(firstName: "John", surname: "Smith"),
+                                healthPractice: HealthPractice(name: "Hand Hygiene"),
                                 location: Location(facilityName: "USC", unitNum: "2", roomNum: "123"), date: Date())
         // MockNetworkManager.sendPostRequest has a fallback if replacementData isn't filled, since post requests commonly return the data sent anyway!
         let reportResult = await reportApiDataSource.createNewReport(mockReport)
@@ -69,7 +73,7 @@ final class ReportDataSourceTests: XCTestCase {
         XCTAssertEqual(anotherReportCreated, mockReport) // EXPECT Post Requests to get the same report back
         XCTAssertEqual(reportCreated, anotherReportCreated)
         
-        mockNetworkManager.error = NSError()
+        mockNetworkManager.error = MockError.description("Error thrown while creating a Report")
         let thrownResult = await reportApiDataSource.createNewReport(mockReport)
         let failedCreation = try? thrownResult.get()
         XCTAssertNil(failedCreation)

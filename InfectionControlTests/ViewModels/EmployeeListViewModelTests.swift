@@ -91,7 +91,7 @@ final class EmployeeListViewModelTests: XCTestCase {
         let (undefinedIndex, unselectedEmployee) = viewModel.selectEmployee(index: -1) // Unselect the employee
         // THEN still get back the index used BUT without an employee and disabling the done button
         XCTAssertEqual(undefinedIndex, -1)
-        XCTAssertEqual(unselectedEmployee, nil)
+        XCTAssertNil(unselectedEmployee)
         XCTAssertEqual(unselectedEmployee, viewModel.selectedEmployee)
 
         // WHEN the search bar is filtering
@@ -110,7 +110,7 @@ final class EmployeeListViewModelTests: XCTestCase {
         let (nextUndefinedIndex, unselectedFilterEmployee) = viewModel.selectEmployee(index: -2)
         // THEN unselect still works as expected, returning -1, no matter the number unused to cause an unselection
         XCTAssertEqual(nextUndefinedIndex, -1)
-        XCTAssertEqual(unselectedFilterEmployee, nil) // AND nil still returned to indicate no employee found
+        XCTAssertNil(unselectedFilterEmployee) // AND nil still returned to indicate no employee found
         XCTAssertEqual(unselectedFilterEmployee, viewModel.selectedEmployee) // AND viewModel's selectedEmployee returned to nil
         // AND Done button disabled
     }
