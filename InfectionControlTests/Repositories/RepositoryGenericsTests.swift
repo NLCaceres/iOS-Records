@@ -13,8 +13,18 @@ final class RepositoryGenericsTests: XCTestCase {
         XCTAssertEqual(someEntity, 1) // Should successfully get the expected data from the success case
     }
     func testOnFailure() async throws {
-        let someThrowingClosure: () async -> Result<Int, Error> = { return .failure(NSError()) }
-        let someResult = try? await getEntity(getData: someThrowingClosure)
-        XCTAssertNil(someResult) // Error should have been thrown so nil gets returned by getEntity
+        let failureMessage = "Failed to get entity"
+        let someThrowingClosure: () async -> Result<Int, Error> = { return .failure(MockError.description(failureMessage)) }
+        
+        // Instead of running the following with "try?" then asserting the return value is nil due to ".failure(error)"
+        do {
+            _ = try await getEntity(getData: someThrowingClosure)
+            XCTFail("Unexpectedly got an entity") // Should NEVER reach here, so if we do, force a test fail
+        }
+        // This alternative method can be extra certain that our method is failing EXACTLY the way we expect
+        // by catching the error thrown, and asserting the description matches our MockError's message
+        catch {
+            XCTAssertEqual(error.localizedDescription, failureMessage)
+        }
     }
 }
