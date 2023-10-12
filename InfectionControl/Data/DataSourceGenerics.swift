@@ -6,11 +6,11 @@
 
 import Foundation
 
-func getBaseArray<T: BaseTypeConvertible & Decodable>(for type: T.Type, fetchTask: () async -> Result<Data?, Error>) async -> Result<[T.Base], Error> {
-    let result = await fetchTask()
-    return Result { try result.get()?.toBaseArray(through: type) ?? [] } // If Data returned is nil, then return empty array. Else preserve the error
+func getBaseArray<T: BaseTypeConvertible & Decodable>(for subtype: T.Type, getAsyncDataResult: () async -> Result<Data?, Error>) async -> Result<[T.Base], Error> {
+    let result = await getAsyncDataResult()
+    return Result { try result.get()?.toBaseArray(of: subtype) ?? [] } // If Data returned is nil, then return empty array. Else preserve the error
 }
-func getBase<T: BaseTypeConvertible & Decodable>(for type: T.Type, fetchTask: () async -> Result<Data?, Error>) async -> Result<T.Base?, Error> {
-    let result = await fetchTask()
-    return Result { try result.get()?.toBase(through: type) } // Okay for nil to be returned BUT NOT if HTTPResponse threw an error
+func getBase<T: BaseTypeConvertible & Decodable>(for subtype: T.Type, getAsyncDataResult: () async -> Result<Data?, Error>) async -> Result<T.Base?, Error> {
+    let result = await getAsyncDataResult()
+    return Result { try result.get()?.toBase(of: subtype) } // Okay for nil to be returned BUT NOT if HTTPResponse threw an error
 }

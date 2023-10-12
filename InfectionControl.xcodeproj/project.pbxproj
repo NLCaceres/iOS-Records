@@ -104,6 +104,7 @@
 		BFA3D0A42873E44000C6112E /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A32873E44000C6112E /* LocationTests.swift */; };
 		BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A52873E44D00C6112E /* EmployeeTests.swift */; };
 		BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */; };
+		BFA5BE3F2AD84EFA003291F5 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA5BE3E2AD84EFA003291F5 /* DataExtensionsTests.swift */; };
 		BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */; };
 		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
 		BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E622965B290023CE7A /* ReportTableViewModel.swift */; };
@@ -264,6 +265,7 @@
 		BFA3D0A32873E44000C6112E /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		BFA3D0A52873E44D00C6112E /* EmployeeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTests.swift; sourceTree = "<group>"; };
 		BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionTests.swift; sourceTree = "<group>"; };
+		BFA5BE3E2AD84EFA003291F5 /* DataExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensionsTests.swift; sourceTree = "<group>"; };
 		BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCellViewModel.swift; sourceTree = "<group>"; };
 		BFC659E622965B290023CE7A /* ReportTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewModel.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				BF8E724C28489F7B008A8DEF /* PrecautionTests.swift */,
 				BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */,
 				BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */,
+				BFA5BE3E2AD84EFA003291F5 /* DataExtensionsTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1038,6 +1041,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF85F8332AAAFADE009B41DF /* PrecautionDataSourceTests.swift in Sources */,
+				BFA5BE3F2AD84EFA003291F5 /* DataExtensionsTests.swift in Sources */,
 				BFFE07D12AAD4E1900503020 /* MockReportDataSource.swift in Sources */,
 				BF369D462ACAC3A20077DA93 /* JsonFactory.swift in Sources */,
 				BF0ADCD3282CC77000A58BCB /* ReportTableCellViewModelTests.swift in Sources */,

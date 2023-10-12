@@ -16,8 +16,8 @@ extension Data {
         return try? decoder.decode(type.self, from: self)
     }
     // Converts Data into a DTO model via toDTO(), then into its Base type for the app to display
-    func toBase<T: BaseTypeConvertible & Decodable>(through type: T.Type) -> T.Base? {
-        return self.toDTO(of: type)?.toBase()
+    func toBase<T: BaseTypeConvertible & Decodable>(of subtype: T.Type) -> T.Base? {
+        return self.toDTO(of: subtype)?.toBase()
     }
     
     // Useful for decoding any array of Decodables, just like toDTO() but with decoding Arrays in mind
@@ -27,8 +27,8 @@ extension Data {
         return try? decoder.decode([T].self, from: self) // Could reuse toDTO BUT this is a bit more clear what's happening
     }
     // Converts Data into a [DTO] via toDecodedArray(), then into a [Base] for display in-app
-    func toBaseArray<T: BaseTypeConvertible & Decodable>(through type: T.Type) -> [T.Base] {
-        guard let modelArr = self.toDecodedArray(containing: type) else { return [] }
+    func toBaseArray<T: BaseTypeConvertible & Decodable>(of subtype: T.Type) -> [T.Base] {
+        guard let modelArr = self.toDecodedArray(containing: subtype) else { return [] }
         
         return modelArr.compactMap { $0.toBase() }
     }

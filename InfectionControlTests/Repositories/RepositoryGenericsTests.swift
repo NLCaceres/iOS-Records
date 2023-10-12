@@ -18,7 +18,7 @@ final class RepositoryGenericsTests: XCTestCase {
         
         // Instead of running the following with "try?" then asserting the return value is nil due to ".failure(error)"
         do {
-            _ = try await getEntity(getData: someThrowingClosure)
+            _ = try await getEntity(getAsyncResult: someThrowingClosure)
             XCTFail("Unexpectedly got an entity") // Should NEVER reach here, so if we do, force a test fail
         }
         // This alternative method can be extra certain that our method is failing EXACTLY the way we expect
