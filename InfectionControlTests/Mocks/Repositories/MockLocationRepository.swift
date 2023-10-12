@@ -16,7 +16,7 @@ class MockLocationRepository: LocationRepository {
         locationList = DataFactory.makeLocations()
     }
     func prepToThrow(description: String? = nil) {
-        error = MockError.description(description ?? "Error occurred in Location Repository!")
+        error = MockError.description(description ?? "Error occurred in Location Repository")
     }
     
     func getLocationList() async throws -> [Location] {

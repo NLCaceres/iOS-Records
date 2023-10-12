@@ -12,6 +12,14 @@ class MockLocationDataSource: LocationDataSource {
     var error: Error? = nil
     var calledCount: [String: Int] = [:]
     
+    // By making this dataSource a class, no wasteful "mutating" funcs are needed! Modify the dataSource as much as needed!
+    func populateList() {
+        locationList = DataFactory.makeLocations()
+    }
+    func prepToThrow(description: String? = nil) {
+        error = MockError.description(description ?? "Error occurred in Location Data Source")
+    }
+    
     func getLocationList() async -> Result<[Location], Error> {
         calledCount[#function, default: 0] += 1
         if let error = error {
@@ -19,13 +27,5 @@ class MockLocationDataSource: LocationDataSource {
             return .failure(error)
         }
         return .success(locationList)
-    }
-    
-    // By making this dataSource a class, no wasteful "mutating" funcs are needed! Modify the dataSource as much as needed!
-    func populateList() {
-        locationList = DataFactory.makeLocations()
-    }
-    func prepToThrow() {
-        error = NSError()
     }
 }

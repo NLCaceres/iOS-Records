@@ -16,7 +16,7 @@ class MockPrecautionRepository: PrecautionRepository {
         precautionList = DataFactory.makePrecautions()
     }
     func prepToThrow(description: String? = nil) {
-        error = MockError.description(description ?? "Error occurred in Precaution Repository!")
+        error = MockError.description(description ?? "Error occurred in Precaution Repository")
     }
     
     func getPrecautionList() async throws -> [Precaution] {

@@ -16,7 +16,7 @@ class MockHealthPracticeRepository: HealthPracticeRepository {
         healthPracticeList = DataFactory.makeHealthPractices()
     }
     func prepToThrow(description: String? = nil) {
-        error = MockError.description(description ?? "Error occurred in HealthPractice Repository!")
+        error = MockError.description(description ?? "Error occurred in HealthPractice Repository")
     }
     
     func getHealthPracticeList() async throws -> [HealthPractice] {

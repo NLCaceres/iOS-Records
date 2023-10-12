@@ -12,6 +12,13 @@ class MockPrecautionDataSource: PrecautionDataSource {
     var error: Error? = nil
     var calledCount: [String: Int] = [:]
     
+    func populateList() {
+        precautionList = DataFactory.makePrecautions()
+    }
+    func prepToThrow(description: String? = nil) {
+        error = MockError.description(description ?? "Error occurred in Precaution Data Source")
+    }
+    
     func getPrecautionList() async -> Result<[Precaution], Error> {
         calledCount[#function, default: 0] += 1
         if let error = error {
@@ -19,13 +26,5 @@ class MockPrecautionDataSource: PrecautionDataSource {
             return .failure(error)
         }
         return .success(precautionList)
-    }
-    
-    // By making this dataSource a class, no wasteful "mutating" funcs are needed! Modify the dataSource as much as needed!
-    func populateList() {
-        precautionList = DataFactory.makePrecautions()
-    }
-    func prepToThrow() {
-        error = NSError()
     }
 }

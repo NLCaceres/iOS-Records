@@ -16,7 +16,7 @@ class MockEmployeeRepository: EmployeeRepository {
         employeeList = DataFactory.makeEmployees()
     }
     func prepToThrow(description: String? = nil) {
-        error = MockError.description(description ?? "Error occurred in Employee Repository!")
+        error = MockError.description(description ?? "Error occurred in Employee Repository")
     }
     
     func getEmployeeList() async throws -> [Employee] {

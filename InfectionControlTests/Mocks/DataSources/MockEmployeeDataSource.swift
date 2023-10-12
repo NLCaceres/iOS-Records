@@ -12,6 +12,13 @@ class MockEmployeeDataSource: EmployeeDataSource {
     var error: Error? = nil
     var calledCount: [String: Int] = [:]
     
+    func populateList() {
+        employeeList = DataFactory.makeEmployees()
+    }
+    func prepToThrow(description: String? = nil) {
+        error = MockError.description(description ?? "Error occurred in Employee Data Source")
+    }
+    
     func getEmployeeList() async -> Result<[Employee], Error> {
         calledCount[#function, default: 0] += 1
         if let error = error {
@@ -28,12 +35,5 @@ class MockEmployeeDataSource: EmployeeDataSource {
             return .failure(error)
         }
         return .success(employeeList.first)
-    }
-    
-    func populateList() {
-        employeeList = DataFactory.makeEmployees()
-    }
-    func prepToThrow() {
-        error = NSError()
     }
 }

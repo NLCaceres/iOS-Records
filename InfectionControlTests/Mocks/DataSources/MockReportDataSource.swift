@@ -11,6 +11,13 @@ class MockReportDataSource: ReportDataSource {
     var reportList: [Report] = []
     var error: Error? = nil
     var calledCount: [String: Int] = [:]
+    
+    func populateList() {
+        reportList = DataFactory.makeReports()
+    }
+    func prepToThrow(description: String? = nil) {
+        error = MockError.description(description ?? "Error occurred in Report Data Source")
+    }
 
     func getReportList() async -> Result<[Report], Error> {
         calledCount[#function, default: 0] += 1
@@ -29,13 +36,7 @@ class MockReportDataSource: ReportDataSource {
         }
         return .success(reportList.first)
     }
-    
-    func populateList() {
-        reportList = DataFactory.makeReports()
-    }
-    func prepToThrow() {
-        error = NSError()
-    }
+
     func createNewReport(_ newReport: Report) async -> Result<Report?, Error> {
         calledCount[#function, default: 0] += 1
         if let error = error {

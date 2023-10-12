@@ -16,7 +16,7 @@ class MockReportRepository: ReportRepository {
         reportList = DataFactory.makeReports()
     }
     func prepToThrow(description: String? = nil) {
-        error = MockError.description(description ?? "Error occurred in Report Repository!")
+        error = MockError.description(description ?? "Error occurred in Report Repository")
     }
     
     func getReportList() async throws -> [Report] {
@@ -36,6 +36,7 @@ class MockReportRepository: ReportRepository {
         }
         return reportList.first
     }
+    
     func createNewReport(_ newReport: Report) async throws -> Report? {
         calledCount[#function, default: 0] += 1
         if let error = error {
