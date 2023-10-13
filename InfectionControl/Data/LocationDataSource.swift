@@ -27,6 +27,6 @@ struct LocationApiDataSource: LocationDataSource {
     }
     
     func getLocationList() async -> Result<[Location], Error> {
-        return await getBaseArray(for: LocationDTO.self) { await networkManager.fetchTask(endpointPath: "/locations") }
+        return await getBaseArray(for: LocationDTO.self) { await networkManager.fetchData(endpointPath: "/locations") }
     }
 }

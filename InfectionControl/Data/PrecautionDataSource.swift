@@ -27,6 +27,6 @@ struct PrecautionApiDataSource: PrecautionDataSource {
     }
     
     func getPrecautionList() async -> Result<[Precaution], Error> {
-        return await getBaseArray(for: PrecautionDTO.self) { await networkManager.fetchTask(endpointPath: "/precautions") }
+        return await getBaseArray(for: PrecautionDTO.self) { await networkManager.fetchData(endpointPath: "/precautions") }
     }
 }

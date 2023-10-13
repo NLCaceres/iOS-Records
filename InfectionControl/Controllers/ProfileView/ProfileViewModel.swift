@@ -41,7 +41,7 @@ class ProfileViewModel: ObservableObject {
     }
     @MainActor // TODO: To prevent having a NetworkManager dependency, abstract away a image fetching API/dataSource/Repository
     func fetchEmployeeImage(urlPath: String, networkManager: FetchingNetworkManager) async {
-        let employeeImgResult = await networkManager.fetchTask(endpointPath: urlPath)
+        let employeeImgResult = await networkManager.fetchData(endpointPath: urlPath)
         if case let .failure(error) = employeeImgResult { // Early return if condition
             print("Got the following error \(error.localizedDescription)")
             return

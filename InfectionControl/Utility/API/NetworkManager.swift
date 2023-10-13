@@ -36,7 +36,8 @@ struct NetworkManager: CompleteNetworkManager {
     }
     
     // MARK: GET HTTP Methods + Async version 1st
-    func fetchTask(endpointPath: String) async -> Result<Data?, Error> {
+    /// Follows Apple's URLSession data request func naming convention where the async/await version is "session.data()" while the older callback version is "session.dataTask()"
+    func fetchData(endpointPath: String) async -> Result<Data?, Error> {
         let endpointURL = self.apiURL.appendingPathComponent(endpointPath)
         do {
             let (data, response) = try await session.data(from: endpointURL)
@@ -46,7 +47,7 @@ struct NetworkManager: CompleteNetworkManager {
             return .failure(error)
         }
     }
-    /// While the above fetchTask can be easily used with the new "async/await" syntax, the following version expects to be used the "old-fashioned way" via callbacks, accepting a trailing closure
+    /// While the above fetchData can be easily used with the new "async/await" syntax, the following version expects to be used the "old-fashioned way" via callbacks, accepting a trailing closure
     // Marked @escaping since dataTask calls its closure after the request/func completes meaning our update called inside it does too!
     func fetchTask(endpointPath: String, updateClosure: @escaping DataUpdater) -> URLSessionDataTask {
         let endpointURL = self.apiURL.appendingPathComponent(endpointPath)

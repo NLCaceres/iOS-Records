@@ -64,7 +64,7 @@ class NetworkManagerTests: XCTestCase {
         }
         let newNetworkManager = NetworkManager(session: MockURLSession.stubURLSession())
         let typedResult = await getBase(for: EmployeeDTO.self) {
-            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+            await newNetworkManager.fetchData(endpointPath: "some-endpoint")
         }
         let employee = try! typedResult.get()!
         XCTAssertEqual(employee.firstName, "Brian") // Get the MockURLProtocol returned employee
@@ -78,7 +78,7 @@ class NetworkManagerTests: XCTestCase {
         }
         // THEN the result is a failure()
         let notFoundResult = await getBase(for: EmployeeDTO.self) {
-            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+            await newNetworkManager.fetchData(endpointPath: "some-endpoint")
         }
         let notFoundEmployee = try? notFoundResult.get()
         XCTAssertNil(notFoundEmployee) // AND employee is nil
@@ -86,7 +86,7 @@ class NetworkManagerTests: XCTestCase {
         // WHEN the request itself fails
         MockURLProtocol.error = MockError.description("Bad request! It failed!")
         let errorResult = await getBase(for: EmployeeDTO.self) {
-            await newNetworkManager.fetchTask(endpointPath: "some-endpoint")
+            await newNetworkManager.fetchData(endpointPath: "some-endpoint")
         }
         // THEN error is caught and .failure() returned
         let errorEmployee = try? errorResult.get()

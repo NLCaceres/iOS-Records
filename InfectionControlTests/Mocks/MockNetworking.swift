@@ -107,7 +107,7 @@ class MockNetworkManager: CompleteNetworkManager {
         self.replacementClosure = replacementClosure
     }
     
-    func fetchTask(endpointPath: String) async -> Result<Data?, Error> {
+    func fetchData(endpointPath: String) async -> Result<Data?, Error> {
         if let error = error { return .failure(error) }
         return .success(self.replacementData)
     }

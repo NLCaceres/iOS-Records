@@ -27,6 +27,6 @@ struct HealthPracticeApiDataSource: HealthPracticeDataSource {
     }
     
     func getHealthPracticeList() async -> Result<[HealthPractice], Error> {
-        return await getBaseArray(for: HealthPracticeDTO.self) { await networkManager.fetchTask(endpointPath: "/healthPractices") }
+        return await getBaseArray(for: HealthPracticeDTO.self) { await networkManager.fetchData(endpointPath: "/healthPractices") }
     }
 }

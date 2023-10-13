@@ -32,9 +32,9 @@ struct EmployeeApiDataSource: EmployeeDataSource {
     }
     
     func getEmployeeList() async -> Result<[Employee], Error> {
-        return await getBaseArray(for: EmployeeDTO.self) { await networkManager.fetchTask(endpointPath: "/employees") }
+        return await getBaseArray(for: EmployeeDTO.self) { await networkManager.fetchData(endpointPath: "/employees") }
     }
     func getEmployee(id: String) async -> Result<Employee?, Error> {
-        return await getBase(for: EmployeeDTO.self) { await networkManager.fetchTask(endpointPath: "/employees/\(id)") }
+        return await getBase(for: EmployeeDTO.self) { await networkManager.fetchData(endpointPath: "/employees/\(id)") }
     }
 }
