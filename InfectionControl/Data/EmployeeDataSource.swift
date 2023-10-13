@@ -27,7 +27,7 @@ struct EmployeeCoreDataSource: EmployeeDataSource {
 struct EmployeeApiDataSource: EmployeeDataSource {
     let networkManager: FetchingNetworkManager
     
-    init(networkManager: FetchingNetworkManager = NetworkManager()) {
+    init(networkManager: FetchingNetworkManager = AppNetworkManager()) {
         self.networkManager = networkManager
     }
     

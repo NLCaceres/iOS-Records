@@ -19,7 +19,7 @@ class ProfileViewModel: ObservableObject {
     @Published var teamList: [Employee] = []
     @Published var reportList: [Report] = [] // Could be individual reports or an entire team's reports
     
-    init(networkManager: FetchingNetworkManager = NetworkManager(), employeeRepository: EmployeeRepository = AppEmployeeRepository(),
+    init(networkManager: FetchingNetworkManager = AppNetworkManager(), employeeRepository: EmployeeRepository = AppEmployeeRepository(),
          reportRepository: ReportRepository = AppReportRepository()) {
         self.networkManager = networkManager
         self.employeeRepository = employeeRepository

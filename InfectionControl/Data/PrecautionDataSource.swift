@@ -22,7 +22,7 @@ struct PrecautionCoreDataSource: PrecautionDataSource {
 struct PrecautionApiDataSource: PrecautionDataSource {
     let networkManager: FetchingNetworkManager
     
-    init(networkManager: FetchingNetworkManager = NetworkManager()) {
+    init(networkManager: FetchingNetworkManager = AppNetworkManager()) {
         self.networkManager = networkManager
     }
     

@@ -31,7 +31,7 @@ struct ReportCoreDataSource: ReportDataSource {
 struct ReportApiDataSource: ReportDataSource {
     let networkManager: CompleteNetworkManager
     
-    init(networkManager: CompleteNetworkManager = NetworkManager()) {
+    init(networkManager: CompleteNetworkManager = AppNetworkManager()) {
         self.networkManager = networkManager
     }
     

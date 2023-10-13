@@ -36,7 +36,7 @@
 		BF291F192ABF4A2800AAB4C3 /* MockPrecautionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF291F182ABF4A2800AAB4C3 /* MockPrecautionRepository.swift */; };
 		BF29989428259C91008DE3E9 /* BaseTypeConvertibleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29989328259C91008DE3E9 /* BaseTypeConvertibleProtocol.swift */; };
 		BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */; };
-		BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */; };
+		BF2CAEC2280B54FB006AFF05 /* AppNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CAEC1280B54FB006AFF05 /* AppNetworkManagerTests.swift */; };
 		BF369D462ACAC3A20077DA93 /* JsonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF369D452ACAC3A20077DA93 /* JsonFactory.swift */; };
 		BF382CD12AC948D700838254 /* CodableDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD02AC948D700838254 /* CodableDefaults.swift */; };
 		BF382CD32AC94A5F00838254 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF382CD22AC94A5F00838254 /* DataExtensions.swift */; };
@@ -127,7 +127,7 @@
 		BFE76542229FD0460067A3C9 /* EmployeeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */; };
 		BFE7D72522A1D29800A07942 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE7D72422A1D29800A07942 /* Default-568h@2x.png */; };
 		BFE7D72722A1DB2B00A07942 /* EmployeeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */; };
-		BFE7D72922A20A2F00A07942 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72822A20A2F00A07942 /* NetworkManager.swift */; };
+		BFE7D72922A20A2F00A07942 /* AppNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7D72822A20A2F00A07942 /* AppNetworkManager.swift */; };
 		BFF15EDF229518D50078F59C /* CreateReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */; };
 		BFF831F029B5E3B800C7A837 /* ReportDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */; };
 		BFFE07CB2AAC46D400503020 /* MockHealthPracticeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE07CA2AAC46D400503020 /* MockHealthPracticeDataSource.swift */; };
@@ -197,7 +197,7 @@
 		BF291F182ABF4A2800AAB4C3 /* MockPrecautionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPrecautionRepository.swift; sourceTree = "<group>"; };
 		BF29989328259C91008DE3E9 /* BaseTypeConvertibleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTypeConvertibleProtocol.swift; sourceTree = "<group>"; };
 		BF2CAEBF2807FF25006AFF05 /* ReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTests.swift; sourceTree = "<group>"; };
-		BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		BF2CAEC1280B54FB006AFF05 /* AppNetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetworkManagerTests.swift; sourceTree = "<group>"; };
 		BF369D452ACAC3A20077DA93 /* JsonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFactory.swift; sourceTree = "<group>"; };
 		BF382CD02AC948D700838254 /* CodableDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDefaults.swift; sourceTree = "<group>"; };
 		BF382CD22AC94A5F00838254 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 		BFE76541229FD0460067A3C9 /* EmployeeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewController.swift; sourceTree = "<group>"; };
 		BFE7D72422A1D29800A07942 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BFE7D72622A1DB2B00A07942 /* EmployeeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListTableViewCell.swift; sourceTree = "<group>"; };
-		BFE7D72822A20A2F00A07942 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BFE7D72822A20A2F00A07942 /* AppNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetworkManager.swift; sourceTree = "<group>"; };
 		BFF15EDE229518D50078F59C /* CreateReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportViewModel.swift; sourceTree = "<group>"; };
 		BFF831EF29B5E3B800C7A837 /* ReportDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataSourceTests.swift; sourceTree = "<group>"; };
 		BFFE07CA2AAC46D400503020 /* MockHealthPracticeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHealthPracticeDataSource.swift; sourceTree = "<group>"; };
@@ -399,7 +399,7 @@
 		BF2194E228616CE400FD769D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				BFE7D72822A20A2F00A07942 /* NetworkManager.swift */,
+				BFE7D72822A20A2F00A07942 /* AppNetworkManager.swift */,
 				BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */,
 			);
 			path = API;
@@ -549,6 +549,7 @@
 		BF8E724528455858008A8DEF /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				BF2CAEC1280B54FB006AFF05 /* AppNetworkManagerTests.swift */,
 				BF8E7246284558C2008A8DEF /* UIColorExtensionTests.swift */,
 			);
 			path = Utility;
@@ -670,7 +671,6 @@
 				BF3849F2281B8C7400670689 /* Models */,
 				BFD094FF224EBFC700953498 /* InfectionControlTests.swift */,
 				BFD09501224EBFC700953498 /* Info.plist */,
-				BF2CAEC1280B54FB006AFF05 /* NetworkManagerTests.swift */,
 			);
 			path = InfectionControlTests;
 			sourceTree = "<group>";
@@ -981,7 +981,7 @@
 				BF8E72642855D6EA008A8DEF /* TabBarConfig.swift in Sources */,
 				BFF15EDF229518D50078F59C /* CreateReportViewModel.swift in Sources */,
 				BFA3D093286EDE0500C6112E /* ViewExtensions.swift in Sources */,
-				BFE7D72922A20A2F00A07942 /* NetworkManager.swift in Sources */,
+				BFE7D72922A20A2F00A07942 /* AppNetworkManager.swift in Sources */,
 				BF8E7253284DF656008A8DEF /* CommonUIViewFactory.swift in Sources */,
 				BF8E7255284F0DFD008A8DEF /* EmployeeRow.swift in Sources */,
 				BFFE07D52AAE59C000503020 /* LocationRepository.swift in Sources */,
@@ -1056,7 +1056,7 @@
 				BFA3D0A62873E44D00C6112E /* EmployeeTests.swift in Sources */,
 				BFF831F029B5E3B800C7A837 /* ReportDataSourceTests.swift in Sources */,
 				BF82708729B0467F004542C8 /* EmployeeListViewModelTests.swift in Sources */,
-				BF2CAEC2280B54FB006AFF05 /* NetworkManagerTests.swift in Sources */,
+				BF2CAEC2280B54FB006AFF05 /* AppNetworkManagerTests.swift in Sources */,
 				BFFE07CB2AAC46D400503020 /* MockHealthPracticeDataSource.swift in Sources */,
 				BFFE07DD2AAE5B8400503020 /* PrecautionRepositoryTests.swift in Sources */,
 				BF2CAEC02807FF25006AFF05 /* ReportTests.swift in Sources */,

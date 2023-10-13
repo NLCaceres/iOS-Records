@@ -1,5 +1,5 @@
 //
-//  NetworkManagerTests.swift
+//  AppNetworkManagerTests.swift
 //  InfectionControlTests
 //
 //  Copyright © 2022 Nick Caceres. All rights reserved.
@@ -7,13 +7,13 @@
 @testable import InfectionControl
 import XCTest
 
-class NetworkManagerTests: XCTestCase {
-    var networkManager: NetworkManager!
+class AppNetworkManagerTests: XCTestCase {
+    var networkManager: AppNetworkManager!
     override func setUp() {
         if !CommandLine.arguments.contains("-devServer") {
             CommandLine.arguments.append("-devServer")
         }
-        networkManager = NetworkManager()
+        networkManager = AppNetworkManager()
     }
     override func tearDown() {
         if let devServerIndex = CommandLine.arguments.firstIndex(of: "-devServer") {
@@ -27,7 +27,7 @@ class NetworkManagerTests: XCTestCase {
     func testApiUrl() {
         let devUrlString = "http://localhost:8080/api"
         let productionUrlString = "http://example.com/foo"
-        let exampleNetworkManager = NetworkManager(baseURL: URL(string: productionUrlString)!)
+        let exampleNetworkManager = AppNetworkManager(baseURL: URL(string: productionUrlString)!)
         // Test runner uses dev args by default so "-devServer" launch arg is added in, and the "localhost" URL is used instead of baseURL
         XCTAssertEqual(exampleNetworkManager.apiURL.absoluteString, devUrlString)
         
@@ -41,7 +41,7 @@ class NetworkManagerTests: XCTestCase {
         let dataTask = networkManager.fetchTask(endpointPath: "barfoo") { _, _ in () }
         let thisRequestURL = dataTask.originalRequest!.url!
         XCTAssertEqual(thisRequestURL.absoluteString, "http://localhost:8080/api/barfoo")
-        let thisRequestBaseURL = thisRequestURL.deletingLastPathComponent() // Should == private URL used by NetworkManager
+        let thisRequestBaseURL = thisRequestURL.deletingLastPathComponent() // Should == private URL used by AppNetworkManager
         XCTAssertEqual(thisRequestBaseURL.absoluteString, "http://localhost:8080/api/")
         
         let otherDataTask = networkManager.fetchTask(endpointPath: "/foobam") { _, _ in () }
@@ -62,7 +62,7 @@ class NetworkManagerTests: XCTestCase {
                                            httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
             return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
         }
-        let newNetworkManager = NetworkManager(session: MockURLSession.stubURLSession())
+        let newNetworkManager = AppNetworkManager(session: MockURLSession.stubURLSession())
         let typedResult = await getBase(for: EmployeeDTO.self) {
             await newNetworkManager.fetchData(endpointPath: "some-endpoint")
         }
@@ -98,7 +98,7 @@ class NetworkManagerTests: XCTestCase {
         // Check each error throws as expected, starting with an invalid or missing response
         // WHEN all params are nil
         networkManager.onHttpResponse(data: nil, response: nil, error: nil) { data, err in
-            guard let err = err as? NetworkManager.NetworkError else {
+            guard let err = err as? AppNetworkManager.NetworkError else {
                 XCTFail("Err wasn't passed in"); return;
             }
             XCTAssertTrue(err == .unexpectedResponse) // THEN expect err is unexpectedResponse
@@ -110,7 +110,7 @@ class NetworkManagerTests: XCTestCase {
         let unexpectedStatusResponse = HTTPURLResponse(url: fooURL, statusCode: 100, httpVersion: nil, headerFields: nil)
         networkManager.onHttpResponse(data: nil, response: unexpectedStatusResponse, error: nil) { data, err in
             // THEN expect err is unexpectedStatusCode
-            if let err = err as? NetworkManager.NetworkError {
+            if let err = err as? AppNetworkManager.NetworkError {
                 XCTAssertTrue(err == .unexpectedStatusCode)
             } else {
                 XCTFail("Error wasn't passed in and is nil")
@@ -121,7 +121,7 @@ class NetworkManagerTests: XCTestCase {
         let clientErrResponse = HTTPURLResponse(url: fooURL, statusCode: 400, httpVersion: nil, headerFields: nil)
         networkManager.onHttpResponse(data: nil, response: clientErrResponse, error: nil) { data, err in
             // THEN expect err is clientErrCode
-            if let err = err as? NetworkManager.NetworkError {
+            if let err = err as? AppNetworkManager.NetworkError {
                 XCTAssertTrue(err == .clientErrCode)
             } else {
                 XCTFail("Error wasn't passed in and is nil")
@@ -132,7 +132,7 @@ class NetworkManagerTests: XCTestCase {
         let serverErrResponse = HTTPURLResponse(url: fooURL, statusCode: 500, httpVersion: nil, headerFields: nil)
         networkManager.onHttpResponse(data: nil, response: serverErrResponse, error: nil) { data, err in
             // THEN expect err is serverErrCode
-            if let err = err as? NetworkManager.NetworkError {
+            if let err = err as? AppNetworkManager.NetworkError {
                 XCTAssertTrue(err == .serverErrCode)
             } else {
                 XCTFail("Error wasn't passed in and is nil")
@@ -145,7 +145,7 @@ class NetworkManagerTests: XCTestCase {
         let badMimeTypeResponse = HTTPURLResponse(url: fooURL, statusCode: 200, httpVersion: nil, headerFields: nil)
         networkManager.onHttpResponse(data: nil, response: badMimeTypeResponse, error: nil) { data, err in
             // THEN expect err is unexpectedMimeType
-            if let err = err as? NetworkManager.NetworkError {
+            if let err = err as? AppNetworkManager.NetworkError {
                 XCTAssertTrue(err == .unexpectedMimeType)
             } else {
                 XCTFail("Error wasn't passed in and is nil")
@@ -202,7 +202,7 @@ class NetworkManagerTests: XCTestCase {
             return (response, EmployeeDTO(firstName: "Brian", surname: "Ishida").toData()!)
         }
         let mockEmployee = EmployeeDTO(firstName: "John", surname: "Smith")
-        let newNetworkManager = NetworkManager(session: MockURLSession.stubURLSession())
+        let newNetworkManager = AppNetworkManager(session: MockURLSession.stubURLSession())
         let typedResult = await getBase(for: EmployeeDTO.self) {
             await newNetworkManager.sendPostRequest(with: mockEmployee, endpointPath: "some-endpoint")
         }

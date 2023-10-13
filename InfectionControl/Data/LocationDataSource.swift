@@ -22,7 +22,7 @@ struct LocationCoreDataSource: LocationDataSource {
 struct LocationApiDataSource: LocationDataSource {
     let networkManager: FetchingNetworkManager
     
-    init(networkManager: FetchingNetworkManager = NetworkManager()) {
+    init(networkManager: FetchingNetworkManager = AppNetworkManager()) {
         self.networkManager = networkManager
     }
     

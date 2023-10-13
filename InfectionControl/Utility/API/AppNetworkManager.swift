@@ -1,4 +1,4 @@
-//  NetworkManager.swift
+//  AppNetworkManager.swift
 //  InfectionControl
 //
 //  Copyright © 2022 Nick Caceres. All rights reserved.
@@ -7,7 +7,7 @@ import Foundation
 import RxSwift
 
 /* Goal: Simplify the most common and generic logic involved across all calls to the remote API */
-struct NetworkManager: CompleteNetworkManager {
+struct AppNetworkManager: CompleteNetworkManager {
     enum NetworkError: Error {
         case unexpectedResponse
         case clientErrCode

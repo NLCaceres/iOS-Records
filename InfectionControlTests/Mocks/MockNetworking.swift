@@ -30,8 +30,8 @@ class MockURLSessionDataTask: URLSessionDataTask {
 }
 
 class MockURLProtocol: URLProtocol {
-    //? These vars need to be static to be modifiable since MockURLProtocol is never actually instantiated,
-    //? the Protocol Type is just injected into the config of my NetworkManager's URLSession
+    //? These vars need to be static/Type props to be modifiable since MockURLProtocol is never instantiated,
+    //? the type alone is injected via a URLSessionConfig with its "protocolClasses" stubbed to "[MockURLProtocol.self]"
     static var error: Error?
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
     
