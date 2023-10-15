@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -106,6 +106,7 @@
 		BFA3D0A82873E45D00C6112E /* ProfessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3D0A72873E45D00C6112E /* ProfessionTests.swift */; };
 		BFA5BE3F2AD84EFA003291F5 /* DataExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA5BE3E2AD84EFA003291F5 /* DataExtensionsTests.swift */; };
 		BFBC94B0283055DB00B7776E /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBC94AF283055DB00B7776E /* NetworkManagerProtocol.swift */; };
+		BFBFA47A2ADA443500A850CE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BFBFA4792ADA443500A850CE /* Kingfisher */; };
 		BFC659E522965A770023CE7A /* ReportTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E422965A770023CE7A /* ReportTableCellViewModel.swift */; };
 		BFC659E722965B290023CE7A /* ReportTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E622965B290023CE7A /* ReportTableViewModel.swift */; };
 		BFC659E9229677F70023CE7A /* CreateReportCvDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC659E8229677F70023CE7A /* CreateReportCvDelegate.swift */; };
@@ -314,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBFA47A2ADA443500A850CE /* Kingfisher in Frameworks */,
 				1FDAC2045C226F5D3F5FBCCA /* libPods-InfectionControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,13 +650,13 @@
 		BFD094E6224EBFC500953498 /* InfectionControl */ = {
 			isa = PBXGroup;
 			children = (
-				BF82708829B048CC004542C8 /* Repositories */,
-				BF82706829B02CD3004542C8 /* Data */,
 				BFD094EE224EBFC600953498 /* InfectionControl.xcdatamodeld */,
 				BFD094E7224EBFC500953498 /* AppDelegate.swift */,
-				BF774C8422A059D300B592E3 /* Supporting Files */,
 				BF1A338C2258210E009F48AA /* Controllers */,
 				BF5566902254696E004A13C8 /* Models */,
+				BF82706829B02CD3004542C8 /* Data */,
+				BF82708829B048CC004542C8 /* Repositories */,
+				BF774C8422A059D300B592E3 /* Supporting Files */,
 				BFBC94AE2830559500B7776E /* Utility */,
 			);
 			path = InfectionControl;
@@ -663,14 +665,14 @@
 		BFD094FE224EBFC700953498 /* InfectionControlTests */ = {
 			isa = PBXGroup;
 			children = (
-				BFE53F6629B428BE00B4846F /* Repositories */,
-				BF82707529B030E5004542C8 /* Mocks */,
-				BF82706F29B02EEE004542C8 /* Data */,
-				BF8E724528455858008A8DEF /* Utility */,
-				BF0ADCD1282CC6DC00A58BCB /* ViewModels */,
-				BF3849F2281B8C7400670689 /* Models */,
 				BFD094FF224EBFC700953498 /* InfectionControlTests.swift */,
 				BFD09501224EBFC700953498 /* Info.plist */,
+				BF0ADCD1282CC6DC00A58BCB /* ViewModels */,
+				BF3849F2281B8C7400670689 /* Models */,
+				BF82706F29B02EEE004542C8 /* Data */,
+				BFE53F6629B428BE00B4846F /* Repositories */,
+				BF82707529B030E5004542C8 /* Mocks */,
+				BF8E724528455858008A8DEF /* Utility */,
 			);
 			path = InfectionControlTests;
 			sourceTree = "<group>";
@@ -678,12 +680,12 @@
 		BFD09509224EBFC800953498 /* InfectionControlUITests */ = {
 			isa = PBXGroup;
 			children = (
-				BF3A47832838C3C600362F09 /* Robots */,
-				BFD0950A224EBFC800953498 /* BaseUITests.swift */,
 				BFD0950C224EBFC800953498 /* Info.plist */,
+				BFD0950A224EBFC800953498 /* BaseUITests.swift */,
 				BF8E7250284D78BF008A8DEF /* CreateReportVcUITests.swift */,
 				BF2194E72864422A00FD769D /* ProfileViewUITests.swift */,
 				BF2194F52865A77900FD769D /* SettingsViewUITests.swift */,
+				BF3A47832838C3C600362F09 /* Robots */,
 			);
 			path = InfectionControlUITests;
 			sourceTree = "<group>";
@@ -778,6 +780,9 @@
 			dependencies = (
 			);
 			name = InfectionControl;
+			packageProductDependencies = (
+				BFBFA4792ADA443500A850CE /* Kingfisher */,
+			);
 			productName = InfectionControl;
 			productReference = BFD094E4224EBFC500953498 /* InfectionControl.app */;
 			productType = "com.apple.product-type.application";
@@ -852,6 +857,9 @@
 				Base,
 			);
 			mainGroup = BFD094DB224EBFC500953498;
+			packageReferences = (
+				BFBFA4782ADA443500A850CE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = BFD094E5224EBFC500953498 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1197,7 +1205,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1255,7 +1263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1306,7 +1314,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 306FBE79199CDFA1CC96909D /* Pods-InfectionControlTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = InfectionControlTests/Info.plist;
@@ -1327,7 +1335,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2590C9ACBD049FBE02BB4C70 /* Pods-InfectionControlTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = InfectionControlTests/Info.plist;
@@ -1424,6 +1432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFBFA4782ADA443500A850CE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFBFA4792ADA443500A850CE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFBFA4782ADA443500A850CE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BFD094EE224EBFC600953498 /* InfectionControl.xcdatamodeld */ = {
