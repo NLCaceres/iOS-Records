@@ -5,13 +5,13 @@
 //  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileView: View, BaseStyling {
-    /* Why @StateObj? It's not destroyed on rerenders! Letting you pass this single obj to children who observe/react to it
-     as an @ObservedObject
-     @ObservedObject where the obj must be marked as @ObservedObj every time. BUT there's a way around
-     the rerender erase. Pass the obj in from elsewhere! Meaning we're actually safe here since it comes from
-     the parent VC BUT since we're passing the viewModel down, better to use @StateObj as intended/expected! */
+    /* Why @StateObj? Because it's not destroyed on rerenders, letting you pass this single obj to children who observe/react to it
+     * as an @ObservedObject. Children Views that receive @ObservedObjs this way can safely rerender without worrying about their
+     * state resetting, which would occur if their parent also used @ObservedObj instead of @StateObj
+     */
     @StateObject var viewModel: ProfileViewModel
     
     var employeeString: String {
@@ -22,12 +22,22 @@ struct ProfileView: View, BaseStyling {
         if let profession = self.viewModel.employee?.profession { return profession.description }
         else { return "Profession info missing!" }
     }
+    /// May be able to use KFImage.placeholder(_ content:) instead of this computed @ViewBuilder prop. See "https://github.com/onevcat/Kingfisher/wiki/Cheat-Sheet"
+    @ViewBuilder var EmployeeImgView: some View { // @ViewBuilder required since the implicit returns aren't the same exact type
+        // resizable() is ONLY available on Images, so add it here, THEN returning the opaque "some View", we can apply the common modifiers inline
+        if let employeeImgURL = viewModel.employeeImgURL {
+            KFImage(employeeImgURL).resizable()
+        }
+        else {
+            Image("mask").resizable()
+        }
+    }
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
-                    Image("mask").resizable().scaledToFit()
+                    EmployeeImgView.scaledToFit()
                         .frame(width: 140, height: 140, alignment: .leading)
                         .padding(.top, 10)
                     VStack(alignment: .leading, spacing: 5) {

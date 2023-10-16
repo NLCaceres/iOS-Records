@@ -5,23 +5,25 @@
 //  Copyright © 2022 Nick Caceres. All rights reserved.
 
 import UIKit
+import Kingfisher
 
 class ProfileViewModel: ObservableObject {
     private let employeeRepository: EmployeeRepository
     private let reportRepository: ReportRepository
-    private let networkManager: FetchingNetworkManager
     @Published private(set) var isLoadingEmployee = false
     @Published private(set) var isLoadingTeamList = false
     @Published private(set) var isLoadingReportList = false
     
     @Published var employee: Employee?
-    @Published var employeeImg: UIImage?
+    // Since this computed prop depends on the above @Published employee, rerenders should receive the re-computed prop
+    var employeeImgURL: URL? {
+        guard let employee = employee else { return nil }
+        return URL(string: "some_url") // TODO: Add employee.imgURL prop to fill URL's string arg
+    }
     @Published var teamList: [Employee] = []
     @Published var reportList: [Report] = [] // Could be individual reports or an entire team's reports
     
-    init(networkManager: FetchingNetworkManager = AppNetworkManager(), employeeRepository: EmployeeRepository = AppEmployeeRepository(),
-         reportRepository: ReportRepository = AppReportRepository()) {
-        self.networkManager = networkManager
+    init(employeeRepository: EmployeeRepository = AppEmployeeRepository(), reportRepository: ReportRepository = AppReportRepository()) {
         self.employeeRepository = employeeRepository
         self.reportRepository = reportRepository
     }
@@ -39,17 +41,7 @@ class ProfileViewModel: ObservableObject {
         }
         isLoadingEmployee = false
     }
-    @MainActor // TODO: To prevent having a NetworkManager dependency, abstract away a image fetching API/dataSource/Repository
-    func fetchEmployeeImage(urlPath: String, networkManager: FetchingNetworkManager) async {
-        let employeeImgResult = await networkManager.fetchData(endpointPath: urlPath)
-        if case let .failure(error) = employeeImgResult { // Early return if condition
-            print("Got the following error \(error.localizedDescription)")
-            return
-        }
-        let employeeImgData = try! employeeImgResult.get() // Should not be able to throw anymore!
-        if let data = employeeImgData { employeeImg = UIImage(data: data) }
-    }
-    
+
     @MainActor
     func fetchReports(endpointPath: String = "reports") async {
         print("Fetching report info from profileViewModel")
@@ -62,6 +54,7 @@ class ProfileViewModel: ObservableObject {
         }
         isLoadingReportList = false
     }
+
     @MainActor
     func fetchTeam() async {
         print("Fetching team info from profileViewModel")
@@ -73,5 +66,4 @@ class ProfileViewModel: ObservableObject {
         }
         isLoadingTeamList = false
     }
-    
 }

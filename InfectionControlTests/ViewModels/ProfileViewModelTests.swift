@@ -9,10 +9,8 @@ import XCTest
 import Combine
 
 class ProfileViewModelTests: XCTestCase {
-    //TODO: Test fetching employee image
     var employeeRepository: MockEmployeeRepository!
     var reportRepository: MockReportRepository!
-    var networkManager: MockNetworkManager!
     var viewModel: ProfileViewModel!
     
     override func setUp() {
@@ -20,8 +18,7 @@ class ProfileViewModelTests: XCTestCase {
         employeeRepository.populateList()
         reportRepository = MockReportRepository()
         reportRepository.populateList()
-        networkManager = MockNetworkManager()
-        viewModel = ProfileViewModel(networkManager: networkManager, employeeRepository: employeeRepository, reportRepository: reportRepository)
+        viewModel = ProfileViewModel(employeeRepository: employeeRepository, reportRepository: reportRepository)
     }
 
     func testEmployeeFetch() async throws { // Fetch user's employee profile info
@@ -40,6 +37,14 @@ class ProfileViewModelTests: XCTestCase {
         }.store(in: &cancellables)
 
         await viewModel.fetchEmployeeInfo()
+    }
+    func testEmployeeImgURL() async throws {
+        XCTAssertNil(viewModel.employeeImgURL)
+        
+        await viewModel.fetchEmployeeInfo()
+
+        let expectedURL = viewModel.employeeImgURL! // Good quick nil check via "!" forced unwrap
+        XCTAssertEqual(expectedURL.absoluteString, "some_url")
     }
 
     func testTeamFetch() async throws {
